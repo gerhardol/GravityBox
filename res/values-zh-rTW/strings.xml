@@ -863,6 +863,9 @@
     <string name="battery_percent_text_size_smaller">較小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
     <string name="battery_percent_text_size_smallest">最小</string>
+    <string name="battery_percent_text_style_title">電池電量百分比風格</string>
+    <string name="battery_percent_text_style_default">預設</string>
+    <string name="battery_percent_text_style_numbers_only">只有數字 (無百分比符號)</string>
     
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">電池設定</string>

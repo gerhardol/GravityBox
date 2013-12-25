@@ -150,7 +150,7 @@
 
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">状态栏调整</string>
-    <string name="pref_cat_statusbar_summary">包含各种关于状态栏的调整选项</string>
+    <string name="pref_cat_statusbar_summary">包含各种与状态栏相关的调整选项</string>
     <string name="pref_cat_misc_title">杂项调整</string>
     <string name="pref_cat_misc_summary">包含所有不属于特定类别的调整选项</string>
     <string name="pref_cat_fixes_title">通用修正</string>
@@ -179,7 +179,7 @@
 
     <!--  Lockscreen tweaks -->
     <string name="pref_cat_lockscreen_title">锁屏画面调整</string>
-    <string name="pref_cat_lockscreen_summary">包含各种关于锁屏画面的调整选项</string>
+    <string name="pref_cat_lockscreen_summary">包含各种与锁屏画面相关的调整选项</string>
     <string name="pref_cat_lockscreen_background_title">锁屏画面背景</string>
     <string name="pref_lockscreen_background_title">背景风格</string>
     <string name="lockscreen_bg_default">默认壁纸</string>
@@ -197,7 +197,7 @@
 
     <!--  Power tweaks category -->
     <string name="pref_cat_power_title">电源调整</string>
-    <string name="pref_cat_power_summary">包含各种关于电源相关的调整选项</string>
+    <string name="pref_cat_power_summary">包含各种与电源相关的调整选项</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用LED闪烁</string>
@@ -205,7 +205,7 @@
 
     <!-- Display tweaks category -->
     <string name="pref_cat_display_title">显示调整</string>
-    <string name="pref_cat_display_summary">包含各种关于显示相关的调整选项</string>
+    <string name="pref_cat_display_summary">包含各种与显示相关的调整选项</string>
 
     <!-- Minimum brightness level -->
     <string name="pref_brightness_min_title">最低亮度级别</string>
@@ -245,7 +245,7 @@
 
     <!-- Media tweaks category -->
     <string name="pref_cat_media_title">媒体调整</string>
-    <string name="pref_cat_media_summary">包含各种关于媒体和声音系统的调整选项</string>
+    <string name="pref_cat_media_summary">包含各种与媒体和声音系统相关的调整选项</string>
 
     <!-- More music volume steps -->
     <string name="pref_music_volume_steps_title">更多音量段数</string>
@@ -262,9 +262,9 @@
     <!-- Hardware key actions -->
     <string name="pref_cat_hwkey_actions_title">实体按键调整</string>
     <string name="pref_cat_hwkey_actions_summary">可在此为实体按键设置自定动作</string>
-    <string name="hwkey_menu_longpress_dialog_title">菜单键长按动作</string>
-    <string name="hwkey_menu_doubletap_dialog_title">菜单键双击动作</string>
-    <string name="hwkey_back_longpress_dialog_title">返回键长按动作</string>
+    <string name="hwkey_menu_longpress_dialog_title">长按菜单键行为</string>
+    <string name="hwkey_menu_doubletap_dialog_title">双击菜单键行为</string>
+    <string name="hwkey_back_longpress_dialog_title">长按返回键行为</string>
     <string name="hwkey_action_default">默认</string>
     <string name="hwkey_action_search">搜索</string>
     <string name="hwkey_action_voice_search">语音搜索</string>
@@ -281,7 +281,7 @@
 
     <!--  Phone tweaks category -->
     <string name="pref_cat_phone_title">电话调整</string>
-    <string name="pref_cat_phone_summary">包含各种关于通话的调整选项</string>
+    <string name="pref_cat_phone_summary">包含各种与通话相关的调整选项</string>
 
     <!-- Flip action while ringing -->
     <string name="pref_phone_flip_title">响铃时的手机翻转动作</string>
@@ -490,7 +490,7 @@
     <string name="hwkey_action_recent_apps">显示最近使用的应用程序</string>
 
     <!-- HW Key Action: Home long-press -->
-    <string name="hwkey_home_longpress_dialog_title">长按主页键动作</string>
+    <string name="hwkey_home_longpress_dialog_title">长按主页键行为</string>
 
     <!-- HW Key Action: Launch cutom app -->
     <string name="hwkey_action_custom_app">执行自定义的应用 1</string>
@@ -534,7 +534,7 @@
 
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">虚拟按键调整</string>
-    <string name="pref_cat_navigation_bar_summary">包含各种关于虚拟按键的调整选项</string>
+    <string name="pref_cat_navigation_bar_summary">包含各种与虚拟按键的调整选项</string>
     <string name="pref_navbar_override_title">覆盖系统默认值</string>
     <string name="pref_navbar_override_summary">虚拟按键调整总开关（需要重新启动）</string>
     <string name="pref_navbar_enable_title">启用虚拟按键</string>
