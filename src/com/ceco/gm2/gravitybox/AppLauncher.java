@@ -40,7 +40,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.text.TextUtils.TruncateAt;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -176,11 +175,7 @@ public class AppLauncher {
                 }
 
                 tv.setText(ai.getAppName());
-                tv.setTextSize(1, 10);
-                tv.setMaxLines(2);
-                tv.setEllipsize(TruncateAt.END);
                 tv.setCompoundDrawablesWithIntrinsicBounds(null, ai.getAppIcon(), null, null);
-                tv.setClickable(true);
                 tv.setOnClickListener(mAppOnClick);
                 tv.setVisibility(View.VISIBLE);
                 lastVisible = tv;
@@ -315,7 +310,7 @@ public class AppLauncher {
                     }
                 }
                 if (appIcon != null) {
-                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
+                    int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, 
                             mResources.getDisplayMetrics());
                     Bitmap scaledIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
                     mAppIcon = new BitmapDrawable(mResources, scaledIcon);

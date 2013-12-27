@@ -616,6 +616,14 @@
                 android:defaultValue="14"
                 android:dependency="pref_data_traffic_enable" />
 
+            <ListPreference
+                android:key="pref_data_traffic_inactivity_mode"
+                android:title="@string/pref_data_traffic_inactivity_mode_title" 
+                android:entries="@array/data_traffic_inactivity_mode_entries"
+                android:entryValues="@array/data_traffic_inactivity_mode_values"
+                android:defaultValue="0"
+                android:dependency="pref_data_traffic_enable" />
+
         </PreferenceScreen>
 
         <com.ceco.gm2.gravitybox.preference.OngoingNotifPreference
@@ -689,6 +697,12 @@
             <CheckBoxPreference 
                 android:key="pref_navbar_swap_keys"
                 android:title="@string/pref_navbar_swap_keys_title"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
+                android:key="pref_navbar_cursor_control"
+                android:title="@string/pref_navbar_cursor_control_title"
+                android:summary="@string/pref_navbar_cursor_control_summary"
                 android:defaultValue="false" />
 
         </PreferenceCategory>
@@ -823,35 +837,59 @@
         android:title="@string/pref_cat_power_title"
         android:summary="@string/pref_cat_power_summary">
 
-        <CheckBoxPreference 
-            android:key="pref_poweroff_advanced"
-            android:title="@string/poweroff_advanced_title"
-            android:summary="@string/poweroff_advanced_summary"
-            android:defaultValue="false" />
+        <PreferenceCategory 
+            android:key="pref_cat_power_menu"
+            android:title="@string/pref_cat_power_menu_title">
 
-        <CheckBoxPreference 
-            android:key="pref_powermenu_screenshot"
-            android:title="@string/pref_powermenu_screenshot_title"
-            android:defaultValue="false" />
+            <CheckBoxPreference 
+                android:key="pref_poweroff_advanced"
+                android:title="@string/poweroff_advanced_title"
+                android:summary="@string/poweroff_advanced_summary"
+                android:defaultValue="false" />
 
-        <ListPreference
-            android:key="pref_low_battery_warning_policy"
-            android:title="@string/low_battery_warning_policy_title"
-            android:entries="@array/low_battery_warning_policy_entries"
-            android:entryValues="@array/low_battery_warning_policy_values"
-            android:defaultValue="3" />
+            <CheckBoxPreference 
+                android:key="pref_reboot_allow_on_lockscreen"
+                android:title="@string/pref_reboot_allow_on_lockscreen_title"
+                android:defaultValue="false"
+                android:dependency="pref_poweroff_advanced" />
 
-        <CheckBoxPreference 
-            android:key="pref_flashing_led_disable"
-            android:title="@string/pref_flashing_led_disable_title"
-            android:summary="@string/pref_flashing_led_disable_summary"
-            android:defaultValue="false" />
+            <CheckBoxPreference 
+                android:key="pref_reboot_confirm_required"
+                android:title="@string/pref_reboot_confirm_required_title"
+                android:defaultValue="true"
+                android:dependency="pref_poweroff_advanced" />
 
-        <CheckBoxPreference 
-            android:key="pref_charging_led_disable"
-            android:title="@string/pref_charging_led_disable_title"
-            android:summary="@string/pref_charging_led_disable_summary"
-            android:defaultValue="false" />
+            <CheckBoxPreference 
+                android:key="pref_powermenu_screenshot"
+                android:title="@string/pref_powermenu_screenshot_title"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory 
+            android:key="pref_cat_power_other"
+            android:title="@string/pref_cat_power_other_title">
+
+            <ListPreference
+                android:key="pref_low_battery_warning_policy"
+                android:title="@string/low_battery_warning_policy_title"
+                android:entries="@array/low_battery_warning_policy_entries"
+                android:entryValues="@array/low_battery_warning_policy_values"
+                android:defaultValue="3" />
+
+            <CheckBoxPreference 
+                android:key="pref_flashing_led_disable"
+                android:title="@string/pref_flashing_led_disable_title"
+                android:summary="@string/pref_flashing_led_disable_summary"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
+                android:key="pref_charging_led_disable"
+                android:title="@string/pref_charging_led_disable_title"
+                android:summary="@string/pref_charging_led_disable_summary"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
 
     </PreferenceScreen>
 
@@ -1213,11 +1251,12 @@
                 android:entryValues="@array/vol_key_cursor_control_values"
                 android:defaultValue="0" />
 
-            <CheckBoxPreference
-                android:key="pref_volume_rocker_wake_disable"
-                android:title="@string/pref_volume_rocker_wake_disable_title"
-                android:summary="@string/pref_volume_rocker_wake_disable_summary"
-                android:defaultValue="false" />
+            <ListPreference
+                android:key="pref_volume_rocker_wake"
+                android:title="@string/pref_volume_rocker_wake_title"
+                android:entries="@array/volume_rocker_wake_entries"
+                android:entryValues="@array/volume_rocker_wake_values"
+                android:defaultValue="default" />
 
         </PreferenceCategory>
 

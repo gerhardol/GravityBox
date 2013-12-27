@@ -319,10 +319,6 @@
     <string name="quick_pulldown_right">الطرف الأيمن</string>
     <string name="quick_pulldown_left">الطرف الأيسر</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">تعطيل تشغيل الشاشة بزر الصوت</string>
-    <string name="pref_volume_rocker_wake_disable_summary">لبعض الأجهزة كالجالكسي3</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">ألوان شريط الحالة</string>
 

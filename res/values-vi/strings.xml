@@ -313,10 +313,6 @@
     <string name="quick_pulldown_right">Phải</string>
     <string name="quick_pulldown_left">Trái</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Tắt phím âm lượng mở khóa màn hình</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Cho thiết bị như là Jiayu G3s,G4 cái mà có thể dùng phím âm lượng mở khóa màn hình</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Màu thanh trạng thái</string>
 

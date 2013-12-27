@@ -313,10 +313,6 @@
     <string name="quick_pulldown_right">右邊</string>
     <string name="quick_pulldown_left">左邊</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">關閉音量鍵喚醒螢幕</string>
-    <string name="pref_volume_rocker_wake_disable_summary">佳域 G3s 和 G4 的實體音量鍵會喚醒螢幕</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">狀態列顏色</string>
 

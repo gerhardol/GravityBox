@@ -302,10 +302,6 @@
     <string name="quick_pulldown_right">Pravý okraj</string>
     <string name="quick_pulldown_left">Levý okraj</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Zakázat probouzení tlačítky hlasitosti</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Pro zařízení jako Jiayu G3S, G4, u kterých tlačítka hlasitosti probouzejí zařízení</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Barvy stavového řádku</string>
 

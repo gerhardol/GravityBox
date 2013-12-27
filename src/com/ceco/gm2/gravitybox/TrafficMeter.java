@@ -39,11 +39,15 @@ public class TrafficMeter extends TextView implements IconManagerListener {
     public static final String TAG = "GB:TrafficMeter";
     private static final boolean DEBUG = false;
 
+    public static final int INACTIVITY_MODE_DEFAULT = 0;
+    public static final int INACTIVITY_MODE_HIDDEN = 1;
+    public static final int INACTIVITY_MODE_SUMMARY = 2;
+
     Context mContext;
     boolean mAttached;
     boolean mTrafficMeterEnable;
     boolean mTrafficMeterHide = false;
-    int mTrafficMeterSummaryTime = 3000;
+    int mTrafficMeterSummaryTime = 0;
     long mTotalRxBytes;
     long mLastUpdateTime;
     long mTrafficBurstStartTime;
@@ -265,6 +269,24 @@ public class TrafficMeter extends TextView implements IconManagerListener {
 
     public int getTrafficMeterPosition() {
         return mPosition;
+    }
+
+    public void setInactivityMode(int mode) {
+        switch (mode) {
+            case INACTIVITY_MODE_HIDDEN:
+                mTrafficMeterHide = true;
+                mTrafficMeterSummaryTime = 0;
+                break;
+            case INACTIVITY_MODE_SUMMARY:
+                mTrafficMeterHide = true;
+                mTrafficMeterSummaryTime = 3000;
+                break;
+            case INACTIVITY_MODE_DEFAULT:
+            default:
+                mTrafficMeterHide = false;
+                mTrafficMeterSummaryTime = 0;
+                break;
+        }
     }
 
     @Override

@@ -24,7 +24,6 @@
     <string name="battery_style_circle_percent">Круглый индикатор с процентами</string>
     <string name="battery_style_kitkat">Батарея KitKat</string>
     <string name="battery_style_kitkat_percent">Батарея KitKat с процентами</string>
-    <string name="battery_percent_text_title">Индикатор с процентами</string>
     <string name="battery_style_none">Не показывать</string>
 
     <string name="vol_music_controls_title">Пропуск трека с помощь клавиш громкости</string>
@@ -328,10 +327,6 @@
     <string name="quick_pulldown_right">Справа</string>
     <string name="quick_pulldown_left">Слева</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Отключение выхода из сна клавишами громкости</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Для устройств вроде Jiayu G3s,G4 где изменение звука будит устройство</string>
-    
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Цвета статусбара</string>
 
@@ -830,4 +825,64 @@
     <string name="hwkey_ls_torch_home_longpress">По долгому нажатию Home</string>
     <string name="hwkey_ls_torch_voldown_longpress">По долгому нажатию Громкость-</string>
     
+	<!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Общий переключатель Быстрых Настроек (необходима перезагрузка)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Приложения</string>
+    <string name="app_picker_shortcuts">Ссылки</string>
+    <string name="app_picker_shortcut_null_intent">Невозможно создать запускаемую ссылку, потому что активность не вернула intent для ссылки</string>
+    <string name="app_picker_shortcut_cancelled">Создание ссылки отменено приложением</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Кнопки Назад и Недавние</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Включить фонарик</string>
+    <string name="pref_lockscreen_ring_torch_summary">Включает фонарик при нажатии на кольцо разблокировки</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Задержка панели громкости</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Настройки тайла "Режим звонка"</string>
+    <string name="ringer_mode_silent">Беззвучный</string>
+    <string name="ringer_mode_vibrate">Вибрация</string>
+    <string name="ringer_mode_sound">Звук</string>
+    <string name="ringer_mode_sound_vibrate">Звук и вибрация</string>
+
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Исправить проблемы с положением</string>
+    <string name="fix_location_summary">Включите если дистанция некорректно определяется спортивными приложениями (необходима перезагрузка)</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Настройки ланчера</string>
+    <string name="pref_cat_launcher_tweaks_summary">Применимо только для ланчера Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Сетка рабочего стола</string>
+    <string name="pref_launcher_desktop_grid_info_title">Использование значений, отличных от значений по умолчанию, может привести к проблемам с виджетами. Используйте с осторожностью. Изменения требуют перезапуска ланчера.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Количество строк</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Количество столбцов</string>
+    <string name="desktop_grid_default">По умолчанию</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Эффект выключения экрана</string>
+    <string name="screen_off_effect_default">По умолчанию</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Затемнение</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Текст процентов заряда</string>
+    <string name="battery_percent_text_size_title">Размер</string>
+    <string name="battery_percent_text_size_normal">Обычный</string>
+    <string name="battery_percent_text_size_smaller">Меньше</string>
+    <string name="battery_percent_text_size_even_smaller">Еще меньше</string>
+    <string name="battery_percent_text_size_smallest">Самый маленький</string>
+    <string name="battery_percent_text_style_title">Стиль текста</string>
+    <string name="battery_percent_text_style_default">По умолчанию</string>
+    <string name="battery_percent_text_style_numbers_only">Цифры (без символа "процент")</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Параметры батареи</string>
+
 </resources>
+

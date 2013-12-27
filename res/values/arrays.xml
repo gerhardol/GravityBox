@@ -748,4 +748,28 @@
         <item>6</item>
     </string-array>
 
+    <string-array name="volume_rocker_wake_entries" translatable="false">
+        <item>@string/volume_rocker_wake_default</item>
+        <item>@string/volume_rocker_wake_enabled</item>
+        <item>@string/volume_rocker_wake_disabled</item>
+    </string-array>
+
+    <string-array name="volume_rocker_wake_values" translatable="false">
+        <item>default</item>
+        <item>enabled</item>
+        <item>disabled</item>
+    </string-array>
+
+    <string-array name="data_traffic_inactivity_mode_entries" translatable="false">
+        <item>@string/inactivity_mode_default</item>
+        <item>@string/inactivity_mode_hide</item>
+        <item>@string/inactivity_mode_summary</item>
+    </string-array>
+
+    <string-array name="data_traffic_inactivity_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

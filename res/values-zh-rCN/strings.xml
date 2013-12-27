@@ -327,10 +327,6 @@
     <string name="quick_pulldown_right">右侧</string>
     <string name="quick_pulldown_left">左侧</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">禁用音量键唤醒屏幕</string>
-    <string name="pref_volume_rocker_wake_disable_summary">用于类似佳域G3s和G4的设备实体音量键会唤醒屏幕</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">状态栏颜色</string>
 
@@ -534,7 +530,7 @@
 
     <!-- Navigation bar tweaks category -->
     <string name="pref_cat_navigation_bar_title">虚拟按键调整</string>
-    <string name="pref_cat_navigation_bar_summary">包含各种与虚拟按键的调整选项</string>
+    <string name="pref_cat_navigation_bar_summary">包含各种与虚拟按键相关的调整选项</string>
     <string name="pref_navbar_override_title">覆盖系统默认值</string>
     <string name="pref_navbar_override_summary">虚拟按键调整总开关（需要重新启动）</string>
     <string name="pref_navbar_enable_title">启用虚拟按键</string>
@@ -887,5 +883,18 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">控制光标键</string>
+    <string name="pref_navbar_cursor_control_summary">允许在虚拟按键显示光标键控制键盘</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
+    <string name="volume_rocker_wake_default">系统默认</string>
+    <string name="volume_rocker_wake_enabled">启用</string>
+    <string name="volume_rocker_wake_disabled">禁用</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">要求重启确认</string>
 
 </resources>

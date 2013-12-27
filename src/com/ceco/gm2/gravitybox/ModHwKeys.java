@@ -95,7 +95,7 @@ public class ModHwKeys {
     private static int mRecentsLongpressAction = 0;
     private static int mDoubletapSpeed = GravityBoxSettings.HWKEY_DOUBLETAP_SPEED_DEFAULT;
     private static int mKillDelay = GravityBoxSettings.HWKEY_KILL_DELAY_DEFAULT;
-    private static boolean mVolumeRockerWakeDisabled = false;
+    private static String mVolumeRockerWake = "default";
     private static boolean mHwKeysEnabled = true;
     private static XSharedPreferences mPrefs;
     private static AppLauncher mAppLauncher;
@@ -189,9 +189,8 @@ public class ModHwKeys {
                 mKillDelay = value;
                 if (DEBUG) log("Kill delay set to: " + value);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_VOLUME_ROCKER_WAKE_CHANGED)) {
-                mVolumeRockerWakeDisabled = intent.getBooleanExtra(
-                        GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE_DISABLE, false);
-                if (DEBUG) log("mVolumeRockerWakeDisabled set to: " + mVolumeRockerWakeDisabled);
+                mVolumeRockerWake = intent.getStringExtra(GravityBoxSettings.EXTRA_VOLUME_ROCKER_WAKE);
+                if (DEBUG) log("mVolumeRockerWake set to: " + mVolumeRockerWake);
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED)) {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH)) {
                     mLockscreenTorch = intent.getIntExtra(GravityBoxSettings.EXTRA_HWKEY_TORCH,
@@ -265,8 +264,7 @@ public class ModHwKeys {
 
             mHomeDoubletapDisabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP_DISABLE, false);
-            mVolumeRockerWakeDisabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE_DISABLE, false);
+            mVolumeRockerWake = prefs.getString(GravityBoxSettings.PREF_KEY_VOLUME_ROCKER_WAKE, "default");
             mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
 
             mPieMode = ModPieControls.PIE_DISABLED;
@@ -331,12 +329,17 @@ public class ModHwKeys {
                         }
                     }
 
-                    if (mVolumeRockerWakeDisabled && 
+                    if (!mVolumeRockerWake.equals("default") && 
                             (keyCode == KeyEvent.KEYCODE_VOLUME_UP ||
                                     keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)) {
                         int policyFlags = (Integer) param.args[1];
-                        policyFlags &= ~FLAG_WAKE;
-                        policyFlags &= ~FLAG_WAKE_DROPPED;
+                        if (mVolumeRockerWake.equals("enabled")) {
+                            policyFlags |= FLAG_WAKE;
+                            policyFlags |= FLAG_WAKE_DROPPED;
+                        } else if (mVolumeRockerWake.equals("disabled")) {
+                            policyFlags &= ~FLAG_WAKE;
+                            policyFlags &= ~FLAG_WAKE_DROPPED;
+                        }
                         param.args[1] = policyFlags;
                         return;
                     }
@@ -550,10 +553,10 @@ public class ModHwKeys {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         int keyCode = (Integer) param.args[0];
-                        if (mVolumeRockerWakeDisabled && 
+                        if (!mVolumeRockerWake.equals("default") && 
                                 (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ||
                                  keyCode == KeyEvent.KEYCODE_VOLUME_UP)) {
-                            param.setResult(false);
+                            param.setResult(mVolumeRockerWake.equals("enabled") ? true : false);
                         }
                     }
                 });

@@ -327,10 +327,6 @@
     <string name="quick_pulldown_right">Droit</string>
     <string name="quick_pulldown_left">Gauche</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Désactiver sortie de veille</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Pour les modèles tels que Jiayu G3s, G4, permet de désactiver la sortie de veille par les touches de volume</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Couleurs barre d\'état</string>
 
@@ -887,5 +883,18 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Paramètres de batterie</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Touches de contrôle du curseur</string>
+    <string name="pref_navbar_cursor_control_summary">Active les touches de contrôle du curseur dans la barre de navigation lorsque le clavier est visible</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Réveiller avec les touches de volume</string>
+    <string name="volume_rocker_wake_default">Valeur système</string>
+    <string name="volume_rocker_wake_enabled">Activé</string>
+    <string name="volume_rocker_wake_disabled">Désactivé</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Confirmation de redémarrage nécessaire</string>
 
 </resources>

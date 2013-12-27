@@ -202,6 +202,10 @@ public class ModStatusBar {
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_SIZE)) {
                     mTrafficMeter.setTextSize(1, intent.getIntExtra(GravityBoxSettings.EXTRA_DT_SIZE, 14));
                 }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_DT_INACTIVITY_MODE)) {
+                    mTrafficMeter.setInactivityMode(intent.getIntExtra(
+                            GravityBoxSettings.EXTRA_DT_INACTIVITY_MODE, 0));
+                }
             }
         }
     };
@@ -404,6 +408,14 @@ public class ModStatusBar {
                         log("Invalid preference value for PREF_KEY_DATA_TRAFFIC_SIZE");
                     }
                     mTrafficMeter.setTextSize(1, size);
+                    int inactivityMode = 0;
+                    try {
+                        inactivityMode = Integer.valueOf(prefs.getString(
+                                GravityBoxSettings.PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE, "0"));
+                    } catch (NumberFormatException nfe) {
+                        log("Invalid preference value for PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE");
+                    }
+                    mTrafficMeter.setInactivityMode(inactivityMode);
                     ModStatusbarColor.registerIconManagerListener(mTrafficMeter);
                     updateTrafficMeterPosition();
                     mTrafficMeter.setTrafficMeterEnabled(prefs.getBoolean(

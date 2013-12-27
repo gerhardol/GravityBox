@@ -30,9 +30,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ImageView.ScaleType;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -129,7 +131,10 @@ public class ModClearAllRecents {
 
                     // create and inject new ImageView and set onClick listener to handle action
                     mRecentsClearButton = new ImageView(vg.getContext());
-                    mRecentsClearButton.setImageDrawable(res.getDrawable(res.getIdentifier("ic_notify_clear", "drawable", PACKAGE_NAME)));
+                    mRecentsClearButton.setImageDrawable(res.getDrawable(res.getIdentifier(
+                            "ic_notify_clear", "drawable", PACKAGE_NAME)));
+                    mRecentsClearButton.setBackground(mGbContext.getResources().getDrawable(
+                            R.drawable.image_view_button_bg));
                     FrameLayout.LayoutParams lParams = new FrameLayout.LayoutParams(
                             mClearAllRecentsSizePx, mClearAllRecentsSizePx);
                     mRecentsClearButton.setLayoutParams(lParams);
@@ -273,26 +278,37 @@ public class ModClearAllRecents {
 
         if (DEBUG) log("handleDismissChild - removing all views");
 
-        LinearLayout mLinearLayout = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mLinearLayout");
-        Handler handler = new Handler();
-
-        int count = mLinearLayout.getChildCount();
-        for (int i = 0; i < count; i++) {
-            final View child = mLinearLayout.getChildAt(i);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Object[] newArgs = new Object[1];
-                        newArgs[0] = child;
-                        XposedBridge.invokeOriginalMethod(param.method, param.thisObject, newArgs);
-                    } catch (Exception e) {
-                        XposedBridge.log(e);
-                    }
-                }
-                
-            }, 150 * i);
+        // scroll recents tasks view to show the first task clearing will start from
+        if (param.thisObject instanceof ScrollView) {
+            ((ScrollView) param.thisObject).smoothScrollTo(0, 0);
+        } else if (param.thisObject instanceof HorizontalScrollView) {
+            ((HorizontalScrollView)param.thisObject).smoothScrollTo(0, 0);
         }
+
+        // start clearing task after 200ms delay to give some time for smooth scroll to finish
+        final LinearLayout mLinearLayout = (LinearLayout) XposedHelpers.getObjectField(param.thisObject, "mLinearLayout");
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int count = mLinearLayout.getChildCount();
+                for (int i = 0; i < count; i++) {
+                    final View child = mLinearLayout.getChildAt(i);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Object[] newArgs = new Object[] { child };
+                                XposedBridge.invokeOriginalMethod(param.method, param.thisObject, newArgs);
+                            } catch (Exception e) {
+                                XposedBridge.log(e);
+                            }
+                        }
+                        
+                    }, 150 * i);
+                }
+            }
+        }, 200);
 
         if (mHandler != null) {
             mHandler.post(updateRamBarTask);

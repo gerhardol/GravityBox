@@ -95,25 +95,25 @@
     <string name="qs_tile_wifi">Wi-Fi</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
-    <string name="qs_tile_gps_alt">GPS (style CM)</string>
+    <string name="qs_tile_gps_alt">GPS (stile CM)</string>
     <string name="qs_tile_mobile_data">Dati mobili</string>
-    <string name="qs_tile_network_mode">Network mode</string>
+    <string name="qs_tile_network_mode">Modalità di rete</string>
     <string name="qs_tile_data_usage">Utilizzo dati</string>
     <string name="qs_tile_audio">Profili audio</string>
     <string name="qs_tile_brightness">Luminosità</string>
-    <string name="qs_tile_screen_timeout">Timout schermo</string>
+    <string name="qs_tile_screen_timeout">Timeout schermo</string>
     <string name="qs_tile_autorotation">Rotazione auto</string>
     <string name="qs_tile_sync">Sincronia</string>
     <string name="qs_tile_wifi_ap">Punto d\'accesso Wi-Fi</string>
     <string name="qs_tile_torch">Torcia</string>
     <string name="qs_tile_gravitybox">GravityBox</string>
-    <string name="qs_tile_sleep">Sleep</string>
+    <string name="qs_tile_sleep">Sospendi dispositivo</string>
     <string name="qs_tile_quickrecord">Registra</string>
     <string name="qs_tile_settings">Parametri</string>
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop esteso</string>
     <string name="qs_tile_stay_awake">Rimane acceso</string>
-    <string name="qs_tile_screenshot">Screenshot</string>
+    <string name="qs_tile_screenshot">Fotografa schermo</string>
     <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
@@ -150,7 +150,7 @@
 
     <!-- Reboot confirmation -->
     <string name="reboot_confirm">Il %s si riavvierà</string>
-    <string name="reboot_confirm_recovery">Il %s si riavvierà in ripristino</string>
+    <string name="reboot_confirm_recovery">Il %s si riavvierà in Recovery</string>
     <string name="reboot_confirm_bootloader">Il %s si riavvierà in Bootloader</string>
 
     <!-- Engineering mode shortcut -->
@@ -311,10 +311,6 @@
     <string name="quick_pulldown_right">Destra</string>
     <string name="quick_pulldown_left">Sinistra</string>
 
-    <!-- Disable volume rocker wake -->
-    <string name="pref_volume_rocker_wake_disable_title">Disabilita sblocco schermo con tasti volume</string>
-    <string name="pref_volume_rocker_wake_disable_summary">Per modelli come Jiayu G3s,G4 in cui i tasti volume accendono lo schermo</string>
-
     <!-- Statusbar colors category -->
     <string name="pref_cat_statusbar_colors_title">Colori Barra di stato</string>
 
@@ -385,7 +381,7 @@
     <string name="pref_navbar_disable_summary">Nascondi barra di navigazione quando è attivo il PIE CONTROL (per telefoni che hanno la barra di navigazione, necessario il riavvio)</string>
 
     <!--  Dithered Holo background -->
-    <string name="pref_holo_bg_dither_title">Dithered Holo background</string>
+    <string name="pref_holo_bg_dither_title">Sfondo Dithered Holo</string>
     <string name="pref_holo_bg_dither_summary">Sostituisce lo sfondo Holo standard con uno dithered per eliminare la distorsione dei colori (necessario il riavvio)</string>
 
     <!-- Disable hardware keys for pie -->
@@ -415,8 +411,8 @@
     <string name="app_picker_none">(Nessuno)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Quick App</string>
-    <string name="pref_cat_quickapp_tile_title">Impostazioni QuickApp</string>
+    <string name="qs_tile_quickapp">App Rapide</string>
+    <string name="pref_cat_quickapp_tile_title">Impostazioni App rapide</string>
     <string name="pref_quickapp_default_title">Applicazione principale</string>
     <string name="pref_quickapp_slot1_title">Pressione lunga app slot 1</string>
     <string name="pref_quickapp_slot2_title">Pressione lunga app slot 2</string>
@@ -531,7 +527,7 @@
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menu</string>
 
     <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Abilita Fotografa schermo nel menu apegnimento</string>
+    <string name="pref_powermenu_screenshot_title">Abilita fotografa schermo nel menu apegnimento</string>
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Applicazioni in sblocco schermo</string>
@@ -579,7 +575,7 @@
     <string name="pref_qs_tile_behaviour_override_summary">Sovrascrivi funzionamento pressione/pressione-lunga per icone selezionate (richiede riavvio)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Impostazioni Network mode tile SIM slot</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Impostazioni Rete utilizzata per lo slot SIM</string>
     <string name="pref_qs_network_mode_sim_slot_summary">Definisce a quale slot SIM applicare le impostazioni (%s)</string>
     <string name="sim_slot1">SIM slot 1</string>
     <string name="sim_slot2">SIM slot 2</string>
@@ -651,7 +647,7 @@
     <string name="dt_size_normal">Normale</string>
     <string name="dt_size_smaller">Più piccola</string>
     <string name="dt_size_smallest">Ancora più piccola</string>
-    <string name="byte_abbr">b</string>
+    <string name="byte_abbr">B</string>
     <string name="kilobyte_abbr">Kb</string>
     <string name="megabyte_abbr">Mb</string>
     <string name="second_abbr">s</string>
@@ -786,7 +782,7 @@
     <string name="hwkey_action_back">Torna indietro</string>
 
     <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">Pulsante Style</string>
+    <string name="pref_qs_tile_style_title">Stile Pulsante</string>
     <string name="pref_qs_tile_style_summary">Si applica solo ai tasti Gravitybox (non incide tasti predefiniti)</string>
 
     <!-- Clear all recents bottom margin -->
@@ -871,6 +867,20 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Settaggi visualizzazione batteria</string>
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Freccie di navigazione</string>
+    <string name="pref_navbar_cursor_control_summary">Abilita le frecce nella barra di navigazione durante la visualizzazione della tastiera</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Volume rocker wake (acc. display tramite tasti volume)</string>
+    <string name="volume_rocker_wake_default">Default</string>
+    <string name="volume_rocker_wake_enabled">Abilitato</string>
+    <string name="volume_rocker_wake_disabled">Disabilitato</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Richiedi conferma di riavvio</string>
+
 
 
 </resources>

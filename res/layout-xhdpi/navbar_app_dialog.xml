@@ -18,9 +18,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="10dp" 
-    android:paddingLeft="10dp"
-    android:paddingBottom="10dp">
+    android:padding="4dp" >
 
     <LinearLayout
         android:id="@+id/appRow1"
@@ -29,43 +27,39 @@
         android:orientation="horizontal">
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp1"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp2"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp3"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp4"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
     <View 
         android:id="@+id/separator"
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
 
     <LinearLayout
         android:id="@+id/appRow2"
@@ -74,36 +68,32 @@
         android:orientation="horizontal">
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp5"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp6"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp7"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
         <TextView 
+            style="@style/AppLauncherTextView"
             android:id="@+id/quickapp8"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:paddingRight="10dp" />
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
