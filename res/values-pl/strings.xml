@@ -85,6 +85,7 @@
     <string name="quick_settings_wifi_turning_on">Włączanie&#8230;</string>
     <string name="quick_settings_nfc_on">NFC Włączone</string>
     <string name="quick_settings_nfc_off">NFC Wyłączone</string>
+    <string name="quick_settings_camera_error_connect">Nie można połączyć się z kamerą</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kafelki Szybkich Ustawień</string>
@@ -116,6 +117,7 @@
     <string name="qs_tile_stay_awake">Blokowanie uśpienia</string>
     <string name="qs_tile_screenshot">Zrzut ekranu</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Kamera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Wybór koloru</string>
@@ -864,5 +866,35 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ustawienia baterii</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Klawisze sterowania kursorem</string>
+    <string name="pref_navbar_cursor_control_summary">Aktywuje klawisze sterowania kursorem w pasku nawigacyjnym, gdy klawiatura jest widoczna</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Wybudzanie klawiszami głośności</string>
+    <string name="volume_rocker_wake_default">Domyślne systemu</string>
+    <string name="volume_rocker_wake_enabled">Włączone</string>
+    <string name="volume_rocker_wake_disabled">Wyłączone</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Wymaganie potwierdzenia restartu</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Ukryj po zmianie</string>
+    <string name="pref_qs_hide_on_change_summary">Zwija automatycznie pasek satusu przy pojedynczym kliknięciu kafelki. Dotyczy tylko kafelek GravityBox.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu zasilania</string>
+    <string name="pref_cat_power_other_title">Inne</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Dozwolone na ekranie blokady</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Tryb braku aktywności</string>
+    <string name="inactivity_mode_default">Domyślny</string>
+    <string name="inactivity_mode_hide">Ukryj gdy brak aktywności</string>
+    <string name="inactivity_mode_summary">Pokaż podsumowanie i ukryj gdy brak aktywności</string>
 
 </resources>

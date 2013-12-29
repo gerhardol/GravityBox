@@ -127,6 +127,7 @@
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
+        <item>@string/qs_tile_camera</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -158,6 +159,7 @@
         <item>expanded_tileview</item>
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
+        <item>camera_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_entries" translatable="false">
@@ -185,6 +187,7 @@
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
+        <item>@string/qs_tile_camera</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values" translatable="false">
@@ -212,6 +215,7 @@
         <item>expanded_tileview</item>
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
+        <item>camera_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">

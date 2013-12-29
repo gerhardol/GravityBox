@@ -100,6 +100,7 @@
     <string name="quick_settings_wifi_turning_on">Mise en route&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
@@ -131,6 +132,7 @@
     <string name="qs_tile_stay_awake">Rester allumé</string>
     <string name="qs_tile_screenshot">Capture d\'écran</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Appareil photo</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -896,5 +898,22 @@
 
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Confirmation de redémarrage nécessaire</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Masquer après changement</string>
+    <string name="pref_qs_hide_on_change_summary">Réduit automatiquement la barre d\'état par appui simple sur la touche. S\'applique aux touches de GravityBox et celles par défaut qui ont été modifiées</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu d\'extinction</string>
+    <string name="pref_cat_power_other_title">Autre</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Actif sur écran de déverrouillage</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Mode d’inactivité</string>
+    <string name="inactivity_mode_default">Par défaut</string>
+    <string name="inactivity_mode_hide">Masquer durant inactivité</string>
+    <string name="inactivity_mode_summary">Afficher un résumé puis masquer durant l\'inactivité</string>
 
 </resources>

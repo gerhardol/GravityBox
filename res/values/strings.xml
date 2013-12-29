@@ -100,6 +100,7 @@
     <string name="quick_settings_wifi_turning_on">Turning on&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_camera_error_connect">Can\'t connect to camera</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
@@ -131,6 +132,7 @@
     <string name="qs_tile_stay_awake">Stay awake</string>
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Camera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -896,6 +898,10 @@
 
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Require reboot confirmation</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Hide on change</string>
+    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles only.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Power menu</string>

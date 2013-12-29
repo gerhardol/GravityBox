@@ -11,7 +11,7 @@
     <string name="battery_style_kitkat_percent">Batteria KitKat con percentuale</string>
     <string name="battery_style_none">Nessuno</string>
 
-    <string name="vol_music_controls_title">Tasto vol cambia traccia</string>
+    <string name="vol_music_controls_title">Tasto volume cambia traccia</string>
     <string name="vol_music_controls_summary">Cambia traccia alla pressione dei tasti volume prolungata a schermo spento</string>
 
     <string name="low_battery_warning_policy_title">Avviso per poca batteria</string>
@@ -30,7 +30,7 @@
     <string name="sim_disable_notifications_summary">Notifica di \"SIM non inserita\" disabilitata</string>
 
     <string name="poweroff_advanced_title">Menu Power-off avanzato</string>
-    <string name="poweroff_advanced_summary">Abilita il menu power-off avanzato con l\'opzione per riavviare in ripristino</string>
+    <string name="poweroff_advanced_summary">Abilita il menu power-off avanzato con l\'opzione per riavviare in Recovery o Veloce</string>
     <string name="poweroff_recovery">Riavvia in Recovery</string>
     <string name="poweroff_bootloader">Bootloader</string>
 
@@ -85,6 +85,7 @@
     <string name="quick_settings_wifi_turning_on">Avvio&#8230;</string>
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_camera_error_connect">Impossibile avviare fotocamera</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Caselle Statusbar QuickSettings</string>
@@ -93,6 +94,7 @@
     <string name="qs_tile_airplane_mode">Modo Aereo</string>
     <string name="qs_tile_battery">Stato batteria</string>
     <string name="qs_tile_wifi">Wi-Fi</string>
+    <string name="qs_tile_wifi_alt">Wi-Fi (CM stile)</string>
     <string name="qs_tile_bluetooth">Bluetooth</string>
     <string name="qs_tile_gps">GPS</string>
     <string name="qs_tile_gps_alt">GPS (stile CM)</string>
@@ -113,8 +115,9 @@
     <string name="qs_tile_volume">Volume</string>
     <string name="qs_tile_expanded_desktop">Desktop esteso</string>
     <string name="qs_tile_stay_awake">Rimane acceso</string>
-    <string name="qs_tile_screenshot">Fotografa schermo</string>
+    <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Fotocamera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Scegli colore</string>
@@ -254,7 +257,7 @@
     <string name="hwkey_action_voice_search">Ricerca vocale</string>
     <string name="hwkey_action_prev_app">Passa alla app precedente</string>
     <string name="hwkey_action_kill">Chiusura forzata app corrente</string>
-    <string name="hwkey_action_sleep">Vai in sleep</string>
+    <string name="hwkey_action_sleep">Vai in sospensione</string>
     <string name="pref_hwkey_kill_delay_title">Durata per chiudura forzata app su pressione lunga</string>
     <string name="pref_hwkey_kill_delay_summary">Si applica per la chiudura forzata dell\'app corrente. Definisce quanto a lungo deve rimanere premuto il tasto per fare la chiusura forzata</string>
     <string name="pref_hwkey_doubletap_speed_title">Velocità doppio-tap</string>
@@ -275,7 +278,7 @@
     <string name="phone_flip_action_dismiss">Rifiuta chiamata</string>
 
     <!-- Soft reboot -->
-    <string name="reboot_soft">Riavvio soft</string>
+    <string name="reboot_soft">Riavvio veloce</string>
 
     <!-- Solid black Holo background -->
     <string name="pref_holo_bg_solid_black_title">Sfondo nero solido</string>
@@ -503,7 +506,7 @@
     <string name="action_expanded_desktop_off">Desktop esteso è SPENTO</string>
 
     <!-- Power menu screenshot -->
-    <string name="screenshot">Fotografa schermo</string>
+    <string name="screenshot">Screenshot</string>
 
     <!-- HW Key Action: Show menu -->
     <string name="hwkey_action_menu">Mostra menù</string>
@@ -527,7 +530,7 @@
     <string name="pref_navbar_menukey_title">Mostra sempre tasto menu</string>
 
     <!-- Screenshot in power menu -->
-    <string name="pref_powermenu_screenshot_title">Abilita fotografa schermo nel menu apegnimento</string>
+    <string name="pref_powermenu_screenshot_title">Abilita screenshot nel menu power-off</string>
 
     <!-- Unlock ring settings -->
     <string name="pref_cat_lockscreen_ring_settings_title">Applicazioni in sblocco schermo</string>
@@ -869,7 +872,7 @@
     <string name="pref_cat_battery_settings_title">Settaggi visualizzazione batteria</string>
     
     <!-- Cursor control in navigation bar -->
-    <string name="pref_navbar_cursor_control_title">Freccie di navigazione</string>
+    <string name="pref_navbar_cursor_control_title">Frecce di navigazione</string>
     <string name="pref_navbar_cursor_control_summary">Abilita le frecce nella barra di navigazione durante la visualizzazione della tastiera</string>
 
     <!-- Volume rocker wake -->
@@ -881,6 +884,21 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Richiedi conferma di riavvio</string>
 
+   <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Nascondi al cambio</string>
+    <string name="pref_qs_hide_on_change_summary">Togli la barra di stato automaticamente al tocco sulle icone. Si applica solo alle icone GravityBox e sovrascrive le icone stock.</string>
 
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Power-Menu</string>
+    <string name="pref_cat_power_other_title">Altro</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permetti su schermata di blocco</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Modalità inattiva</string>
+    <string name="inactivity_mode_default">Default</string>
+    <string name="inactivity_mode_hide">Nascondi in inattività</string>
+    <string name="inactivity_mode_summary">Mostra il sommario e nascondi in inattività</string>
 
 </resources>

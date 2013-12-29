@@ -24,14 +24,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class StayAwakeTile extends AQuickSettingsTile {
+public class StayAwakeTile extends BasicTile {
     private static final String TAG = "GB:StayAwakeTile";
     private static final boolean DEBUG = false;
 
@@ -40,7 +37,6 @@ public class StayAwakeTile extends AQuickSettingsTile {
     public static final String SETTING_USER_TIMEOUT = "gb_stay_awake_tile_user_timeout";
 
     private SettingsObserver mSettingsObserver;
-    private TextView mTextView;
     private int mCurrentTimeout;
 
     private static void log(String message) {
@@ -64,17 +60,15 @@ public class StayAwakeTile extends AQuickSettingsTile {
                 return true;
             }
         };
-    }
-
-    @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_stay_awake, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.stay_awake_tileview);
 
         mCurrentTimeout = Settings.System.getInt(mContext.getContentResolver(), 
                 Settings.System.SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE);
-        if (DEBUG) log("onTileCreate: mCurrentTimeout = " + mCurrentTimeout);
+        if (DEBUG) log("mCurrentTimeout = " + mCurrentTimeout);
+    }
+
+    @Override
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_stay_awake;
     }
 
     @Override
@@ -95,15 +89,13 @@ public class StayAwakeTile extends AQuickSettingsTile {
             mDrawableId = R.drawable.ic_qs_stayawake_off;
         }
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mCurrentTimeout == NEVER_SLEEP ? 
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mCurrentTimeout == NEVER_SLEEP ? 
                     KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
+
+        super.updateTile();
     }
 
     private void toggleStayAwake() {

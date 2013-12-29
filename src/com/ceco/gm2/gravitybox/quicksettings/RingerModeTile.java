@@ -34,16 +34,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class RingerModeTile extends AQuickSettingsTile {
+public class RingerModeTile extends BasicTile {
     private static final String TAG = "GB:RingerModeTile";
     private static final boolean DEBUG = false;
 
@@ -63,7 +60,6 @@ public class RingerModeTile extends AQuickSettingsTile {
     private boolean mHasVibrator;
     private Vibrator mVibrator;
     private SettingsObserver mSettingsObserver;
-    private TextView mTextView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -95,10 +91,8 @@ public class RingerModeTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_ringer_mode, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.ringer_mode_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_ringer_mode;
     }
 
     @Override
@@ -120,15 +114,13 @@ public class RingerModeTile extends AQuickSettingsTile {
         findCurrentState();
         mDrawableId = RINGERS[mRingerIndex].mDrawable;
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mDrawableId == R.drawable.ic_qs_ring_off ?
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mDrawableId == R.drawable.ic_qs_ring_off ?
                     KK_COLOR_OFF : KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
+
+        super.updateTile();
     }
 
     @Override

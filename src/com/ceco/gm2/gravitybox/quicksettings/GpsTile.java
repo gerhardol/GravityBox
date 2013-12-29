@@ -23,14 +23,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class GpsTile extends AQuickSettingsTile {
+public class GpsTile extends BasicTile {
     private static final String TAG = "GB:GpsTile";
     private static final boolean DEBUG = false;
 
@@ -40,7 +37,6 @@ public class GpsTile extends AQuickSettingsTile {
 
     private boolean mGpsEnabled;
     private boolean mGpsFixed;
-    private TextView mTextView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -95,10 +91,8 @@ public class GpsTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_gps, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.gps_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_gps;
     }
 
     @Override
@@ -124,13 +118,11 @@ public class GpsTile extends AQuickSettingsTile {
             mDrawableId = R.drawable.ic_qs_gps_disable;
         }
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mGpsEnabled ? KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mGpsEnabled ? KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
         }
+
+        super.updateTile();
     }
 }

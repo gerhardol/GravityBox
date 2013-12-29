@@ -22,14 +22,11 @@ import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class SleepTile extends AQuickSettingsTile {
+public class SleepTile extends BasicTile {
 
     public SleepTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -57,28 +54,24 @@ public class SleepTile extends AQuickSettingsTile {
                 return true;
             }
         };
+
+        mDrawableId = R.drawable.ic_qs_sleep;
+        mLabel = mGbResources.getString(R.string.qs_tile_sleep);
     }
 
     @Override
-    protected void onTileCreate() {
-        mDrawableId = R.drawable.ic_qs_sleep;
-        mLabel = mGbResources.getString(R.string.qs_tile_sleep);
-
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_sleep, mTile);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_sleep;
     }
 
     @Override
     protected void updateTile() {
-        TextView tv = (TextView) mTile.findViewById(R.id.sleep_tileview);
-        tv.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            tv.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
         }
+
+        super.updateTile();
     }
 
 }

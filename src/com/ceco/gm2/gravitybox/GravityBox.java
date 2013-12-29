@@ -76,6 +76,10 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             FixTraceFlood.initZygote();
             ModElectronBeam.initZygote(prefs);
             ModLockscreen.initZygote(prefs);
+
+            // PermissionGranter init goes here because so far its only purpose
+            // is to grant permissions needed by QuickSettings camera tile
+            PermissionGranter.initZygote();
         }
 
         // Common

@@ -21,13 +21,10 @@ import de.robv.android.xposed.XposedHelpers;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class VolumeTile extends AQuickSettingsTile {
+public class VolumeTile extends BasicTile {
 
     public VolumeTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -50,27 +47,23 @@ public class VolumeTile extends AQuickSettingsTile {
                 return true;
             }
         };
+
+        mDrawableId = R.drawable.ic_qs_volume;
+        mLabel = mGbContext.getString(R.string.qs_tile_volume);
     }
 
     @Override
-    protected void onTileCreate() {
-        mDrawableId = R.drawable.ic_qs_volume;
-        mLabel = mGbContext.getString(R.string.qs_tile_volume);
-
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_volume, mTile);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_volume;
     }
 
     @Override
     protected synchronized void updateTile() {
-        TextView tv = (TextView) mTile.findViewById(R.id.volume_tileview);
-        tv.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            tv.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            tv.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
         }
+
+        super.updateTile();
     }
 }

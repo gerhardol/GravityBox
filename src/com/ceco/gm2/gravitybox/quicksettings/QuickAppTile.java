@@ -49,7 +49,7 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-public class QuickAppTile extends AQuickSettingsTile {
+public class QuickAppTile extends BasicTile {
     private static final String TAG = "GB:QuickAppTile";
     private static final boolean DEBUG = false;
 
@@ -263,18 +263,16 @@ public class QuickAppTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_quick_app, mTile);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_quick_app;
     }
 
     @Override
     protected synchronized void updateTile() {
         mLabel = mMainApp.getAppName();
+        mDrawable = mMainApp.getAppIconSmall();
 
-        TextView tv = (TextView) mTile.findViewById(R.id.quickapp_tileview);
-        tv.setText(mLabel);
-        tv.setCompoundDrawablesWithIntrinsicBounds(null, mMainApp.getAppIconSmall(), null, null);
+        super.updateTile();
     }
 
     @Override
@@ -325,5 +323,4 @@ public class QuickAppTile extends AQuickSettingsTile {
             ai.initAppInfo(value);
         }
     }
-
 }

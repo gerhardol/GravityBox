@@ -23,14 +23,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class TorchTile extends AQuickSettingsTile {
+public class TorchTile extends BasicTile {
 
-    private TextView mTextView;
     private int mTorchStatus = TorchService.TORCH_STATUS_OFF;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -60,13 +56,16 @@ public class TorchTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_torch, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.torch_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_torch;
+    }
 
+    @Override
+    protected void onTilePostCreate() {
         IntentFilter intentFilter = new IntentFilter(TorchService.ACTION_TORCH_STATUS_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -79,15 +78,13 @@ public class TorchTile extends AQuickSettingsTile {
             mLabel = mGbResources.getString(R.string.quick_settings_torch_off);
         }
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mTorchStatus == TorchService.TORCH_STATUS_ON ? 
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mTorchStatus == TorchService.TORCH_STATUS_ON ? 
                     KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
+
+        super.updateTile();
     }
 
     private void toggleState() {

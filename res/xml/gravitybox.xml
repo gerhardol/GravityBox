@@ -215,6 +215,13 @@
                 android:defaultValue="0"
                 android:dependency="pref_qs_management_enable" />
 
+            <CheckBoxPreference 
+                android:key="pref_qs_hide_on_change"
+                android:title="@string/pref_qs_hide_on_change_title"
+                android:summary="@string/pref_qs_hide_on_change_summary"
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
+
             <MultiSelectListPreference 
                 android:key="pref_qs_tile_behaviour_override"
                 android:title="@string/pref_qs_tile_behaviour_override_title"

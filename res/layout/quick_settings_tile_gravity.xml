@@ -14,11 +14,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/TextAppearance.QuickSettings.TileView"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/gravitybox_tileview"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/TextAppearance.QuickSettings.TileView"
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center" />
+
+</FrameLayout>

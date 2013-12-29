@@ -85,6 +85,7 @@
     <string name="quick_settings_wifi_turning_on">オンにしています&#8230;</string>
     <string name="quick_settings_nfc_on">NFC オン</string>
     <string name="quick_settings_nfc_off">NFC オフ</string>
+    <string name="quick_settings_camera_error_connect">カメラ接続不可</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -115,6 +116,7 @@
     <string name="qs_tile_expanded_desktop">拡張デスクトップ</string>
     <string name="qs_tile_stay_awake">画面常時点灯</string>
     <string name="qs_tile_screenshot">スクリーンショット</string>
+    <string name="qs_tile_camera">カメラ</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
@@ -861,5 +863,35 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">バッテリー設定</string>
+    
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">カーソル操作キー</string>
+    <string name="pref_navbar_cursor_control_summary">キーボードが表示されているときナビバーにカーソル移動できるキーを表示します。</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">音量キーで画面オン</string>
+    <string name="volume_rocker_wake_default">デフォルト</string>
+    <string name="volume_rocker_wake_enabled">有効</string>
+    <string name="volume_rocker_wake_disabled">無効</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">再起動の確認をする</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">変更時に閉じる</string>
+    <string name="pref_qs_hide_on_change_summary">タイルをタップした時自動的にステータスバーを閉じます。GravityBoxで追加したタイルにのみ適用されます。</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">電源メニュー</string>
+    <string name="pref_cat_power_other_title">その他</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">ロック画面でも許可</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">通信無し時の挙動</string>
+    <string name="inactivity_mode_default">デフォルト</string>
+    <string name="inactivity_mode_hide">非表示にする</string>
+    <string name="inactivity_mode_summary">概要を表示して通信無しなら非表示にする</string>
     
 </resources>

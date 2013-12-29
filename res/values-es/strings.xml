@@ -29,7 +29,7 @@
     <string name="vol_music_controls_title">Botones de volumen cambian la canción</string>
     <string name="vol_music_controls_summary">Cambiar canción con pulsación larga sobre los botones de volumen con la pantalla apagada</string>
 
-    <string name="low_battery_warning_policy_title">Advertencia de batería baja</string>
+    <string name="low_battery_warning_policy_title">Aviso de batería baja</string>
     <string name="low_battery_warning_full">Aviso y sonido</string>
     <string name="low_battery_warning_popup">Solo aviso</string>
     <string name="low_battery_warning_sound">Solo sonido</string>
@@ -37,6 +37,13 @@
 
     <string name="reboot_required">Los cambios se aplicarán después de reiniciar</string>
 
+    <string name="signal_icon_autohide_title">Ocultar auto. iconos de señal</string>
+    <string name="signal_icon_autohide_summary">Oculta automáticamente los iconos de señal de la SIM seleccionada cuando no hay ninguna SIM insertada, desactiva la notificación de \"SIM no insertada\"</string>
+    <string name="sim_slot_1">Ocultar auto. SIM Slot 1</string>
+    <string name="sim_slot_2">Ocultar auto. SIM Slot 2</string>
+    <string name="sim_disable_notifications">Desactivar notificaciones</string>
+    <string name="sim_disable_notifications_summary">Notificación de \"SIM no insertada\" desactivada</string>
+    
     <string name="poweroff_advanced_title">Menú de reinicio avanzado</string>
     <string name="poweroff_advanced_summary">Activa menú de reinicio avanzado con opción para reiniciar en modo recuperación</string>
     <string name="poweroff_recovery">Modo recuperación</string>
@@ -49,6 +56,20 @@
     <string name="vol_key_cursor_control_on_reverse">Volumen arriba/abajo mueve el cursor a derecha/izquierda</string>
 
     <string name="recents_clear_all_title">Eliminar tareas recientes</string>
+    
+    <string name="fix_datetime_crash_title">Arreglar error en ajustes de fecha y hora</string>
+    <string name="fix_datetime_crash_summary">Activar en caso de que se produzca un cierre inesperado en los ajustes de fecha y hora (requiere reinicio)</string>
+
+    <string name="fix_caller_id_phone_title">Fix caller ID for phone</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_phone_summary">Activar si el contacto guardado no coincide cuando recibes su llamada (requiere reinicio)</string>
+    <string name="fix_caller_id_phone_alert">Tras el reinicio deberías volver a añadir tus contactos para que los cambios tengan efecto. Usa Ajustes / Aplicaciones / Todas - para eliminar los datos del proveedor de Contactos.</string>
+
+    <string name="fix_caller_id_mms_title">Fix caller ID for messages</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_mms_summary">Enable in case you experience splitted conversation threads for the same contact (requires reboot)</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_caller_id_mms_alert">After reboot, you should delete all splitted threads in messaging app for change to take effect!</string> <!-- STILL UNTRANSLATED -->
+
+    <string name="fix_calendar_title">Arreglar aplicación calendario</string>
+    <string name="fix_calendar_summary">Activar si la pantalla se enciende sola periódicamente (requiere reinicio)</string>
 
     <string name="important">Importante</string>
 
@@ -79,6 +100,7 @@
     <string name="quick_settings_wifi_turning_on">Activando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC activado</string>
     <string name="quick_settings_nfc_off">NFC desactivado</string>
+    <string name="quick_settings_camera_error_connect">Imposible conectar con la cámara</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Ajustes rápidos de la barra de estado</string>
@@ -110,15 +132,24 @@
     <string name="qs_tile_stay_awake">Mantener despierto</string>
     <string name="qs_tile_screenshot">Captura de pantalla</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Cámara</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Selector de color</string>
     <string name="press_color_to_apply">Pulsa en el color para aplicar</string>
 
-    <!--  Statusbar background color -->
+    <!-- Statusbar background color -->
     <string name="statusbar_bgcolor_title">Color de fondo de la barra de estado</string>
     <string name="statusbar_bgcolor_summary">Permite establecer un color de fondo a la barra de estado</string>
+    
+    <!--  Fix speech settings -->
+    <string name="fix_tts_settings_title">Fix speech settings</string> <!-- STILL UNTRANSLATED -->
+    <string name="fix_tts_settings_summary">Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string> <!-- STILL UNTRANSLATED -->
 
+    <!--  Advanced developer options -->
+    <string name="fix_dev_opts_title">Opciones avanzadas de desarrollo</string>
+    <string name="fix_dev_opts_summary">Desbloquea las opciones avanzadas de desarrollo (requiere reinicio)</string>
+    
     <!-- Main preference categories -->
     <string name="pref_cat_statusbar_title">Ajustes de la barra de estado</string>
     <string name="pref_cat_statusbar_summary">Contiene varios ajustes de la barra de estado</string>
@@ -389,7 +420,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">Aplicación rápida</string>
-    <string name="pref_cat_quickapp_tile_title">Ajustes de las casillas de aplicaciones rápidas</string>
+    <string name="pref_cat_quickapp_tile_title">Ajustes de casillas de apps rápidas</string>
     <string name="pref_quickapp_default_title">Aplicación principal</string>
     <string name="pref_quickapp_slot1_title">Pulsación larga en aplicación 1</string>
     <string name="pref_quickapp_slot2_title">Pulsación larga en aplicación 2</string>
@@ -524,7 +555,7 @@
     <string name="pref_cat_phone_mobile_data_title">Datos móviles</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Modos de red disponibles en ajustes rápidos</string>
+    <string name="pref_network_mode_tile_mode_title">Alternación de modos de red</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
@@ -802,14 +833,14 @@
 
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Indicador de batería en porcentaje</string>
-    <string name="battery_percent_text_size_title">Tamaño del texto del indicador</string>
+    <string name="battery_percent_text_size_title">Tamaño del indicador</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
     <string name="battery_percent_text_size_smallest">Diminuto</string>
-    <string name="battery_percent_text_style_title">Estilo de indicador en texto</string>
+    <string name="battery_percent_text_style_title">Mostrar símbolo de porcentaje</string>
     <string name="battery_percent_text_style_default">Predeterminado</string>
-    <string name="battery_percent_text_style_numbers_only">Solo números (sin icono de porcentaje)</string>
+    <string name="battery_percent_text_style_numbers_only">No mostrar</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
@@ -827,6 +858,10 @@
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Requerir confirmación para reiniciar</string>
     
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Cerrar al pulsar</string>
+    <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
+  
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menú de apagado</string>
     <string name="pref_cat_power_other_title">Otro</string>

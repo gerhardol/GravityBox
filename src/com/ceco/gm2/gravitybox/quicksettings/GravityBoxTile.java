@@ -22,11 +22,9 @@ import com.ceco.gm2.gravitybox.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class GravityBoxTile extends AQuickSettingsTile {
+public class GravityBoxTile extends BasicTile {
 
     public GravityBoxTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -50,22 +48,14 @@ public class GravityBoxTile extends AQuickSettingsTile {
                     return true;
                 }
             };
+
+            mDrawableId = R.drawable.ic_qs_gravitybox;
+            mLabel = "GravityBox";
         }
     }
 
     @Override
-    protected void onTileCreate() {
-        mDrawableId = R.drawable.ic_qs_gravitybox;
-        mLabel = "GravityBox";
-
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_gravity, mTile);
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        TextView tv = (TextView) mTile.findViewById(R.id.gravitybox_tileview);
-        tv.setText(mLabel);
-        tv.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_gravity;
     }
 }

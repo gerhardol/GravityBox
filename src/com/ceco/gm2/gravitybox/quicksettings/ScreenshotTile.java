@@ -21,15 +21,10 @@ import com.ceco.gm2.gravitybox.R;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class ScreenshotTile extends AQuickSettingsTile {
-
-    private TextView mTextView;
+public class ScreenshotTile extends BasicTile {
 
     public ScreenshotTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -47,26 +42,23 @@ public class ScreenshotTile extends AQuickSettingsTile {
                 }, 1000);
             }
         };
+
+        mDrawableId = R.drawable.ic_qs_screenshot;
+        mLabel = mGbContext.getString(R.string.qs_tile_screenshot);
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_screenshot, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.screenshot_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_screenshot;
     }
 
     @Override
     protected synchronized void updateTile() {
-        mDrawableId = R.drawable.ic_qs_screenshot;
-        mLabel = mGbContext.getString(R.string.qs_tile_screenshot);
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
         }
+
+        super.updateTile();
     }
 }

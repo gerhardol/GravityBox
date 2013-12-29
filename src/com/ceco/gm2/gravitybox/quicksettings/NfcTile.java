@@ -27,11 +27,9 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.provider.Settings;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class NfcTile extends AQuickSettingsTile {
+public class NfcTile extends BasicTile {
     private static final String TAG = "GB:NfcTile";
     private static final boolean DEBUG = false;
 
@@ -46,7 +44,6 @@ public class NfcTile extends AQuickSettingsTile {
 
     private int mNfcState = NFC_ADAPTER_UNKNOWN;
     private BroadcastReceiver mStateChangeReceiver;
-    private TextView mTextView;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -76,10 +73,8 @@ public class NfcTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_nfc, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.nfc_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_nfc;
     }
 
     @Override
@@ -113,8 +108,7 @@ public class NfcTile extends AQuickSettingsTile {
                 break;
         }
 
-        mTextView.setText(mLabel);
-        mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
+        super.updateTile();
     }
 
     protected void toggleState() {

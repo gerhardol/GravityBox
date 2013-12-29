@@ -25,16 +25,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class SyncTile extends AQuickSettingsTile {
+public class SyncTile extends BasicTile {
 
-    private TextView mTextView;
     private Handler mHandler;
     private Object mSyncObserverHandle = null;
     private GravityBoxResultReceiver mReceiver;
@@ -55,11 +51,12 @@ public class SyncTile extends AQuickSettingsTile {
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_sync, mTile);
-        mTextView = (TextView) mTile.findViewById(R.id.sync_tileview);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_sync;
+    }
 
+    @Override
+    protected void onTilePostCreate() {
         mReceiver = new GravityBoxResultReceiver(mHandler);
         mReceiver.setReceiver(new Receiver() {
 
@@ -75,11 +72,9 @@ public class SyncTile extends AQuickSettingsTile {
 
         mSyncObserverHandle = ContentResolver.addStatusChangeListener(
                 ContentResolver.SYNC_OBSERVER_TYPE_SETTINGS, mSyncObserver);
-    }
-
-    @Override
-    protected void onTilePostCreate() {
         getSyncState();
+
+        super.onTilePostCreate();
     }
 
     @Override
@@ -92,15 +87,13 @@ public class SyncTile extends AQuickSettingsTile {
             mLabel = mGbResources.getString(R.string.quick_settings_sync_off);
         }
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mSyncState ? 
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mSyncState ? 
                     KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
-        }
+        } 
+
+        super.updateTile();
     }
 
     private void getSyncState() {

@@ -22,22 +22,16 @@ import com.ceco.gm2.gravitybox.WifiManagerWrapper.WifiApStateChangeListener;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
-public class WifiApTile extends AQuickSettingsTile implements WifiApStateChangeListener {
+public class WifiApTile extends BasicTile implements WifiApStateChangeListener {
 
     private WifiManagerWrapper mWifiManager;
     private int mWifiApState;
-    private TextView mTextView;
 
     public WifiApTile(Context context, Context gbContext, Object statusBar,
             Object panelBar, WifiManagerWrapper wifiManager) {
         super(context, gbContext, statusBar, panelBar);
-
-        mWifiManager = wifiManager;
 
         mOnClick = new View.OnClickListener() {
 
@@ -62,17 +56,15 @@ public class WifiApTile extends AQuickSettingsTile implements WifiApStateChangeL
                 return true;
             }
         };
+
+        mWifiManager = wifiManager;
+        mWifiApState = mWifiManager.getWifiApState();
+        mWifiManager.setWifiApStateChangeListener(this);
     }
 
     @Override
-    protected void onTileCreate() {
-        LayoutInflater inflater = LayoutInflater.from(mGbContext);
-        inflater.inflate(R.layout.quick_settings_tile_wifi_ap, mTile);
-
-        mTextView = (TextView) mTile.findViewById(R.id.wifi_ap_tileview);
-
-        mWifiApState = mWifiManager.getWifiApState();
-        mWifiManager.setWifiApStateChangeListener(this);
+    protected int onGetLayoutId() {
+        return R.layout.quick_settings_tile_wifi_ap;
     }
 
     @Override
@@ -93,15 +85,13 @@ public class WifiApTile extends AQuickSettingsTile implements WifiApStateChangeL
                 break;
         }
 
-        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT) {
-            Drawable d = mGbResources.getDrawable(mDrawableId).mutate();
-            d.setColorFilter(mDrawableId == R.drawable.ic_qs_wifi_ap_off ? 
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mDrawableId == R.drawable.ic_qs_wifi_ap_off ? 
                     KK_COLOR_OFF : KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, d, null, null);
-        } else {
-            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
+
+        super.updateTile();
     }
 
     @Override
