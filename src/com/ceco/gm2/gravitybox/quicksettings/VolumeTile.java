@@ -20,7 +20,6 @@ import com.ceco.gm2.gravitybox.R;
 import de.robv.android.xposed.XposedHelpers;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.view.View;
 
@@ -50,20 +49,11 @@ public class VolumeTile extends BasicTile {
 
         mDrawableId = R.drawable.ic_qs_volume;
         mLabel = mGbContext.getString(R.string.qs_tile_volume);
+        mTileColor = KK_COLOR_ON;
     }
 
     @Override
     protected int onGetLayoutId() {
         return R.layout.quick_settings_tile_volume;
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
-
-        super.updateTile();
     }
 }

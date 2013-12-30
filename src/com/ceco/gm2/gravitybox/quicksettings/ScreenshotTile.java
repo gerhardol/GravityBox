@@ -20,7 +20,6 @@ import com.ceco.gm2.gravitybox.R;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.view.View;
 
@@ -45,20 +44,11 @@ public class ScreenshotTile extends BasicTile {
 
         mDrawableId = R.drawable.ic_qs_screenshot;
         mLabel = mGbContext.getString(R.string.qs_tile_screenshot);
+        mTileColor = KK_COLOR_ON;
     }
 
     @Override
     protected int onGetLayoutId() {
         return R.layout.quick_settings_tile_screenshot;
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
-
-        super.updateTile();
     }
 }

@@ -48,8 +48,6 @@ public abstract class AQuickSettingsTile implements OnClickListener, BroadcastSu
     protected OnLongClickListener mOnLongClick;
     protected Resources mResources;
     protected Resources mGbResources;
-    protected int mDrawableId;
-    protected String mLabel;
     protected Object mStatusBar;
     protected Object mPanelBar;
     protected int mTileStyle;

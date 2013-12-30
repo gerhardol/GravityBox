@@ -272,7 +272,8 @@ public class QuickAppTile extends BasicTile {
         mLabel = mMainApp.getAppName();
         mDrawable = mMainApp.getAppIconSmall();
 
-        super.updateTile();
+        mTextView.setText(mLabel);
+        mTextView.setCompoundDrawablesWithIntrinsicBounds(null, mDrawable, null, null);
     }
 
     @Override

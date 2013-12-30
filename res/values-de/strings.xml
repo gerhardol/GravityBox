@@ -699,9 +699,6 @@
     <string name="pref_app_launcher_slot_title">Anwendungsplatz %d</string>
     <string name="app_launcher_no_apps">Keine Apps zugeordnet. Bitte verwenden Sie das GravityBox/App-Launcher-Menü, um Apps zuzuordnen.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">App-Launcher-Taste anzeigen</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">App-Launcher anzeigen</string>
 

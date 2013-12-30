@@ -33,7 +33,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -112,6 +111,7 @@ public class CameraTile extends BasicTile {
 
         mDrawableId = R.drawable.ic_qs_camera;
         mLabel = mGbContext.getString(R.string.qs_tile_camera);
+        mTileColor = KK_COLOR_ON;
 
         String imageFileNameFormat = DEFAULT_IMAGE_FILE_NAME_FORMAT;
         try {
@@ -140,16 +140,6 @@ public class CameraTile extends BasicTile {
         mFlashView = mTile.findViewById(R.id.camera_surface_flash_overlay);
 
         super.onTilePostCreate();
-    }
-
-    @Override
-    protected synchronized void updateTile() {
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        } 
-
-        super.updateTile();
     }
 
     private Runnable mStartRunnable = new Runnable() {

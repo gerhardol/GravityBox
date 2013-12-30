@@ -33,7 +33,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -114,11 +113,8 @@ public class RingerModeTile extends BasicTile {
         findCurrentState();
         mDrawableId = RINGERS[mRingerIndex].mDrawable;
 
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mDrawableId == R.drawable.ic_qs_ring_off ?
-                    KK_COLOR_OFF : KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
+        mTileColor = (mDrawableId == R.drawable.ic_qs_ring_off ? 
+                KK_COLOR_OFF : KK_COLOR_ON);
 
         super.updateTile();
     }

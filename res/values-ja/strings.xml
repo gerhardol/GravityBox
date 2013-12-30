@@ -704,9 +704,6 @@
     <string name="pref_app_launcher_slot_title">アプリスロット %d</string>
     <string name="app_launcher_no_apps">アプリが登録されていません。GravityBox / アプリランチャーで登録してください。</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">アプリランチャーキー</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">アプリランチャーを表示</string>
 

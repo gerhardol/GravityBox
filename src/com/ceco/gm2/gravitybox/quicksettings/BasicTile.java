@@ -17,9 +17,8 @@ package com.ceco.gm2.gravitybox.quicksettings;
 
 import com.ceco.gm2.gravitybox.R;
 
-import de.robv.android.xposed.XposedBridge;
-
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -32,6 +31,7 @@ public abstract class BasicTile extends AQuickSettingsTile {
     protected int mDrawableId;
     protected Drawable mDrawable;
     protected String mLabel;
+    protected int mTileColor;
 
     public BasicTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
         super(context, gbContext, statusBar, panelBar);
@@ -55,11 +55,12 @@ public abstract class BasicTile extends AQuickSettingsTile {
     @Override
     protected void updateTile() {
         mTextView.setText(mLabel);
-        if (mDrawable != null) {
+        if (mTileStyle == KITKAT) {
+            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
+            mDrawable.setColorFilter(mTileColor, PorterDuff.Mode.SRC_ATOP);
             mTextView.setCompoundDrawablesWithIntrinsicBounds(null, mDrawable, null, null);
         } else {
             mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
-        mDrawable = null;
     }
 }

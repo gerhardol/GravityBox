@@ -722,9 +722,6 @@
     <string name="pref_app_launcher_slot_title">Слот приложения %d</string>
     <string name="app_launcher_no_apps">Приложения не выбраны. Используйте GravityBox / Запуск приложений для выбора приложений.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Показывать кнопку запуска приложения</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Запустить приложение</string>
 

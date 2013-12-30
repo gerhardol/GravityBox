@@ -457,7 +457,6 @@
     <string name="pref_cat_app_launcher_summary">Діалог, що дозволяє вибрати до 8 додатків, які можна призначити для дій кнопок або помістити на панель навігації</string>
     <string name="pref_app_launcher_slot_title">Слот додатки %d</string>
     <string name="app_launcher_no_apps">Додатки не вибрані. Використовуйте GravityBox/Запуск додатків для вибору додатків.</string>
-    <string name="pref_navbar_launcher_enable_title">Показувати кнопку запуску програми</string>
     <string name="hwkey_action_app_launcher">Запустити програму</string>
     <string name="pref_pie_control_custom_key_title">Показати призначену для користувача кнопку</string>
     <string name="pie_custom_key_off">Відключено</string>

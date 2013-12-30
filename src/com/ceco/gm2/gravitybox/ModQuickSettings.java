@@ -1077,6 +1077,9 @@ public class ModQuickSettings {
                             @Override
                             public void onClick(View v) {
                                 mWifiManager.toggleWifiEnabled();
+                                if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
                             }
                         });
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
@@ -1111,7 +1114,7 @@ public class ModQuickSettings {
                                 final boolean mobileDataEnabled = 
                                         (Boolean) XposedHelpers.callMethod(cm, "getMobileDataEnabled");
 
-                                if ((mHideOnChange || !mobileDataEnabled) && mStatusBar != null) {
+                                if (mHideOnChange && mStatusBar != null) {
                                     XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
                                 }
 
@@ -1167,7 +1170,23 @@ public class ModQuickSettings {
                     CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
-                    ((View)param.args[0]).setTag(mAospTileTags.get("auto_rotate_textview"));
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("auto_rotate_textview"));
+                    if (mOverrideTileKeys.contains("auto_rotate_textview")) {
+                        tile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final Object rlCtrl = XposedHelpers.getObjectField(
+                                        mQuickSettings, "mRotationLockController");
+                                final boolean locked = (Boolean) XposedHelpers.callMethod(
+                                        rlCtrl, "isRotationLocked");
+                                XposedHelpers.callMethod(rlCtrl, "setRotationLocked", !locked);
+                                if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
+                            }
+                        });
+                    }
                 }
             });
         } catch (Throwable t) {
@@ -1206,6 +1225,14 @@ public class ModQuickSettings {
                                 Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
                                 intent.putExtra("state", !amOn);
                                 mContext.sendBroadcast(intent);
+
+                                final Object state = XposedHelpers.getObjectField(
+                                        param.thisObject, "mAirplaneModeState");
+                                final boolean enabled = XposedHelpers.getBooleanField(state, "enabled");
+                                XposedHelpers.callMethod(param.thisObject, "setAirplaneModeState", !enabled);
+                                if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
                             }
                         });
                     }
@@ -1232,6 +1259,9 @@ public class ModQuickSettings {
                                 } else {
                                     btAdapter.enable();
                                 }
+                                if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
                             }
                         });
                         tile.setOnLongClickListener(new View.OnLongClickListener() {
@@ -1239,6 +1269,46 @@ public class ModQuickSettings {
                             public boolean onLongClick(View v) {
                                 XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
                                         android.provider.Settings.ACTION_BLUETOOTH_SETTINGS);
+                                tile.setPressed(false);
+                                return true;
+                            }
+                        });
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
+
+        try {
+            XposedHelpers.findAndHookMethod(classQsModel, "addLocationTile",
+                    CLASS_QS_TILEVIEW, CLASS_QS_MODEL_RCB, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
+                    final View tile = (View) param.args[0];
+                    tile.setTag(mAospTileTags.get("gps_textview"));
+                    if (mOverrideTileKeys.contains("gps_textview")) {
+                        tile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                final Object locCtrl = XposedHelpers.getObjectField(
+                                        mQuickSettings, "mLocationController");
+                                final boolean newState = !(Boolean)XposedHelpers.callMethod(
+                                        locCtrl, "isLocationEnabled");
+                                if ((Boolean)XposedHelpers.callMethod(locCtrl, "setLocationEnabled", newState)
+                                        && newState) {
+                                    Intent closeDialog = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+                                    mContext.sendBroadcast(closeDialog);
+                                } else if (mHideOnChange && mStatusBar != null) {
+                                    XposedHelpers.callMethod(mStatusBar, "animateCollapsePanels");
+                                }
+                            }
+                        });
+                        tile.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View v) {
+                                XposedHelpers.callMethod(mQuickSettings, "startSettingsActivity", 
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 tile.setPressed(false);
                                 return true;
                             }

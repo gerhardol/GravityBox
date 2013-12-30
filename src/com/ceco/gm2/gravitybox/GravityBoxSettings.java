@@ -443,7 +443,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_NAVBAR_HEIGHT_LANDSCAPE = "pref_navbar_height_landscape";
     public static final String PREF_KEY_NAVBAR_WIDTH = "pref_navbar_width";
     public static final String PREF_KEY_NAVBAR_MENUKEY = "pref_navbar_menukey";
-    public static final String PREF_KEY_NAVBAR_LAUNCHER_ENABLE = "pref_navbar_launcher_enable";
+    public static final String PREF_CAT_KEY_NAVBAR_CUSTOM_KEY = "pref_cat_navbar_custom_key";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE = "pref_navbar_custom_key_enable";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP = "pref_navbar_custom_key_singletap";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS = "pref_navbar_custom_key_longpress";
+    public static final String PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP = "pref_navbar_custom_key_doubletap";
     public static final String PREF_KEY_NAVBAR_SWAP_KEYS = "pref_navbar_swap_keys";
     public static final String PREF_KEY_NAVBAR_CURSOR_CONTROL = "pref_navbar_cursor_control";
     public static final String PREF_KEY_NAVBAR_COLOR_ENABLE = "pref_navbar_color_enable";
@@ -456,12 +460,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String EXTRA_NAVBAR_HEIGHT_LANDSCAPE = "navbarHeightLandscape";
     public static final String EXTRA_NAVBAR_WIDTH = "navbarWidth";
     public static final String EXTRA_NAVBAR_MENUKEY = "navbarMenukey";
-    public static final String EXTRA_NAVBAR_LAUNCHER_ENABLE = "navbarLauncherEnable";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_ENABLE = "navbarCustomKeyEnable";
     public static final String EXTRA_NAVBAR_COLOR_ENABLE = "navbarColorEnable";
     public static final String EXTRA_NAVBAR_KEY_COLOR = "navbarKeyColor";
     public static final String EXTRA_NAVBAR_KEY_GLOW_COLOR = "navbarKeyGlowColor";
     public static final String EXTRA_NAVBAR_BG_COLOR = "navbarBgColor";
     public static final String EXTRA_NAVBAR_CURSOR_CONTROL = "navbarCursorControl";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP = "navbarCustomKeySingletap";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS = "navbarCustomKeyLongpress";
+    public static final String EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP = "navbarCustomKeyDoubletap";
 
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_ENABLE = "pref_lockscreen_ring_targets_enable";
     public static final String PREF_KEY_LOCKSCREEN_TARGETS_APP[] = new String[] {
@@ -825,6 +832,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefLauncherDesktopGridRows;
         private ListPreference mPrefLauncherDesktopGridCols;
         private ListPreference mPrefVolumeRockerWake;
+        private PreferenceScreen mPrefCatNavbarCustomKey;
+        private ListPreference mPrefNavbarCustomKeySingletap;
+        private ListPreference mPrefNavbarCustomKeyLongpress;
+        private ListPreference mPrefNavbarCustomKeyDoubletap;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -986,6 +997,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefCatNavbarColor = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_COLOR);
             mPrefCatNavbarDimen = (PreferenceCategory) findPreference(PREF_CAT_KEY_NAVBAR_DIMEN);
             mPrefNavbarEnable = (CheckBoxPreference) findPreference(PREF_KEY_NAVBAR_ENABLE);
+            mPrefCatNavbarCustomKey = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_CUSTOM_KEY);
+            mPrefNavbarCustomKeySingletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP);
+            mPrefNavbarCustomKeyLongpress = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS);
+            mPrefNavbarCustomKeyDoubletap = (ListPreference) findPreference(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP);
 
             mPrefLockscreenTargetsApp = new AppPickerPreference[5];
             for (int i=0; i<=4; i++) {
@@ -1240,6 +1255,12 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             mPrefHwKeyRecentsSingletap.setEntryValues(actionEntryValues);
             mPrefHwKeyRecentsLongpress.setEntries(actionEntries);
             mPrefHwKeyRecentsLongpress.setEntryValues(actionEntryValues);
+            mPrefNavbarCustomKeySingletap.setEntries(actionEntries);
+            mPrefNavbarCustomKeySingletap.setEntryValues(actionEntryValues);
+            mPrefNavbarCustomKeyLongpress.setEntries(actionEntries);
+            mPrefNavbarCustomKeyLongpress.setEntryValues(actionEntryValues);
+            mPrefNavbarCustomKeyDoubletap.setEntries(actionEntries);
+            mPrefNavbarCustomKeyDoubletap.setEntryValues(actionEntryValues);
 
             setDefaultValues();
         }
@@ -1542,6 +1563,18 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             if (key == null || key.equals(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE)) {
                 mPrefDataTrafficInactivityMode.setSummary(mPrefDataTrafficInactivityMode.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP)) {
+                mPrefNavbarCustomKeySingletap.setSummary(mPrefNavbarCustomKeySingletap.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS)) {
+                mPrefNavbarCustomKeyLongpress.setSummary(mPrefNavbarCustomKeyLongpress.getEntry());
+            }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
+                mPrefNavbarCustomKeyDoubletap.setSummary(mPrefNavbarCustomKeyDoubletap.getEntry());
             }
         }
 
@@ -1851,10 +1884,22 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NAVBAR_MENUKEY)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_MENUKEY, prefs.getBoolean(PREF_KEY_NAVBAR_MENUKEY, false));
-            } else if (key.equals(PREF_KEY_NAVBAR_LAUNCHER_ENABLE)) {
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
-                intent.putExtra(EXTRA_NAVBAR_LAUNCHER_ENABLE,
-                        prefs.getBoolean(PREF_KEY_NAVBAR_LAUNCHER_ENABLE, false));
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_ENABLE,
+                        prefs.getBoolean(PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false));
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_SINGLETAP,
+                        Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_SINGLETAP, "12")));
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_LONGPRESS,
+                        Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_LONGPRESS, "0")));
+            } else if (key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
+                intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
+                intent.putExtra(EXTRA_NAVBAR_CUSTOM_KEY_DOUBLETAP,
+                        Integer.valueOf(prefs.getString(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP, "0")));
             } else if (key.equals(PREF_KEY_NAVBAR_SWAP_KEYS)) {
                 intent.setAction(ACTION_PREF_NAVBAR_SWAP_KEYS);
             } else if (key.equals(PREF_KEY_NAVBAR_CURSOR_CONTROL)) {

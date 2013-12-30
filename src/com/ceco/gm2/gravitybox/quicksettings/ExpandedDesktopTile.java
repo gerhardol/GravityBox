@@ -26,7 +26,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
@@ -105,17 +104,14 @@ public class ExpandedDesktopTile extends BasicTile {
         if (mExpanded) {
             mLabel = mGbContext.getString(R.string.quick_settings_expanded_desktop_expanded);
             mDrawableId = R.drawable.ic_qs_expanded_desktop_on;
+            mTileColor = KK_COLOR_ON;
         } else {
             mLabel = (mMode == GravityBoxSettings.ED_DISABLED) ? 
                     mGbContext.getString(R.string.quick_settings_expanded_desktop_disabled) :
                         mGbContext.getString(R.string.quick_settings_expanded_desktop_normal);
             mDrawableId = R.drawable.ic_qs_expanded_desktop_off;
+            mTileColor = KK_COLOR_OFF;
         }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mExpanded ? KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-        } 
 
         super.updateTile();
     }

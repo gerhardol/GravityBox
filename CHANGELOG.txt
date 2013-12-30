@@ -1,3 +1,41 @@
+Changelog 2.8.5 - 29/12/2013
+--------------------------------------
+- Navigation bar: implemented cursor control keys
+- QuickSettings tiles:
+--- implemented Camera Tile:
+------- single-tap starts in-tile preview
+------- single-tap while preview is showing takes picture
+------- long-press opens camera in normal mode
+--- implemented Hide on Change (works also for stock tiles that have default behaviour overriden)
+--- behaviour override option extended to support: GPS, rotation lock
+--- under-the-hood code optimization (thanks to bgcngm)
+- Hardware Key Actions:
+--- reworked option for volume rocker wake
+--- previous AppLauncher navbar key turned into fully customizable custom navbar key
+- Advanced reboot menu:
+--- new high res icons for reboot actions
+--- option to choose whether to ask for reboot confirmation
+--- option to choose whether allow reboot on lockscreen
+- Clear all recents: added visual effects for better feedback
+--- visual feedback when button is pressed
+--- list of tasks will scroll to the first task that clearing will start from
+- AppLauncher improvements:
+--- visual feedback when app is pressed
+--- improved layout: bigger icons and texts
+- Data traffic monitor improvements:
+--- option for inactivity mode: default, hide on inactivity, show summary and hide
+- Make color picker appear correctly on non-standard resolutions (thanks to gerhardol)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated French translation (thanks to ch-vox)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Russian translations (thanks to smb.roman AKA romashko)
+- Updated Italian translations (thanks to pesa1234)
+- Updated Slovak and Czech translations
+- Updated Indonesian translation (thanks to awaaas)
+
 Changelog 2.8.4 - 23/12/2013
 --------------------------------------
 - AppLaucnher: fix missing apps after reboot on some devices

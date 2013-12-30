@@ -23,7 +23,6 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
@@ -89,11 +88,8 @@ public class StayAwakeTile extends BasicTile {
             mDrawableId = R.drawable.ic_qs_stayawake_off;
         }
 
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mCurrentTimeout == NEVER_SLEEP ? 
-                    KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-        }
+        mTileColor = (mCurrentTimeout == NEVER_SLEEP ?
+                KK_COLOR_ON : KK_COLOR_OFF);
 
         super.updateTile();
     }

@@ -697,11 +697,6 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
-                android:key="pref_navbar_launcher_enable"
-                android:title="@string/pref_navbar_launcher_enable_title"
-                android:defaultValue="false" />
-
-            <CheckBoxPreference 
                 android:key="pref_navbar_swap_keys"
                 android:title="@string/pref_navbar_swap_keys_title"
                 android:defaultValue="false" />
@@ -711,6 +706,35 @@
                 android:title="@string/pref_navbar_cursor_control_title"
                 android:summary="@string/pref_navbar_cursor_control_summary"
                 android:defaultValue="false" />
+
+            <PreferenceScreen 
+                android:key="pref_cat_navbar_custom_key"
+                android:title="@string/pref_cat_navbar_custom_key_title">
+
+                <CheckBoxPreference 
+                    android:key="pref_navbar_custom_key_enable"
+                    android:title="@string/pref_navbar_custom_key_enable_title"
+                    android:defaultValue="false" />
+
+                <ListPreference
+                    android:key="pref_navbar_custom_key_singletap"
+                    android:title="@string/pref_hwkey_singletap_title"
+                    android:defaultValue="12"
+                    android:dependency="pref_navbar_custom_key_enable" />
+
+                <ListPreference
+                    android:key="pref_navbar_custom_key_longpress"
+                    android:title="@string/pref_hwkey_longpress_title"
+                    android:defaultValue="0"
+                    android:dependency="pref_navbar_custom_key_enable" />
+
+                <ListPreference
+                    android:key="pref_navbar_custom_key_doubletap"
+                    android:title="@string/pref_hwkey_doubletap_title"
+                    android:defaultValue="0"
+                    android:dependency="pref_navbar_custom_key_enable" />
+
+            </PreferenceScreen>
 
         </PreferenceCategory>
 

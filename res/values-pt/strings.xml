@@ -708,9 +708,6 @@
     <string name="pref_app_launcher_slot_title">Aplicativo na posição %d</string>
     <string name="app_launcher_no_apps">Nenhum aplicativo definido. Use o menu Lançador de aplicativos do GravityBox para definir.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Exibir botão Lançador aplicativos</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Exibir lançador de aplicativos</string>
 

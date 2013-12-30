@@ -722,9 +722,6 @@
     <string name="pref_app_launcher_slot_title">Alkalmazás hely %d</string>
     <string name="app_launcher_no_apps">Nincs beállítva alkalmazás. Applikációk hozzárendeléséhez használja a GravityBox / Alkalmazás Indító menüt. </string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Alkalmazás Indító gomb mutatása</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Alkalmazás Indító megjelenítése</string>
 

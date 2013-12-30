@@ -22,7 +22,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.view.View;
 
 public class TorchTile extends BasicTile {
@@ -73,15 +72,11 @@ public class TorchTile extends BasicTile {
         if (mTorchStatus == TorchService.TORCH_STATUS_ON) {
             mDrawableId = R.drawable.ic_qs_torch_on;
             mLabel = mGbResources.getString(R.string.quick_settings_torch_on);
+            mTileColor = KK_COLOR_ON;
         } else {
             mDrawableId = R.drawable.ic_qs_torch_off;
             mLabel = mGbResources.getString(R.string.quick_settings_torch_off);
-        }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mTorchStatus == TorchService.TORCH_STATUS_ON ? 
-                    KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
+            mTileColor = KK_COLOR_OFF;
         }
 
         super.updateTile();

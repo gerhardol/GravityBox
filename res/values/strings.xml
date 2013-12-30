@@ -724,9 +724,6 @@
     <string name="pref_app_launcher_slot_title">Application slot %d</string>
     <string name="app_launcher_no_apps">No apps assigned. Use GravityBox / Application launcher menu to assign apps.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Show app launcher key</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Show application launcher</string>
 
@@ -901,7 +898,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Hide on change</string>
-    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles only.</string>
+    <string name="pref_qs_hide_on_change_summary">Collapses statusbar automatically on tile single-tap. Applies to GravityBox tiles and overriden stock tiles.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Power menu</string>
@@ -915,5 +912,9 @@
     <string name="inactivity_mode_default">Default</string>
     <string name="inactivity_mode_hide">Hide on inactivity</string>
     <string name="inactivity_mode_summary">Show summary and hide on inactivity</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Custom key settings</string>
+    <string name="pref_navbar_custom_key_enable_title">Enable custom key</string>
 
 </resources>

@@ -18,13 +18,12 @@
 
     <string name="app_name">GravityBox</string>
 
-    <string name="battery_style_title">Gaya indikator Baterai</string>	
+    <string name="battery_style_title">Gaya indikator Baterai</string>  
     <string name="battery_style_stock">Indikator baterai bawaan</string>
     <string name="battery_style_circle">Baterai lingkar</string>
     <string name="battery_style_circle_percent">Baterai lingkar dengan persentase</string>
     <string name="battery_style_kitkat">Baterai KitKat</string>
     <string name="battery_style_kitkat_percent">Baterai KitKat dengan persentase</string>
-    <string name="battery_percent_text_title">Teks persentase baterai</string>
     <string name="battery_style_none">Tidak ada</string>
 
     <string name="vol_music_controls_title">Tombol volume untuk meloncati trek lagu</string>
@@ -99,6 +98,8 @@
     <string name="quick_settings_wifi_off">Wi-Fi mati</string>
     <string name="quick_settings_wifi_not_connected">Tidak terkoneksi</string>
     <string name="quick_settings_wifi_turning_on">Menghidupkan&#8230;</string>
+    <string name="quick_settings_nfc_on">NFC hidup</string>
+    <string name="quick_settings_nfc_off">NFC mati</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kotak-kotak QuickSettings Statusbar</string>
@@ -129,6 +130,7 @@
     <string name="qs_tile_expanded_desktop">Perluasan Desktop</string>
     <string name="qs_tile_stay_awake">Tetap menyala</string>
     <string name="qs_tile_screenshot">Screenshot</string>
+    <string name="qs_tile_nfc">NFC</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Pilihan Warna</string>
@@ -543,7 +545,12 @@
     <!-- Screenshot in power menu -->
     <string name="pref_powermenu_screenshot_title">Screenshot di menu power</string>
 
-    <!-- Lockscreen targets -->
+    <!-- Unlock ring settings -->
+    <string name="pref_cat_lockscreen_ring_settings_title">Target Lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_enable_title">Hidupkan target lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_enable_summary">Hidupkan pengaturan target lockscreen</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Aplikasi target %s</string>
+    <string name="pref_lockscreen_ring_vertical_offset_title">Jarak bawah cincin unlock</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Jarak samping cincin unlock</string>
 
     <!-- Statusbar brightness control -->
@@ -651,7 +658,7 @@
     <string name="pref_data_traffic_position_title">Posisi</string>
     <string name="dt_position_auto">Otomatis (tengah atau kanan, bergantung posisi jam)</string>
     <string name="dt_position_left">Kiri</string>
-	<string name="dt_position_right">Kanan</string>
+    <string name="dt_position_right">Kanan</string>
     <string name="pref_data_traffic_size_title">Ukuran</string>
     <string name="dt_size_normal">Normal</string>
     <string name="dt_size_smaller">Lebih kecil</string>
@@ -715,9 +722,6 @@
     <string name="pref_app_launcher_slot_title">Aplikasi slot %d</string>
     <string name="app_launcher_no_apps">Tidak ada aplikasi yang ditetapkan. Gunakan GravityBox / menu Launcher Aplikasi untuk menetapkan aplikasi.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Tunjukkan tombol Launcher Aplikasi</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Tunjukkan Launcher Aplikasi</string>
 
@@ -776,5 +780,105 @@
     <string name="pref_statusbar_icon_color_secondary_summary">Merubah warna sinyal oranye</string>
     <string name="pref_statusbar_data_activity_color_secondary_title">Warna aktifitas data kedua</string>
     <string name="pref_statusbar_data_activity_color_secondary_summary">Men-set warna untuk indikator lalu-lintas data kedua</string>
+
+    <!-- Status icon style -->
+    <string name="pref_status_icon_style_title">Gaya ikon status</string>
+    <string name="pref_status_icon_style_summary">Diterapkan pada ikon status seperti mode diam, getar, alarm, dsb.</string>
+    <string name="icon_style_jb">JellyBean</string>
+    <string name="icon_style_kk">KitKat</string>
+
+    <!-- HW Key Actions: Back double-tap -->
+    <string name="hwkey_back_doubletap_dialog_title">Aksi tombol kembali ketika ditekan dua kali</string>
+
+    <!-- HW Key Actions: Home and Back actions -->
+    <string name="hwkey_action_home">Ke awal</string>
+    <string name="hwkey_action_back">Kembali</string>
+
+    <!-- QS Tile Style -->
+    <string name="pref_qs_tile_style_title">Gaya kotak</string>
+    <string name="pref_qs_tile_style_summary">Diterapkan hanya ke kotak yang diperkenalkan oleh GravityBox (tidak berpengaruh ke kotak bawaan)</string>
+
+    <!-- Clear all recents bottom margin -->
+    <string name="pref_recent_clear_margin_bottom_title">Atur batas bawah</string>
+
+    <!-- Google Plus -->
+    <string name="pref_about_gplus_title">Komunitas Google+</string>
+    <string name="pref_about_gplus_summary">Sentuh untuk mengunjungi komunitas GravityBox di Google+</string>
+
+    <!-- Network mode tile: Allow LTE network mode -->
+    <string name="pref_network_mode_tile_lte_title">Ijinkan mode jaringan LTE</string>
+
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Matikan tipe data jaringan</string>
+    <string name="pref_disable_data_network_type_icons_summary">Mengijinkan anda untuk mematikan indikator 3G/G di sebelah bar sinyal</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Untuk menghidupkan dukungan aksi navbar, diperlukan
+        untuk memaksakan bawaan sistem di menu Tweak navigation bar</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Senter lockscreen</string>
+    <string name="hwkey_ls_torch_disabled">Dimatikan</string>
+    <string name="hwkey_ls_torch_home_longpress">Ketika tombol home ditahan</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Ketika tombol volume bawah ditahan</string>
+
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Tombol utama untuk manajemen QuickSettings (membutuhkan restart)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplikasi</string>
+    <string name="app_picker_shortcuts">Jalur pintas</string>
+    <string name="app_picker_shortcut_null_intent">Tidak memungkinkan untuk membuat jalur pintas dikarenakan activity aplikasi tidak mengembalikan maksud jalur pintas</string>
+    <string name="app_picker_shortcut_cancelled">Pembuatan jalur pintas dibatalkan aplikasi tertuju</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Tukar tombol kembali dan recents</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Hidupkan senter</string>
+    <string name="pref_lockscreen_ring_torch_summary">Hidup/matikan senter ketika cincin unlock ditahan</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Batas waktu panel volume</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Mode kotak Ringer mode</string>
+    <string name="ringer_mode_silent">Sunyi</string>
+    <string name="ringer_mode_vibrate">Getar</string>
+    <string name="ringer_mode_sound">Suara</string>
+    <string name="ringer_mode_sound_vibrate">Suara dan Getar</string>
+
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Benarkan masalah lokasi</string>
+    <string name="fix_location_summary">Hidupkan jika anda melihat adanya salah kalkulasi jarak ketika menggunakan aplikasi olahraga (membutuhkan restart)</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Tweak Launcher</string>
+    <string name="pref_cat_launcher_tweaks_summary">Berlaku hanya untuk Google Experience launcher</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Kisi-kisi layar</string>
+    <string name="pref_launcher_desktop_grid_info_title">Menggunakan selain nilai bawaan mungkin membuat tata ruang widget rusak. Gunakan secara bijak. Setiap perubahan membutuhkan launcher untuk di restart.</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Jumlah baris</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Jumlah kolom</string>
+    <string name="desktop_grid_default">Bawaan</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Efek layar mati</string>
+    <string name="screen_off_effect_default">Bawaan sistem</string>
+    <string name="screen_off_effect_crt">CRT</string>
+    <string name="screen_off_effect_fade">Memudar</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Teks persentase baterai</string>
+    <string name="battery_percent_text_size_title">Ukuran teks persentase baterai</string>
+    <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_smaller">Lebih kecil</string>
+    <string name="battery_percent_text_size_even_smaller">Lebih kecil lagi</string>
+    <string name="battery_percent_text_size_smallest">Paling kecil</string>
+    <string name="battery_percent_text_style_title">Gaya teks persentase baterai</string>
+    <string name="battery_percent_text_style_default">Bawaan</string>
+    <string name="battery_percent_text_style_numbers_only">Hanya nomor (tanpa tanda persentase)</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Pengaturan baterai</string>
 
 </resources>

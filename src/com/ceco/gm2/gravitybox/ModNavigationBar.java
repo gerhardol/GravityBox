@@ -58,11 +58,10 @@ public class ModNavigationBar {
     private static boolean mCursorControlEnabled;
     private static boolean mDpadKeysVisible;
 
-    // Application launcher key
-    private static boolean mAppLauncherEnabled;
+    // Custom key
+    private static boolean mCustomKeyEnabled;
     private static Resources mResources;
     private static Context mGbContext;
-    private static AppLauncher mAppLauncher;
     private static NavbarViewInfo[] mNavbarViewInfo = new NavbarViewInfo[2];
 
     // Colors
@@ -87,10 +86,10 @@ public class ModNavigationBar {
     static class NavbarViewInfo {
         ViewGroup navButtons;
         View originalView;
-        KeyButtonView appLauncherView;
+        KeyButtonView customKey;
         KeyButtonView dpadLeft;
         KeyButtonView dpadRight;
-        int appLauncherPosition;
+        int customKeyPosition;
         boolean visible;
     }
 
@@ -105,10 +104,10 @@ public class ModNavigationBar {
                     if (DEBUG) log("mAlwaysShowMenukey = " + mAlwaysShowMenukey);
                     setMenuKeyVisibility();
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_LAUNCHER_ENABLE)) {
-                    mAppLauncherEnabled = intent.getBooleanExtra(
-                            GravityBoxSettings.EXTRA_NAVBAR_LAUNCHER_ENABLE, false);
-                    setAppKeyVisibility();
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE)) {
+                    mCustomKeyEnabled = intent.getBooleanExtra(
+                            GravityBoxSettings.EXTRA_NAVBAR_CUSTOM_KEY_ENABLE, false);
+                    setCustomKeyVisibility();
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_NAVBAR_KEY_COLOR)) {
                     mKeyColor = intent.getIntExtra(
@@ -175,8 +174,8 @@ public class ModNavigationBar {
                 XposedBridge.log(nfe);
             }
 
-            mAppLauncherEnabled = prefs.getBoolean(
-                    GravityBoxSettings.PREF_KEY_NAVBAR_LAUNCHER_ENABLE, false);
+            mCustomKeyEnabled = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_NAVBAR_CUSTOM_KEY_ENABLE, false);
             mHwKeysEnabled = !prefs.getBoolean(GravityBoxSettings.PREF_KEY_HWKEYS_DISABLE, false);
             mCursorControlEnabled = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_NAVBAR_CURSOR_CONTROL, false);
@@ -201,8 +200,6 @@ public class ModNavigationBar {
                     mNavbarDefaultBgColor = res.getColor(R.color.navbar_bg_color);
                     mNavbarBgColor = prefs.getInt(
                             GravityBoxSettings.PREF_KEY_NAVBAR_BG_COLOR, mNavbarDefaultBgColor);
-
-                    mAppLauncher = new AppLauncher(context, prefs);
 
                     mNavigationBarView = (View) param.thisObject;
                     IntentFilter intentFilter = new IntentFilter();
@@ -275,7 +272,7 @@ public class ModNavigationBar {
                         appKey.setScaleType(ScaleType.FIT_CENTER);
                         appKey.setClickable(true);
                         appKey.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_apps));
-                        appKey.setOnClickListener(mAppKeyOnClickListener);
+                        appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setScaleType(ScaleType.FIT_CENTER);
@@ -303,7 +300,7 @@ public class ModNavigationBar {
                         KeyButtonView appKey = new KeyButtonView(context);
                         appKey.setClickable(true);
                         appKey.setImageDrawable(gbRes.getDrawable(R.drawable.ic_sysbar_apps));
-                        appKey.setOnClickListener(mAppKeyOnClickListener);
+                        appKey.setKeyCode(KeyEvent.KEYCODE_SOFT_LEFT);
 
                         KeyButtonView dpadLeft = new KeyButtonView(context);
                         dpadLeft.setClickable(true);
@@ -347,7 +344,7 @@ public class ModNavigationBar {
                     int.class, boolean.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    setAppKeyVisibility();
+                    setCustomKeyVisibility();
                     setMenuKeyVisibility();
                 }
             });
@@ -380,7 +377,7 @@ public class ModNavigationBar {
 
             mNavbarViewInfo[index] = new NavbarViewInfo();
             mNavbarViewInfo[index].navButtons = navButtons;
-            mNavbarViewInfo[index].appLauncherView = appView;
+            mNavbarViewInfo[index].customKey = appView;
             mNavbarViewInfo[index].dpadLeft = dpadLeft;
             mNavbarViewInfo[index].dpadRight = dpadRight;
             mNavbarViewInfo[index].navButtons.addView(dpadLeft, 0);
@@ -397,7 +394,7 @@ public class ModNavigationBar {
                     mNavbarViewInfo[index].originalView = v;
                 }
             }
-            mNavbarViewInfo[index].appLauncherPosition = searchPosition;
+            mNavbarViewInfo[index].customKeyPosition = searchPosition;
 
             // determine app key layout
             LinearLayout.LayoutParams lp = null;
@@ -438,7 +435,7 @@ public class ModNavigationBar {
                 lp = new LinearLayout.LayoutParams(size, size, 0);
             }
             if (DEBUG) log("appView: lpWidth=" + lp.width + "; lpHeight=" + lp.height);
-            mNavbarViewInfo[index].appLauncherView.setLayoutParams(lp);
+            mNavbarViewInfo[index].customKey.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadLeft.setLayoutParams(lp);
             mNavbarViewInfo[index].dpadRight.setLayoutParams(lp);
         } catch (Throwable t) {
@@ -446,25 +443,25 @@ public class ModNavigationBar {
         }
     }
 
-    private static void setAppKeyVisibility() {
+    private static void setCustomKeyVisibility() {
         try {
             final int disabledFlags = XposedHelpers.getIntField(mNavigationBarView, "mDisabledFlags");
-            final boolean visible = mAppLauncherEnabled &&
+            final boolean visible = mCustomKeyEnabled &&
                     !((disabledFlags & STATUS_BAR_DISABLE_RECENT) != 0);
             for (int i = 0; i <= 1; i++) {
                 if (mNavbarViewInfo[i].visible == visible) continue;
 
                 if (mNavbarViewInfo[i].originalView != null) {
-                    mNavbarViewInfo[i].navButtons.removeViewAt(mNavbarViewInfo[i].appLauncherPosition);
+                    mNavbarViewInfo[i].navButtons.removeViewAt(mNavbarViewInfo[i].customKeyPosition);
                     mNavbarViewInfo[i].navButtons.addView(visible ?
-                            mNavbarViewInfo[i].appLauncherView : mNavbarViewInfo[i].originalView,
-                            mNavbarViewInfo[i].appLauncherPosition);
+                            mNavbarViewInfo[i].customKey : mNavbarViewInfo[i].originalView,
+                            mNavbarViewInfo[i].customKeyPosition);
                 } else {
                     if (visible) {
-                        mNavbarViewInfo[i].navButtons.addView(mNavbarViewInfo[i].appLauncherView,
-                                mNavbarViewInfo[i].appLauncherPosition);
+                        mNavbarViewInfo[i].navButtons.addView(mNavbarViewInfo[i].customKey,
+                                mNavbarViewInfo[i].customKeyPosition);
                     } else {
-                        mNavbarViewInfo[i].navButtons.removeView(mNavbarViewInfo[i].appLauncherView);
+                        mNavbarViewInfo[i].navButtons.removeView(mNavbarViewInfo[i].customKey);
                     }
                 }
                 mNavbarViewInfo[i].visible = visible;
@@ -506,7 +503,7 @@ public class ModNavigationBar {
 
             for (int i = 0; i <= 1; i++) {
                 // hide/unhide app key or whatever view at that position
-                View v = mNavbarViewInfo[i].navButtons.getChildAt(mNavbarViewInfo[i].appLauncherPosition);
+                View v = mNavbarViewInfo[i].navButtons.getChildAt(mNavbarViewInfo[i].customKeyPosition);
                 if (v != null) {
                     v.setVisibility(mDpadKeysVisible ? View.GONE : View.VISIBLE);
                 }
@@ -565,15 +562,6 @@ public class ModNavigationBar {
             XposedBridge.log(t);
         }
     }
-
-    private static View.OnClickListener mAppKeyOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (mAppLauncher != null && mHwKeysEnabled) {
-                mAppLauncher.showDialog();
-            }
-        }
-    };
 
     private static void setKeyColor() {
         try {

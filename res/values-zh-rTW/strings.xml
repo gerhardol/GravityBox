@@ -86,6 +86,7 @@
     <string name="quick_settings_wifi_turning_on">開啟中&#8230;</string>
     <string name="quick_settings_nfc_on">NFC 開啟</string>
     <string name="quick_settings_nfc_off">NFC 關閉</string>
+    <string name="quick_settings_camera_error_connect">無法連結相機</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">狀態列快速設定磁貼</string>
@@ -117,6 +118,7 @@
     <string name="qs_tile_stay_awake">保持清醒</string>
     <string name="qs_tile_screenshot">螢幕截圖</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">相機</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">顏色選擇器</string>
@@ -706,9 +708,6 @@
     <string name="pref_app_launcher_slot_title">應用程式槽 %d</string>
     <string name="app_launcher_no_apps">沒有應用程式被分配. 使用 GravityBox / 程式啟動器選單來分配應用程式.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">顯示程式啟動器按鍵</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">顯示應用程式啟動器</string>
 
@@ -865,5 +864,39 @@
     
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">電池設定</string>
+    
+     <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">方向控制鍵</string>
+    <string name="pref_navbar_cursor_control_summary">在海苔條上與鍵盤上啟用方向控制鍵</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">音量鍵喚醒</string>
+    <string name="volume_rocker_wake_default">系統預設</string>
+    <string name="volume_rocker_wake_enabled">啟用</string>
+    <string name="volume_rocker_wake_disabled">停用</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">要求重新啟動確認</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">隱藏在變更</string>
+    <string name="pref_qs_hide_on_change_summary">瓷貼單點選，狀態列自動發生崩潰，適用於 GravityBox 所推出的瓷貼與原生瓷貼.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">電源選單</string>
+    <string name="pref_cat_power_other_title">其他</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">允許在鎖定螢幕上</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">閒置模式</string>
+    <string name="inactivity_mode_default">預設</string>
+    <string name="inactivity_mode_hide">在閒置模式中隱藏</string>
+    <string name="inactivity_mode_summary">顯示摘要並且隱藏在閒置模式中</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自訂按鍵設定</string>
+    <string name="pref_navbar_custom_key_enable_title">啟用自訂按鍵</string>
  
 </resources>

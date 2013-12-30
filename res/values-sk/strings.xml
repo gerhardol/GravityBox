@@ -84,6 +84,7 @@
     <string name="quick_settings_wifi_turning_on">Zapína sa&#8230;</string>
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
+    <string name="quick_settings_camera_error_connect">Nie je možné spustiť fotoaparát</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -113,7 +114,8 @@
     <string name="qs_tile_expanded_desktop">Rozšírená plocha</string>
     <string name="qs_tile_stay_awake">Bdenie</string>
     <string name="qs_tile_screenshot">Screenshot</string>
-    <string name="qs_tile_nfc">NFC</string>  
+    <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Fotoaparát</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výber farby</string>
@@ -688,9 +690,6 @@
     <string name="pref_app_launcher_slot_title">Aplikácia %d</string>
     <string name="app_launcher_no_apps">Nie sú priradené žiadne aplikácie. Použite GravityBox / Spúšťač aplikácií pre priradenie aplikácií.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Tlačidlo spúštača aplikácií</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Zobraziť spúšťač aplikácií</string>
 
@@ -844,5 +843,39 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Nastavenia indikátora batérie</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Tlačidlá ovládania kurzora</string>
+    <string name="pref_navbar_cursor_control_summary">Zobrazí tlačidlá ovládania kurzora v navigačnej lište počas písania na klávesnici</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Zobudenie tlačidlami hlasitosti</string>
+    <string name="volume_rocker_wake_default">Predvolené</string>
+    <string name="volume_rocker_wake_enabled">Zapnuté</string>
+    <string name="volume_rocker_wake_disabled">Vypnuté</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Vyžadovať potvrdenie reštartu</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Zavrieť po zmene</string>
+    <string name="pref_qs_hide_on_change_summary">Zavrie stavovú lištu automaticky po ťuknutí na dlaždicu. Týka sa GravityBox dlaždíc a systémových dlaždíc, pre ktoré je obídené systémové správanie.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Ponuka napájania</string>
+    <string name="pref_cat_power_other_title">Ostatné</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Povoliť na obrazovke uzamknutia</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Režim počas nečinnosti</string>
+    <string name="inactivity_mode_default">Predvolený</string>
+    <string name="inactivity_mode_hide">Skryť počas nečinnosti</string>
+    <string name="inactivity_mode_summary">Zobraziť štatistiku a skryť</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Voliteľné tlačidlo</string>
+    <string name="pref_navbar_custom_key_enable_title">Povoliť voliteľné tlačidlo</string>
 
 </resources>

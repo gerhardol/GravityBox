@@ -51,6 +51,7 @@ public class GravityBoxTile extends BasicTile {
 
             mDrawableId = R.drawable.ic_qs_gravitybox;
             mLabel = "GravityBox";
+            mTileColor = KK_COLOR_ON;
         }
     }
 

@@ -24,7 +24,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SyncStatusObserver;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -82,16 +81,12 @@ public class SyncTile extends BasicTile {
         if (mSyncState) {
             mDrawableId = R.drawable.ic_qs_sync_on;
             mLabel = mGbResources.getString(R.string.quick_settings_sync_on);
+            mTileColor = KK_COLOR_ON;
         } else {
             mDrawableId = R.drawable.ic_qs_sync_off;
             mLabel = mGbResources.getString(R.string.quick_settings_sync_off);
+            mTileColor = KK_COLOR_OFF;
         }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mSyncState ? 
-                    KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
-        } 
 
         super.updateTile();
     }

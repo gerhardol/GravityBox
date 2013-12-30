@@ -55,6 +55,8 @@ public class WifiTile extends BasicTile implements WifiStateChangeListener {
             WifiManagerWrapper wifiManager) {
         super(context, gbContext, statusBar, panelBar);
 
+        mTileColor = KK_COLOR_ON;
+
         mWifiManager = wifiManager;
         mWifiManager.setWifiStateChangeListener(this);
 
@@ -105,15 +107,17 @@ public class WifiTile extends BasicTile implements WifiStateChangeListener {
 
     @Override
     protected synchronized void updateTile() {
+        mTextView.setText(mLabel);
         if (mTileStyle == KITKAT && (mDrawableId == R.drawable.ic_qs_wifi_full_1 ||
                 mDrawableId == R.drawable.ic_qs_wifi_full_2 ||
                 mDrawableId == R.drawable.ic_qs_wifi_full_3 ||
                 mDrawableId == R.drawable.ic_qs_wifi_full_4)) {
             mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
+            mDrawable.setColorFilter(mTileColor, PorterDuff.Mode.SRC_ATOP);
+            mTextView.setCompoundDrawablesWithIntrinsicBounds(null, mDrawable, null, null);
+        } else {
+            mTextView.setCompoundDrawablesWithIntrinsicBounds(0, mDrawableId, 0, 0);
         }
-
-        super.updateTile();
     }
 
     private void prepareDrawableMap() {

@@ -724,9 +724,6 @@
     <string name="pref_app_launcher_slot_title">应用程序槽 %d</string>
     <string name="app_launcher_no_apps">没有应用程序被分配，请使用GravityBox程序启动器来分配应用</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">显示程序启动器按键</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">显示程序启动器</string>
 

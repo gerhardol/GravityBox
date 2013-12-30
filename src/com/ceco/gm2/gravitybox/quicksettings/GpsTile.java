@@ -22,7 +22,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.location.LocationManager;
 import android.provider.Settings;
 import android.view.View;
@@ -113,14 +112,11 @@ public class GpsTile extends BasicTile {
                     mGbContext.getString(R.string.qs_tile_gps_enabled);
             mDrawableId = mGpsFixed ? R.drawable.ic_qs_gps_locked :
                     R.drawable.ic_qs_gps_enable;
+            mTileColor = KK_COLOR_ON;
         } else {
             mLabel = mGbContext.getString(R.string.qs_tile_gps_disabled);
             mDrawableId = R.drawable.ic_qs_gps_disable;
-        }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mGpsEnabled ? KK_COLOR_ON : KK_COLOR_OFF, PorterDuff.Mode.SRC_ATOP);
+            mTileColor = KK_COLOR_OFF;
         }
 
         super.updateTile();

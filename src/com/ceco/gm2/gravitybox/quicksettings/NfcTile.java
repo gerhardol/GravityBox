@@ -99,12 +99,14 @@ public class NfcTile extends BasicTile {
             case STATE_ON:
                 mDrawableId = R.drawable.ic_qs_nfc_on;
                 mLabel = mGbContext.getString(R.string.quick_settings_nfc_on);
+                mTileColor = KK_COLOR_ON;
                 break;
             case STATE_TURNING_OFF:
             case STATE_OFF:
             default:
                 mDrawableId = R.drawable.ic_qs_nfc_off;
                 mLabel = mGbContext.getString(R.string.quick_settings_nfc_off);
+                mTileColor = KK_COLOR_OFF;
                 break;
         }
 

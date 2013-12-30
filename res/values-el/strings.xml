@@ -720,9 +720,6 @@
     <string name="pref_app_launcher_slot_title">Θέση εφαρμογής %d</string>
     <string name="app_launcher_no_apps">Καμία εφαρμογή. Χρησιμοποιήστε το μενού GravityBox / Εκκίνηση εφαρμογών να ορίσετε εφαρμογές.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Εμφάνιση πλήκτρου εκκίνησης εφαρμογών</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Εμφάνιση εκκίνησης εφαρμογών</string>
 

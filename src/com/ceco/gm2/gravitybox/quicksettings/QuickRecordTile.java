@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Handler;
@@ -194,11 +193,7 @@ public class QuickRecordTile extends BasicTile {
                 mDrawableId = R.drawable.ic_qs_qr_record;
                 break;
         }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
+        mTileColor = KK_COLOR_ON;
 
         super.updateTile();
     }

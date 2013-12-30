@@ -142,11 +142,11 @@
     <string name="statusbar_bgcolor_title">Color de fondo de la barra de estado</string>
     <string name="statusbar_bgcolor_summary">Permite establecer un color de fondo a la barra de estado</string>
     
-    <!--  Fix speech settings -->
+    <!-- Fix speech settings -->
     <string name="fix_tts_settings_title">Fix speech settings</string> <!-- STILL UNTRANSLATED -->
     <string name="fix_tts_settings_summary">Unlocks voice search and text-to-speech settings in Language&amp;Input (requires reboot)</string> <!-- STILL UNTRANSLATED -->
 
-    <!--  Advanced developer options -->
+    <!-- Advanced developer options -->
     <string name="fix_dev_opts_title">Opciones avanzadas de desarrollo</string>
     <string name="fix_dev_opts_summary">Desbloquea las opciones avanzadas de desarrollo (requiere reinicio)</string>
     
@@ -155,7 +155,9 @@
     <string name="pref_cat_statusbar_summary">Contiene varios ajustes de la barra de estado</string>
     <string name="pref_cat_misc_title">Ajustes varios</string>
     <string name="pref_cat_misc_summary">Contiene todos los demás ajustes que no pertenecen a una categoría concreta</string>
-
+    <string name="pref_cat_fixes_title">Correcciones generales</string>
+    <string name="pref_cat_fixes_summary">Contiene correcciones específicas para MTK6589. Usar solo si es necesario.</string>
+    
     <!-- About -->
     <string name="pref_cat_about_title">Acerca de</string>
     <string name="about_gb_summary">Programado por C3C076@XDA. Toca para visitar el hilo oficial.</string>
@@ -235,6 +237,10 @@
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activar botón menú</string>
     <string name="pref_lockscreen_menu_key_summary">Permite usar el botón menú para desbloquear rápidamente el dispositivo en la pantalla de bloqueo (requiere reinicio)</string>
+
+    <!-- Fix messaging wakelock -->
+    <string name="pref_mms_fix_wakelock_title">Arreglar wakelock en mensajería</string>
+    <string name="pref_mms_fix_wakelock_summary">Impide que la pantalla se encienda cuando llega un mensaje (requiere reinicio)</string>
 
     <!-- Statusbar center clock -->
     <string name="pref_statusbar_center_clock_title">Centrar reloj</string>
@@ -414,6 +420,10 @@
     <!-- Clear all recents top margin -->
     <string name="pref_recent_clear_margin_top_title">Ajustar margen superior</string>
 
+    <!-- Disable roaming warnings -->
+    <string name="pref_roaming_warning_disable_title">Desactivar advertencias en roaming</string>
+    <string name="pref_roaming_warning_disable_summary">Desactiva las advertencias al enviar mensajes o hacer llamadas en roaming</string>
+
     <!-- AppPickerPreference -->
     <string name="app_picker_search">Buscar</string>
     <string name="app_picker_none">(Ninguna)</string>
@@ -462,8 +472,8 @@
     <string name="pref_alarm_icon_hide_title">Ocultar icono de alarma</string>
 
     <!-- Screen dim level -->
-    <string name="pref_screen_dim_level_title">Screen dim level</string>
-    <string name="pref_screen_dim_level_summary">Amount of brightness for dim state - when screen is about to be turned off (requires reboot)</string>
+    <string name="pref_screen_dim_level_title">Screen dim level</string> <!-- STILL UNTRANSLATED -->
+    <string name="pref_screen_dim_level_summary">Amount of brightness for dim state - when screen is about to be turned off (requires reboot)</string> <!-- STILL UNTRANSLATED -->
 
     <!-- Device type -->
     <string name="device_phone">teléfono</string>
@@ -554,6 +564,21 @@
     <string name="pref_cat_phone_messaging_title">Mensajería</string>
     <string name="pref_cat_phone_mobile_data_title">Datos móviles</string>
 
+    <!-- Messaging: Strip unicode -->
+    <string name="pref_mms_unicode_stripping_title">Strip unicode</string> <!-- STILL UNTRANSLATED -->
+    <string name="pref_mms_unicode_stripping_summary">Converts unicode characters to normal characters. Decreases overall message size.</string> <!-- STILL UNTRANSLATED -->
+    <string name="unicode_stripping_leave_intact">Leave characters intact</string> <!-- STILL UNTRANSLATED -->
+    <string name="unicode_stripping_non_encodable">Strip non-encodable characters</string> <!-- STILL UNTRANSLATED -->
+    <string name="unicode_stripping_all">Strip all unicode characters</string> <!-- STILL UNTRANSLATED -->
+
+    <!-- Disable slow 2G data warning -->
+    <string name="pref_mobile_data_slow2g_disable_title">Desactivar aviso de red 2G lenta</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">Desactiva el aviso de velocidad de datos lenta al activar los datos móviles desde ajustes rápidos en una SIM con 2G</string>
+
+    <!-- Follow stock battery color -->
+    <string name="pref_sbcolor_follow_stock_battery_title">Usar color de la batería predeterminada</string>
+    <string name="pref_sbcolor_follow_stock_battery_summary">El reloj, porcentaje y batería en círculo usarán el color de la batería predeterminada. Funciona cuando no se ha aplicado ningún color personalizado.</string>
+
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
     <string name="pref_network_mode_tile_mode_title">Alternación de modos de red</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
@@ -578,6 +603,10 @@
     <string name="pie_controls_enabled_always">Siempre</string>
     <string name="pie_controls_enabled_expanded">Con escritorio expandido activado</string>
     <string name="pie_controls_enabled_expanded_navbar">Cuando el escritorio expandido oculte la barra de navegación</string>
+
+    <!-- Icon coloring: preserve stock battery icon -->
+    <string name="pref_statusbar_color_skip_battery_title">No alterar icono de batería predet.</string>
+    <string name="pref_statusbar_color_skip_battery_summary">Usar si se ha reemplazado el icono de batería con un mod de batería de terceros</string>
 
     <!-- Unplug turns on screen -->
     <string name="pref_unplug_turns_on_screen_title">Desconexión de energía enciende la pantalla</string>
@@ -664,7 +693,7 @@
     <string name="pref_lockscreen_battery_arc_summary">Muestra un arco con el estado de la batería alrededor del anillo de desbloqueo</string>
 
     <!-- HW Key Actions: toggle torch -->
-    <string name="hwkey_action_torch">Des/activar linterna</string>
+    <string name="hwkey_action_torch">Activar/desactivar linterna</string>
 
     <!-- Volume panel: Show expanded -->
     <string name="pref_volume_panel_autoexpand_title">Expandir automáticamente</string>
@@ -694,9 +723,6 @@
     <string name="pref_cat_app_launcher_summary">Diálogo que permite definir hasta 8 aplicaciones que pueden ser asignada a botones físicos o usadas como botones adicionales en la barra de navegación</string>
     <string name="pref_app_launcher_slot_title">Aplicación %d</string>
     <string name="app_launcher_no_apps">No hay aplicaciones asignadas. Us GravityBox / menú de lanzador de aplicaciones para asignar apps.</string>
-
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Mostrar botón de lanzador de app</string>
 
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Mostrar lanzador de aplicaciones</string>
@@ -739,6 +765,10 @@
     <string name="pref_navbar_key_glow_color_title">Color del brillo del botón de navegación</string>
     <string name="pref_navbar_bg_color_title">Color de fondo de la barra de navegación</string>
 
+    <!-- Disable lockscreen shade -->
+    <string name="pref_lockscreen_shade_disable_title">Desactivar sombra en pantalla de bloqueo</string>
+    <string name="pref_lockscreen_shade_disable_summary">Quita el tinte oscuro de la pantalla de bloqueo</string>
+
     <!-- Transparency manager mode -->
     <string name="pref_tm_mode_title">Modo de gestor de transparencia</string>
     <string name="pref_tm_mode_summary">Requiere reinicio</string>
@@ -766,6 +796,10 @@
     <string name="hwkey_action_home">Ir al inicio</string>
     <string name="hwkey_action_back">Volver atrás</string>
 
+    <!-- QS Tile Style -->
+    <string name="pref_qs_tile_style_title">Estilo de casilla</string>
+    <string name="pref_qs_tile_style_summary">Funciona solo en casillas de GravityBox (no afecta a las predeterminadas)</string>
+
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ajustar margen inferior</string>
 
@@ -775,6 +809,10 @@
 
     <!-- Network mode tile: Allow LTE network mode -->
     <string name="pref_network_mode_tile_lte_title">Permitir modo de red LTE</string>
+
+    <!-- Disable data network type icons -->
+    <string name="pref_disable_data_network_type_icons_title">Desactivar indicadores de tipo de red de datos</string>
+    <string name="pref_disable_data_network_type_icons_summary">Desactiva los indicadores 3G/G al lado de las barras de señal de la barra de estado</string>
 
     <!-- HW Keys Navigation Bar warning -->
     <string name="hwkey_navbar_warning">Para habilitar el soporte de acciones en la barra de navegación, es necesario 
@@ -874,5 +912,9 @@
     <string name="inactivity_mode_default">Predeterminado</string>
     <string name="inactivity_mode_hide">Ocultar con inactividad</string>
     <string name="inactivity_mode_summary">Mostrar resumen y ocultar con inactividad</string>
+    
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Ajustes de botón personalizado</string>
+    <string name="pref_navbar_custom_key_enable_title">Activar botón personalizado</string>
     
 </resources>

@@ -21,7 +21,6 @@ import com.ceco.gm2.gravitybox.R;
 import de.robv.android.xposed.XposedBridge;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.view.View;
@@ -57,21 +56,11 @@ public class SleepTile extends BasicTile {
 
         mDrawableId = R.drawable.ic_qs_sleep;
         mLabel = mGbResources.getString(R.string.qs_tile_sleep);
+        mTileColor = KK_COLOR_ON;
     }
 
     @Override
     protected int onGetLayoutId() {
         return R.layout.quick_settings_tile_sleep;
     }
-
-    @Override
-    protected void updateTile() {
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
-
-        super.updateTile();
-    }
-
 }

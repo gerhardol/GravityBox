@@ -27,7 +27,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
@@ -116,6 +115,7 @@ public class NetworkModeTile extends BasicTile {
         };
 
         mLabel = mGbResources.getString(R.string.qs_tile_network_mode);
+        mTileColor = KK_COLOR_ON;
         mDefaultNetworkType = PhoneWrapper.getDefaultNetworkType();
         ContentResolver cr = mContext.getContentResolver();
         mNetworkType = Settings.Global.getInt(cr, 
@@ -198,11 +198,6 @@ public class NetworkModeTile extends BasicTile {
                     log("updateTile: Unknown or unsupported network type: mNetworkType = " + mNetworkType);
                 }
                 break;
-        }
-
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
         }
 
         super.updateTile();

@@ -21,7 +21,6 @@ import com.ceco.gm2.gravitybox.WifiManagerWrapper.WifiApStateChangeListener;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.view.View;
 
 public class WifiApTile extends BasicTile implements WifiApStateChangeListener {
@@ -85,11 +84,8 @@ public class WifiApTile extends BasicTile implements WifiApStateChangeListener {
                 break;
         }
 
-        if (mTileStyle == KITKAT) {
-            mDrawable = mGbResources.getDrawable(mDrawableId).mutate();
-            mDrawable.setColorFilter(mDrawableId == R.drawable.ic_qs_wifi_ap_off ? 
-                    KK_COLOR_OFF : KK_COLOR_ON, PorterDuff.Mode.SRC_ATOP);
-        }
+        mTileColor = (mDrawableId == R.drawable.ic_qs_wifi_ap_off ?
+                KK_COLOR_OFF : KK_COLOR_ON);
 
         super.updateTile();
     }

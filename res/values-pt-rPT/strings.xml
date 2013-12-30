@@ -709,9 +709,6 @@
     <string name="pref_app_launcher_slot_title">Aplicação posição %d</string>
     <string name="app_launcher_no_apps">Nenhuma aplicação definida. Aceda a \"GravityBox / Lançador de aplicações\" para definir aplicações.</string>
 
-    <!-- Navigation bar app launcher key -->
-    <string name="pref_navbar_launcher_enable_title">Mostrar botão Lançador aplicações</string>
-
     <!-- HW Key Actions: application launcher -->
     <string name="hwkey_action_app_launcher">Mostrar lançador de aplicações</string>
 
@@ -886,7 +883,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Ocultar ao tocar</string>
-    <string name="pref_qs_hide_on_change_summary">Permite ocultar a Barra de Status automaticamente assim que tocar num painel (aplicável apenas aos painéis adicionados pelo GravityBox)</string>
+    <string name="pref_qs_hide_on_change_summary">Permite ocultar a Barra de Status automaticamente assim que tocar num painel (aplicável aos painéis adicionados pelo GravityBox bem como aos painéis padrão substituídos)</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menu Desligar</string>
@@ -900,5 +897,9 @@
     <string name="inactivity_mode_default">Por defeito</string>
     <string name="inactivity_mode_hide">Ocultar por inatividade</string>
     <string name="inactivity_mode_summary">Mostar sumário e ocultar por inatividade</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Definições de tecla personalizável</string>
+    <string name="pref_navbar_custom_key_enable_title">Ativar tecla personalizável</string>
 
 </resources>
