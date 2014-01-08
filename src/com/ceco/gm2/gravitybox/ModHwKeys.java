@@ -23,10 +23,12 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
@@ -34,8 +36,11 @@ import android.hardware.input.InputManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.PowerManager;
 import android.os.Process;
+import android.os.RemoteException;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.view.HapticFeedbackConstants;
@@ -65,6 +70,15 @@ public class ModHwKeys {
     public static final String ACTION_SHOW_POWER_MENU = "gravitybox.intent.action.SHOW_POWER_MENU";
     public static final String ACTION_TOGGLE_EXPANDED_DESKTOP = 
             "gravitybox.intent.action.TOGGLE_EXPANDED_DESKTOP";
+    public static final String ACTION_EXPAND_NOTIFICATIONS = "gravitybox.intent.action.EXPAND_NOTIFICATIONS";
+    public static final String ACTION_EXPAND_QUICKSETTINGS = "gravitybox.intent.action.EXPAND_QUICKSETTINGS";
+    public static final String ACTION_TOGGLE_TORCH = "gravitybox.intent.action.TOGGLE_TORCH";
+    public static final String ACTION_SHOW_RECENT_APPS = "gravitybox.intent.action.SHOW_RECENT_APPS";
+    public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
+    public static final String ACTION_TOGGLE_ROTATION_LOCK = "gravitybox.intent.action.TOGGLE_ROTATION_LOCK";
+    public static final String ACTION_SLEEP = "gravitybox.intent.action.SLEEP";
+
+    public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
     private static Class<?> classActivityManagerNative;
     private static Object mPhoneWindowManager;
@@ -76,6 +90,8 @@ public class ModHwKeys {
     private static String mStrCustomAppNone;
     private static String mStrCustomAppMissing;
     private static String mStrExpandedDesktopDisabled;
+    private static String mStrAutoRotationEnabled;
+    private static String mStrAutoRotationDisabled;
     private static boolean mIsMenuLongPressed = false;
     private static boolean mIsMenuDoubleTap = false;
     private static boolean mIsBackLongPressed = false;
@@ -216,11 +232,7 @@ public class ModHwKeys {
                     mPieMode = intent.getIntExtra(GravityBoxSettings.EXTRA_PIE_ENABLE, 0);
                 }
             } else if (action.equals(ACTION_SCREENSHOT) && mPhoneWindowManager != null) {
-                try {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "takeScreenshot");
-                } catch (Throwable t) {
-                    log("Error executing PhoneWindowManager.takeScreenshot(): " + t.getMessage());
-                }
+                takeScreenshot();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_DISPLAY_ALLOW_ALL_ROTATIONS_CHANGED)) {
                 final boolean allowAllRotations = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_ALLOW_ALL_ROTATIONS, false);
@@ -231,11 +243,7 @@ public class ModHwKeys {
                     log("Error settings PhoneWindowManager.mAllowAllRotations: " + t.getMessage());
                 }
             } else if (action.equals(ACTION_SHOW_POWER_MENU) && mPhoneWindowManager != null) {
-                try {
-                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
-                } catch (Throwable t) {
-                    log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
-                }
+                showGlobalActionsDialog();
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED)) {
                 mExpandedDesktopMode = intent.getIntExtra(
                         GravityBoxSettings.EXTRA_ED_MODE, GravityBoxSettings.ED_DISABLED);
@@ -260,6 +268,20 @@ public class ModHwKeys {
                                 GravityBoxSettings.HWKEY_ACTION_DEFAULT);
                     if (DEBUG) log("mCustomKeyDoubletapAction set to: " + mCustomKeyDoubletapAction);
                 }
+            } else if (action.equals(ACTION_EXPAND_NOTIFICATIONS) && mPhoneWindowManager != null) {
+                expandNotificationsPanel();
+            } else if (action.equals(ACTION_EXPAND_QUICKSETTINGS) && mPhoneWindowManager != null) {
+                expandSettingsPanel();
+            } else if (action.equals(ACTION_TOGGLE_TORCH)) {
+                toggleTorch();
+            } else if (action.equals(ACTION_SHOW_RECENT_APPS)) {
+                toggleRecentApps();
+            } else if (action.equals(ACTION_SHOW_APP_LAUCNHER)) {
+                showAppLauncher();
+            } else if (action.equals(ACTION_TOGGLE_ROTATION_LOCK)) {
+                toggleAutoRotation();
+            } else if (action.equals(ACTION_SLEEP)) {
+                goToSleep();
             }
         }
     };
@@ -677,6 +699,8 @@ public class ModHwKeys {
             mStrCustomAppNone = res.getString(R.string.hwkey_action_custom_app_none);
             mStrCustomAppMissing = res.getString(R.string.hwkey_action_custom_app_missing);
             mStrExpandedDesktopDisabled = res.getString(R.string.hwkey_action_expanded_desktop_disabled);
+            mStrAutoRotationEnabled = res.getString(R.string.hwkey_action_auto_rotation_enabled);
+            mStrAutoRotationDisabled =  res.getString(R.string.hwkey_action_auto_rotation_disabled);
 
             mAppLauncher = new AppLauncher(mContext, mPrefs);
 
@@ -700,6 +724,13 @@ public class ModHwKeys {
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_HWKEY_LOCKSCREEN_TORCH_CHANGED);
             intentFilter.addAction(ACTION_TOGGLE_EXPANDED_DESKTOP);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_NAVBAR_CHANGED);
+            intentFilter.addAction(ACTION_EXPAND_NOTIFICATIONS);
+            intentFilter.addAction(ACTION_EXPAND_QUICKSETTINGS);
+            intentFilter.addAction(ACTION_TOGGLE_TORCH);
+            intentFilter.addAction(ACTION_SHOW_RECENT_APPS);
+            intentFilter.addAction(ACTION_SHOW_APP_LAUCNHER);
+            intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
+            intentFilter.addAction(ACTION_SLEEP);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -911,6 +942,14 @@ public class ModHwKeys {
             injectKey(KeyEvent.KEYCODE_HOME);
         } else if (action == GravityBoxSettings.HWKEY_ACTION_BACK) {
             injectKey(KeyEvent.KEYCODE_BACK);
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_AUTO_ROTATION) {
+            toggleAutoRotation();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_SHOW_POWER_MENU) {
+            showGlobalActionsDialog();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_EXPAND_NOTIFICATIONS) {
+            expandNotificationsPanel();
+        } else if (action == GravityBoxSettings.HWKEY_ACTION_EXPAND_QUICKSETTINGS) {
+            expandSettingsPanel();
         }
     }
 
@@ -1163,5 +1202,130 @@ public class ModHwKeys {
                 mAppLauncher.showDialog();
             }
         });
+    }
+
+    private static void toggleAutoRotation() {
+        try {
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    final Class<?> rlPolicyClass = XposedHelpers.findClass(
+                            "com.android.internal.view.RotationPolicy", null);
+                    final boolean locked = (Boolean) XposedHelpers.callStaticMethod(
+                            rlPolicyClass, "isRotationLocked", mContext);
+                    XposedHelpers.callStaticMethod(rlPolicyClass, "setRotationLock", mContext, !locked);
+                    if (locked) {
+                        Toast.makeText(mContext, mStrAutoRotationEnabled, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(mContext, mStrAutoRotationDisabled, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } catch (Throwable t) {
+            log("Error toggling auto rotation: " + t.getMessage());
+        }
+    }
+
+    private static final Object mScreenshotLock = new Object();
+    private static ServiceConnection mScreenshotConnection = null;  
+    private static void takeScreenshot() {
+        final Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+        if (handler == null) return;
+
+        synchronized (mScreenshotLock) {  
+            if (mScreenshotConnection != null) {  
+                return;  
+            }  
+            ComponentName cn = new ComponentName("com.android.systemui",  
+                    "com.android.systemui.screenshot.TakeScreenshotService");  
+            Intent intent = new Intent();  
+            intent.setComponent(cn);  
+            ServiceConnection conn = new ServiceConnection() {  
+                @Override  
+                public void onServiceConnected(ComponentName name, IBinder service) {  
+                    synchronized (mScreenshotLock) {  
+                        if (mScreenshotConnection != this) {  
+                            return;  
+                        }  
+                        Messenger messenger = new Messenger(service);  
+                        Message msg = Message.obtain(null, 1);  
+                        final ServiceConnection myConn = this;  
+                                                
+                        Handler h = new Handler(handler.getLooper()) {  
+                            @Override  
+                            public void handleMessage(Message msg) {  
+                                synchronized (mScreenshotLock) {  
+                                    if (mScreenshotConnection == myConn) {  
+                                        mContext.unbindService(mScreenshotConnection);  
+                                        mScreenshotConnection = null;  
+                                        handler.removeCallbacks(mScreenshotTimeout);  
+                                    }  
+                                }  
+                            }  
+                        };  
+                        msg.replyTo = new Messenger(h);  
+                        msg.arg1 = msg.arg2 = 0;  
+                        try {  
+                            messenger.send(msg);  
+                        } catch (RemoteException e) {
+                            XposedBridge.log(e);
+                        }  
+                    }  
+                }  
+                @Override  
+                public void onServiceDisconnected(ComponentName name) {}  
+            };  
+            if (mContext.bindService(intent, conn, Context.BIND_AUTO_CREATE)) {  
+                mScreenshotConnection = conn;  
+                handler.postDelayed(mScreenshotTimeout, 10000);  
+            }  
+        }
+    }
+    
+    private static final Runnable mScreenshotTimeout = new Runnable() {
+        @Override
+        public void run() {
+            synchronized (mScreenshotLock) {
+                if (mScreenshotConnection != null) {
+                    mContext.unbindService(mScreenshotConnection);
+                    mScreenshotConnection = null;
+                }
+            }
+        }
+    };
+
+    private static void showGlobalActionsDialog() {
+        try {
+            Handler handler = (Handler) XposedHelpers.getObjectField(mPhoneWindowManager, "mHandler");
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    XposedHelpers.callMethod(mPhoneWindowManager, "sendCloseSystemWindows", 
+                            SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS);
+                    XposedHelpers.callMethod(mPhoneWindowManager, "showGlobalActionsDialog");
+                }
+            });
+        } catch (Throwable t) {
+            log("Error executing PhoneWindowManager.showGlobalActionsDialog(): " + t.getMessage());
+        }
+    }
+
+    private static void expandNotificationsPanel() {
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
+            XposedHelpers.callMethod(sbService, "expandNotificationsPanel");
+        } catch (Throwable t) {
+            log("Error executing expandNotificationsPanel(): " + t.getMessage());
+        }
+    }
+
+    private static void expandSettingsPanel() {
+        try {
+            final Object sbService = XposedHelpers.callMethod(mPhoneWindowManager, "getStatusBarService"); 
+            XposedHelpers.callMethod(sbService, "expandSettingsPanel");
+        } catch (Throwable t) {
+            log("Error executing expandSettingsPanel(): " + t.getMessage());
+        }
     }
 }

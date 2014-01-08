@@ -285,8 +285,8 @@
     <string name="pref_holo_bg_solid_black_summary">Użyj jednolitego czarnego tła zamiast czarno-szarego gradientu dla domyślnego tematu Holo (wymagany restart)</string>
 
     <!-- QuickSettings tiles per row -->
-    <string name="pref_qs_tiles_per_row_title">Ilość kafelek w rzędzie</string>
-    <string name="pref_qs_tiles_per_row_summary">Określa ile Kefelek Szybkich Ustawień wyświetlić w jednym rzędzie. Rozmiar Kafelek zostanie odpowiednio zmieniony. Dotyczy trybu Portret.</string>
+    <string name="pref_qs_tiles_per_row_title">Ilość kafelków w rzędzie</string>
+    <string name="pref_qs_tiles_per_row_summary">Określa ile Kafelków Szybkich Ustawień wyświetlić w jednym rzędzie przy czym rozmiar kafelków zostanie odpowiednio zmieniony (dotyczy trybu portretowego dla telefonów lub dowolnej orientacji ekranu dla tabletów)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Pokaż dzień tygodnia</string>
@@ -536,7 +536,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Ustawienia Pierścienia Odblokowania</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Włącz Cele Ekranu Blokady</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Główny wyłącznik Celów Ekranu Blokady</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplikacja docelowa %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Cel pierścienia %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Pionowe przesunięcie pierścienia</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Poziome przesunięcie pierścienia</string>
 
@@ -565,7 +565,7 @@
     <string name="pref_sbcolor_follow_stock_battery_summary">Powoduje, że zegar, koło baterii i wskaźnik procentowy na pasku statusu używają typowych kolorów ikony baterii. Obowiązuje tylko, gdy kolorystyka icon jest wyłączona.</string>
 
     <!-- Network mode tile mode (2G/2G+3G/3G or 2G/2G+3G) -->
-    <string name="pref_network_mode_tile_mode_title">Kafelka trybu sieci</string>
+    <string name="pref_network_mode_tile_mode_title">Kafelek trybu sieci</string>
     <string name="nm_tile_mode1">2G/2G+3G/3G/(LTE)</string>
     <string name="nm_tile_mode2">2G/2G+3G/(LTE)</string>
     <string name="nm_tile_mode3">2G/3G/(LTE)</string>
@@ -574,12 +574,12 @@
     <string name="pref_display_allow_all_rotations_title">Zezwalaj na pełen obrót</string>
 
     <!-- QuickSettings: override AOSP tile behaviour -->
-    <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelek</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Zastępuje zachowanie wybranych kafelek przy krótkim i długim naciśnięciu (wymagany restart)</string>
+    <string name="pref_qs_tile_behaviour_override_title">Zmień domyślne zachowanie kafelków</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Zamienia akcje krótkiego i długiego naciśnięcia oraz dodaje wsparcie \'Ukryj po zmianie\' dla wybranych kafelków (wymagany restart)</string>
  
     <!-- QuickSettings: SIM Slot for network mode tile -->
-    <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM Kafelki trybu sieci</string>
-    <string name="pref_qs_network_mode_sim_slot_summary">Definiuje gniazdo SIM którego dotyczy Kafelka trybu sieci (%s)</string>
+    <string name="pref_qs_network_mode_sim_slot_title">Gniazdo SIM dla Kafelka trybu sieci</string>
+    <string name="pref_qs_network_mode_sim_slot_summary">Definiuje gniazdo SIM którego dotyczy Kafelek trybu sieci (%s)</string>
     <string name="sim_slot1">Gniazdo SIM 1</string>
     <string name="sim_slot2">Gniazdo SIM 2</string>
 
@@ -609,8 +609,8 @@
     <string name="call_vibration_periodic">Co 45 sek. podczas połączenia wychodzącego</string>
 
     <!-- QuickSettings tile order -->
-    <string name="pref_qs_tile_order_title">Zmiana kolejności kafelek</string>
-    <string name="pref_qs_tile_order_summary">Umożliwia zmianę kolejności kafelek Szybkich Ustawień</string>
+    <string name="pref_qs_tile_order_title">Zmiana kolejności kafelków</string>
+    <string name="pref_qs_tile_order_summary">Umożliwia zmianę kolejności kafelków Szybkich Ustawień</string>
 
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">Blokowanie bieżących powiadomień</string>
@@ -779,8 +779,8 @@
     <string name="hwkey_action_back">Powrót</string>
 
     <!-- QS Tile Style -->
-    <string name="pref_qs_tile_style_title">Styl kafelek</string>
-    <string name="pref_qs_tile_style_summary">Dotyczy tylko kafelek dodanych przez GravityBox (nie dotyczy typowych kafelek)</string>
+    <string name="pref_qs_tile_style_title">Styl kafelków</string>
+    <string name="pref_qs_tile_style_summary">Dotyczy tylko kafelków dodanych przez GravityBox (nie dotyczy typowych kafelków)</string>
 
     <!-- Clear all recents bottom margin -->
     <string name="pref_recent_clear_margin_bottom_title">Ustaw dolny margines</string>
@@ -825,7 +825,7 @@
     <string name="pref_volume_panel_timeout_title">Czas wyświetlania panelu głośności</string>
 
     <!-- Ringer tile modes -->
-    <string name="pref_qs_ringer_mode_title">Ustawienia kafelki trybu dzwonka</string>
+    <string name="pref_qs_ringer_mode_title">Ustawienia kafelka trybu dzwonka</string>
     <string name="ringer_mode_silent">Cisza</string>
     <string name="ringer_mode_vibrate">Wibracje</string>
     <string name="ringer_mode_sound">Dźwięk</string>
@@ -853,6 +853,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Tekstowy wskaźnik baterii</string>
     <string name="battery_percent_text_size_title">Wielkość tekstowego wskaźnika baterii</string>
+    <string name="battery_percent_text_size_larger">Większy</string>
     <string name="battery_percent_text_size_normal">Normalny</string>
     <string name="battery_percent_text_size_smaller">Mały</string>
     <string name="battery_percent_text_size_even_smaller">Mniejszy</string>
@@ -862,7 +863,7 @@
     <string name="battery_percent_text_style_numbers_only">Tylko cyfry (bez symbolu procentów)</string>
 
     <!-- Battery settings category -->
-    <string name="pref_cat_battery_settings_title">Ustawienia baterii</string>
+    <string name="pref_cat_battery_settings_title">Ustawienia wskaźnika baterii</string>
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Klawisze sterowania kursorem</string>
@@ -879,7 +880,7 @@
 
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Ukryj po zmianie</string>
-    <string name="pref_qs_hide_on_change_summary">Zwija automatycznie pasek satusu przy pojedynczym kliknięciu kafelki. Dotyczy kafelek GravityBox i kafelek zastąpionych.</string>
+    <string name="pref_qs_hide_on_change_summary">Zwija automatycznie pasek satusu przy pojedynczym kliknięciu kafelka. Dotyczy kafelków GravityBox i kafelków zastąpionych.</string>
 
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menu zasilania</string>
@@ -898,4 +899,71 @@
     <string name="pref_cat_navbar_custom_key_title">Ustawienia opcjonalnego przycisku</string>
     <string name="pref_navbar_custom_key_enable_title">Włącz opcjonalny przycisk</string>
     
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Użyj trybów sieci CDMA</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Przełącz auto-obracanie</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto-obracanie włączone</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto-obracanie wyłączone</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Dozwolony dowolny widżet</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Pozwala umieścić na Ekranie Blokady widżety, które normalnie mogą być używane tylko na ekranie Startera Aplikacji</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Pokaż Menu Zasilania</string>
+    <string name="hwkey_action_expand_notifications">Rozwiń Panel Powiadomień</string>
+    <string name="hwkey_action_expand_quicksettings">Rozwiń Panel Szybkich Ustawień</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Cele pierścienia nawigacji</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Główny wyłącznik celów pierścienia nawigacji (wymagany restart)</string>
+    <string name="pref_navbar_ring_target_title">Cel pierścienia %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Akcje GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Przełącznik trybu sieci</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Przełącznik transmisji danych</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Przełącznik WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Przełącznik Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Przełącznik WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Przełącznik NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Przełącznik GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Styl tła celów</string>
+    <string name="nrt_bg_style_none">Żaden</string>
+    <string name="nrt_bg_style_light">Jasny</string>
+    <string name="nrt_bg_style_dark">Ciemny</string>
+    <string name="nrt_bg_style_black">Czarny</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Nie rób nic</string>
+    <string name="smart_radio_action_summary">Przełącz na %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">EKSPERYMENTALNE! Może mieć wpływ na ręczne przełączanie trybu sieciowego</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Przy włączonej transmisji danych</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Przy wyłączonej transmisji danych</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Zawiera ustawienia związane z Pie</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Włącz animację ładowania</string>
+
 </resources>

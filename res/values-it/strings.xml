@@ -705,7 +705,7 @@
 
     <!-- Application launcher -->
     <string name="pref_cat_app_launcher_title">Avvio applicazioni</string>
-    <string name="pref_cat_app_launcher_summary">Consente di definire fino a 8 app che possono essere assegnate a azioni tasti hardware or usate come barra di navigazione aggiuntiva</string>
+    <string name="pref_cat_app_launcher_summary">Consente di definire fino a 8 app che possono essere assegnate a azioni tasti hardware o usate come barra di navigazione aggiuntiva</string>
     <string name="pref_app_launcher_slot_title">Slot Applicazione %d</string>
     <string name="app_launcher_no_apps">Nessuna app assegnata. Usa GravityBox / Menu Launcher Applicazioni per assegnare le applicazioni.</string>
 
@@ -857,10 +857,11 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Testo Batteria percentuale</string>
     <string name="battery_percent_text_size_title">Dimensione percentuale batteria</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normale</string>
     <string name="battery_percent_text_size_smaller">Piccolo</string>
     <string name="battery_percent_text_size_even_smaller">Ancora più piccolo</string>
-    <string name="battery_percent_text_size_smallest">Minore</string>
+    <string name="battery_percent_text_size_smallest">Piccolissimo</string>
     <string name="battery_percent_text_style_title">Stile visualizzazione batteria percentuale</string>
     <string name="battery_percent_text_style_default">Default</string>
     <string name="battery_percent_text_style_numbers_only">Solo numero no percentuale</string>
@@ -897,5 +898,76 @@
     <string name="inactivity_mode_default">Default</string>
     <string name="inactivity_mode_hide">Nascondi in inattività</string>
     <string name="inactivity_mode_summary">Mostra il sommario e nascondi in inattività</string>
+    
+        <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Settaggi tasti personalizzati</string>
+    <string name="pref_navbar_custom_key_enable_title">Abilita tasti personalizzati</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Usa modalità di rete CDMA</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Controllo auto-rotazione</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto-rotazione abilitata</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto rotazione disabilitata</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permetti qualsiasi widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permetti questi widget nella schermata di blocco che normalmente sono usati solo nel launcher</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Visualizza power-menu</string>
+    <string name="hwkey_action_expand_notifications">Espandi barra notifiche</string>
+    <string name="hwkey_action_expand_quicksettings">Espandi pannello QuickSettings</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Pulsanti su anello della barra di navigazione</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Interruttore per abilitare i pulsanti su anello della barra di navigazione (necessario riavvio)</string>
+    <string name="pref_navbar_ring_target_title">Destinazione per pulsante %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Azioni GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Modalità di rete</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Dati Mobili</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Stile sfondo anello pulsanti</string>
+    <string name="nrt_bg_style_none">Nessuno</string>
+    <string name="nrt_bg_style_light">Chiaro</string>
+    <string name="nrt_bg_style_dark">Scuro</string>
+    <string name="nrt_bg_style_black">Nero</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Non fare nulla</string>
+    <string name="smart_radio_action_summary">Cambia a %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">SPERIMENTALE! Potrebbe avere effetti sul cambio della modalità di rete manuale.</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Dati Mobili abilitati</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Dati Mobili disabilitati</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Settaggi Pie Controls</string>
+    
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Abilita animazione in carica</string>
 
 </resources>

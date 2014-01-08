@@ -17,13 +17,12 @@
 
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryData;
+import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -33,11 +32,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class KitKatBattery extends View implements IconManagerListener {
+public class KitKatBattery extends View implements IconManagerListener, BatteryStatusListener {
     public static final String TAG = "GB:KitKatBattery";
 
     public static final boolean SINGLE_DIGIT_PERCENT = false;
@@ -57,6 +55,8 @@ public class KitKatBattery extends View implements IconManagerListener {
     private Paint mFramePaint, mBatteryPaint, mWarningTextPaint, mTextPaint, mBoltPaint;
     private int mButtonHeight;
     private float mTextHeight, mWarningTextHeight;
+    private boolean mAttached = false;
+    private BatteryData mBatteryData;
 
     private int mHeight;
     private int mWidth;
@@ -70,50 +70,26 @@ public class KitKatBattery extends View implements IconManagerListener {
     private final RectF mClipFrame = new RectF();
     private final Rect mBoltFrame = new Rect();
 
-    private class BatteryTracker extends BroadcastReceiver {
-        public static final int UNKNOWN_LEVEL = -1;
-
-        // current battery status
-        int level = UNKNOWN_LEVEL;
-        int plugType;
-        boolean plugged;
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                level = (int)(100f
-                        * intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
-                        / intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100));
-
-                plugType = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-                plugged = plugType != 0;
-
-                postInvalidate();
-            }
+    @Override
+    public void onBatteryStatusChanged(BatteryData batteryData) {
+        mBatteryData = batteryData;
+        if (mAttached) {
+            postInvalidate();
         }
     }
-
-    BatteryTracker mTracker = new BatteryTracker();
 
     @Override
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        final Intent sticky = getContext().registerReceiver(mTracker, filter);
-        if (sticky != null) {
-            // preload the battery level
-            mTracker.onReceive(getContext(), sticky);
-        }
+        mAttached = true;
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
-        getContext().unregisterReceiver(mTracker);
+        mAttached = false;
     }
 
     public KitKatBattery(Context context) {
@@ -217,12 +193,9 @@ public class KitKatBattery extends View implements IconManagerListener {
 
     @Override
     public void draw(Canvas c) {
-        BatteryTracker tracker = mTracker;
-        final int level = tracker.level;
+        if (mBatteryData == null || mBatteryData.level < 0) return;
 
-        if (level == BatteryTracker.UNKNOWN_LEVEL) return;
-
-        float drawFrac = (float) level / 100f;
+        float drawFrac = (float) mBatteryData.level / 100f;
         final int pt = getPaddingTop();
         final int pl = getPaddingLeft();
         final int pr = getPaddingRight();
@@ -255,12 +228,13 @@ public class KitKatBattery extends View implements IconManagerListener {
         c.drawRect(mFrame, mFramePaint);
 
         // fill 'er up
-        final int color = tracker.plugged ? mChargeColor : getColorForLevel(level);
+        final int color = mBatteryData.charging ? 
+                mChargeColor : getColorForLevel(mBatteryData.level);
         mBatteryPaint.setColor(color);
 
-        if (level >= FULL) {
+        if (mBatteryData.level >= FULL) {
             drawFrac = 1f;
-        } else if (level <= EMPTY) {
+        } else if (mBatteryData.level <= EMPTY) {
             drawFrac = 0f;
         }
 
@@ -274,7 +248,7 @@ public class KitKatBattery extends View implements IconManagerListener {
         c.drawRect(mFrame, mBatteryPaint);
         c.restore();
 
-        if (tracker.plugged) {
+        if (mBatteryData.charging) {
             // draw the bolt
             final int bl = (int)(mFrame.left + mFrame.width() / 4.5f);
             final int bt = (int)(mFrame.top + mFrame.height() / 6f);
@@ -297,17 +271,18 @@ public class KitKatBattery extends View implements IconManagerListener {
                         mBoltFrame.top + mBoltPoints[1] * mBoltFrame.height());
             }
             c.drawPath(mBoltPath, mBoltPaint);
-        } else if (level <= EMPTY) {
+        } else if (mBatteryData.level <= EMPTY) {
             final float x = mWidth * 0.5f;
             final float y = (mHeight + mWarningTextHeight) * 0.48f;
             c.drawText(mWarningString, x, y, mWarningTextPaint);
-        } else if (mShowPercent && !(tracker.level == 100 && !SHOW_100_PERCENT)) {
+        } else if (mShowPercent && !(mBatteryData.level == 100 && !SHOW_100_PERCENT)) {
             mTextPaint.setTextSize(height *
                     (SINGLE_DIGIT_PERCENT ? 0.75f
-                            : (tracker.level == 100 ? 0.38f : 0.5f)));
+                            : (mBatteryData.level == 100 ? 0.38f : 0.5f)));
             mTextHeight = -mTextPaint.getFontMetrics().ascent;
 
-            final String str = String.valueOf(SINGLE_DIGIT_PERCENT ? (level/10) : level);
+            final String str = String.valueOf(SINGLE_DIGIT_PERCENT ? 
+                    (mBatteryData.level/10) : mBatteryData.level);
             final float x = mWidth * 0.5f;
             final float y = (mHeight + mTextHeight) * 0.47f;
             c.drawText(str,

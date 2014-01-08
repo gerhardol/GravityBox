@@ -85,6 +85,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT = "pref_battery_percent_text";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_SIZE = "pref_battery_percent_text_size";
     public static final String PREF_KEY_BATTERY_PERCENT_TEXT_STYLE = "pref_battery_percent_text_style";
+    public static final String PREF_KEY_BATTERY_PERCENT_TEXT_ANIM = "pref_battery_percent_text_anim";
     public static final int BATTERY_STYLE_STOCK = 1;
     public static final int BATTERY_STYLE_CIRCLE = 2;
     public static final int BATTERY_STYLE_CIRCLE_PERCENT = 3;
@@ -199,6 +200,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LOCKSCREEN_RING_TORCH = "pref_lockscreen_ring_torch";
     public static final String PREF_KEY_LOCKSCREEN_MAXIMIZE_WIDGETS = "pref_lockscreen_maximize_widgets";
     public static final String PREF_KEY_LOCKSCREEN_WIDGET_LIMIT_DISABLE = "pref_lockscreen_widget_limit_disable";
+    public static final String PREF_KEY_LOCKSCREEN_ALLOW_ANY_WIDGET = "pref_lockscreen_allow_any_widget";
     public static final String PREF_KEY_LOCKSCREEN_ROTATION = "pref_lockscreen_rotation";
     public static final String PREF_KEY_LOCKSCREEN_MENU_KEY = "pref_lockscreen_menu_key";
     public static final String PREF_KEY_LOCKSCREEN_QUICK_UNLOCK = "pref_lockscreen_quick_unlock";
@@ -281,6 +283,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final int HWKEY_ACTION_APP_LAUNCHER = 12;
     public static final int HWKEY_ACTION_HOME = 13;
     public static final int HWKEY_ACTION_BACK = 14;
+    public static final int HWKEY_ACTION_AUTO_ROTATION = 15;
+    public static final int HWKEY_ACTION_SHOW_POWER_MENU = 16;
+    public static final int HWKEY_ACTION_EXPAND_NOTIFICATIONS = 17;
+    public static final int HWKEY_ACTION_EXPAND_QUICKSETTINGS = 18;
     public static final int HWKEY_DOUBLETAP_SPEED_DEFAULT = 400;
     public static final int HWKEY_KILL_DELAY_DEFAULT = 1000;
     public static final int HWKEY_TORCH_DISABLED = 0;
@@ -397,6 +403,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED =
             "gravitybox.intent.action.BATTERY_PERCENT_TEXT_SIZE_CHANGED";
     public static final String EXTRA_BATTERY_PERCENT_TEXT_STYLE = "batteryPercentTextStyle";
+    public static final String EXTRA_BATTERY_PERCENT_TEXT_ANIM = "batteryPercentTextAnim";
     public static final String ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED = "gravitybox.intent.action.SIGNAL_ICON_AUTOHIDE_CHANGED";
 
     public static final String ACTION_PREF_STATUSBAR_COLOR_CHANGED = "gravitybox.intent.action.STATUSBAR_COLOR_CHANGED";
@@ -494,9 +501,11 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
     public static final String PREF_KEY_NETWORK_MODE_TILE_MODE = "pref_network_mode_tile_mode";
     public static final String PREF_KEY_NETWORK_MODE_TILE_LTE = "pref_network_mode_tile_lte";
+    public static final String PREF_KEY_NETWORK_MODE_TILE_CDMA = "pref_network_mode_tile_cdma";
     public static final String PREF_KEY_RINGER_MODE_TILE_MODE = "pref_qs_ringer_mode";
     public static final String EXTRA_NMT_MODE = "networkModeTileMode";
     public static final String EXTRA_NMT_LTE = "networkModeTileLte";
+    public static final String EXTRA_NMT_CDMA = "networkModeTileCdma";
     public static final String EXTRA_RMT_MODE = "ringerModeTileMode";
 
     public static final String PREF_KEY_DISPLAY_ALLOW_ALL_ROTATIONS = "pref_display_allow_all_rotations";
@@ -545,6 +554,23 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_ROWS = "pref_launcher_desktop_grid_rows";
     public static final String PREF_KEY_LAUNCHER_DESKTOP_GRID_COLS = "pref_launcher_desktop_grid_cols";
 
+    public static final String PREF_CAT_KEY_NAVBAR_RING_TARGETS = "pref_cat_navbar_ring_targets";
+    public static final String PREF_KEY_NAVBAR_RING_TARGETS_ENABLE = "pref_navbar_ring_targets_enable";
+    public static final List<String> PREF_KEY_NAVBAR_RING_TARGET = new ArrayList<String>(Arrays.asList(
+            "pref_navbar_ring_target0", "pref_navbar_ring_target1", "pref_navbar_ring_target2",
+            "pref_navbar_ring_target3", "pref_navbar_ring_target4"));
+    public static final String PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE = "pref_navbar_ring_targets_bg_style";
+    public static final String ACTION_PREF_NAVBAR_RING_TARGET_CHANGED = "gravitybox.intent.action.NAVBAR_RING_TARGET_CHANGED";
+    public static final String EXTRA_RING_TARGET_INDEX = "ringTargetIndex";
+    public static final String EXTRA_RING_TARGET_APP = "ringTargetApp";
+    public static final String EXTRA_RING_TARGET_BG_STYLE = "ringTargetBgStyle";
+
+    public static final String PREF_KEY_SMART_RADIO_ON_DATA_ENABLED = "pref_smart_radio_on_data_enabled";
+    public static final String PREF_KEY_SMART_RADIO_ON_DATA_DISABLED = "pref_smart_radio_on_data_disabled";
+    public static final String ACTION_PREF_SMART_RADIO_CHANGED = "gravitybox.intent.action.SMART_RADIO_CHANGED";
+    public static final String EXTRA_SR_ON_DATA_ENABLED = "smartRadioOnDataEnabled";
+    public static final String EXTRA_SR_ON_DATA_DISABLED = "smartRadioOnDataDisabled";
+
     private static final int REQ_LOCKSCREEN_BACKGROUND = 1024;
     private static final int REQ_NOTIF_BG_IMAGE_PORTRAIT = 1025;
     private static final int REQ_NOTIF_BG_IMAGE_LANDSCAPE = 1026;
@@ -572,7 +598,8 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE,
             PREF_KEY_UNPLUG_TURNS_ON_SCREEN,
             PREF_KEY_TM_MODE,
-            PREF_KEY_QUICK_SETTINGS_ENABLE
+            PREF_KEY_QUICK_SETTINGS_ENABLE,
+            PREF_KEY_NAVBAR_RING_TARGETS_ENABLE
     ));
 
     private static final class SystemProperties {
@@ -794,6 +821,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private PreferenceCategory mPrefCatPhoneMobileData;
         private ListPreference mPrefNetworkModeTileMode;
         private CheckBoxPreference mPrefNetworkModeTileLte;
+        private CheckBoxPreference mPrefNetworkModeTileCdma;
         private MultiSelectListPreference mPrefQsTileBehaviourOverride;
         private ListPreference mPrefQsNetworkModeSimSlot;
         private CheckBoxPreference mPrefSbColorSkipBattery;
@@ -836,6 +864,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
         private ListPreference mPrefNavbarCustomKeySingletap;
         private ListPreference mPrefNavbarCustomKeyLongpress;
         private ListPreference mPrefNavbarCustomKeyDoubletap;
+        private PreferenceScreen mPrefCatNavbarRingTargets;
+        private SwitchPreference mPrefNavbarRingTargetsEnable;
+        private AppPickerPreference[] mPrefNavbarRingTarget;
+        private ListPreference mPrefNavbarRingTargetsBgStyle;
 
         @SuppressWarnings("deprecation")
         @Override
@@ -1026,6 +1058,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefNetworkModeTileMode = (ListPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_MODE);
             mPrefNetworkModeTileLte = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_LTE);
+            mPrefNetworkModeTileCdma = (CheckBoxPreference) findPreference(PREF_KEY_NETWORK_MODE_TILE_CDMA);
             mPrefQsTileBehaviourOverride = 
                     (MultiSelectListPreference) findPreference(PREF_KEY_QS_TILE_BEHAVIOUR_OVERRIDE);
             mPrefQsNetworkModeSimSlot = (ListPreference) findPreference(PREF_KEY_QS_NETWORK_MODE_SIM_SLOT);
@@ -1068,6 +1101,22 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
 
             mPrefVolumeRockerWake = (ListPreference) findPreference(PREF_KEY_VOLUME_ROCKER_WAKE);
 
+            mPrefCatNavbarRingTargets = (PreferenceScreen) findPreference(PREF_CAT_KEY_NAVBAR_RING_TARGETS);
+            mPrefNavbarRingTargetsEnable = (SwitchPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE);
+            mPrefNavbarRingTargetsBgStyle = (ListPreference) findPreference(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE);
+            mPrefNavbarRingTarget = new AppPickerPreference[PREF_KEY_NAVBAR_RING_TARGET.size()];
+            for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
+                AppPickerPreference appPref = new AppPickerPreference(getActivity(), null);
+                appPref.setKey(PREF_KEY_NAVBAR_RING_TARGET.get(i));
+                appPref.setTitle(String.format(
+                        getActivity().getString(R.string.pref_navbar_ring_target_title), i + 1));
+                appPref.setDialogTitle(appPref.getTitle());
+                appPref.setDefaultSummary(getActivity().getString(R.string.app_picker_none));
+                appPref.setSummary(getActivity().getString(R.string.app_picker_none));
+                mPrefNavbarRingTarget[i] = appPref;
+                mPrefCatNavbarRingTargets.addPreference(mPrefNavbarRingTarget[i]);
+            }
+
             // Remove Phone specific preferences on Tablet devices
             if (sSystemProperties.isTablet) {
                 mPrefCatStatusbarQs.removePreference(mPrefAutoSwitchQs);
@@ -1102,6 +1151,7 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileMode);
                 mPrefCatStatusbar.removePreference(mSignalIconAutohide);
                 mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileLte);
+                mPrefCatStatusbarQs.removePreference(mPrefNetworkModeTileCdma);
                 mPrefCatStatusbar.removePreference(mPrefDisableRoamingIndicators);
                 mPrefCatPhoneMobileData.removePreference(mPrefMobileDataSlow2gDisable);
                 mPrefCatStatusbarQs.removePreference(mPrefQsNetworkModeSimSlot);
@@ -1576,6 +1626,17 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             if (key == null || key.equals(PREF_KEY_NAVBAR_CUSTOM_KEY_DOUBLETAP)) {
                 mPrefNavbarCustomKeyDoubletap.setSummary(mPrefNavbarCustomKeyDoubletap.getEntry());
             }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_ENABLE)) {
+                final boolean enabled = mPrefNavbarRingTargetsEnable.isChecked();
+                for (int i = 0; i < mPrefNavbarRingTarget.length; i++) {
+                    mPrefNavbarRingTarget[i].setEnabled(enabled);
+                }
+            }
+
+            if (key == null || key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
+                mPrefNavbarRingTargetsBgStyle.setSummary(mPrefNavbarRingTargetsBgStyle.getEntry());
+            }
         }
 
         @Override
@@ -1598,6 +1659,10 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
                 intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_STYLE,
                         prefs.getString(PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
+            } else if (key.equals(PREF_KEY_BATTERY_PERCENT_TEXT_ANIM)) {
+                intent.setAction(ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED);
+                intent.putExtra(EXTRA_BATTERY_PERCENT_TEXT_ANIM,
+                        prefs.getBoolean(PREF_KEY_BATTERY_PERCENT_TEXT_ANIM, false));
             } else if (key.equals(PREF_KEY_SIGNAL_ICON_AUTOHIDE)) {
                 intent.setAction(ACTION_PREF_SIGNAL_ICON_AUTOHIDE_CHANGED);
                 String[] autohidePrefs = mSignalIconAutohide.getValues().toArray(new String[0]);
@@ -1906,6 +1971,15 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_CURSOR_CONTROL,
                         prefs.getBoolean(PREF_KEY_NAVBAR_CURSOR_CONTROL, false));
+            } else if (PREF_KEY_NAVBAR_RING_TARGET.contains(key)) {
+                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+                intent.putExtra(EXTRA_RING_TARGET_INDEX,
+                        PREF_KEY_NAVBAR_RING_TARGET.indexOf(key));
+                intent.putExtra(EXTRA_RING_TARGET_APP, prefs.getString(key, null));
+            } else if (key.equals(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE)) {
+                intent.setAction(ACTION_PREF_NAVBAR_RING_TARGET_CHANGED);
+                intent.putExtra(EXTRA_RING_TARGET_BG_STYLE,
+                        prefs.getString(PREF_KEY_NAVBAR_RING_TARGETS_BG_STYLE, "NONE"));
             } else if (key.equals(PREF_KEY_NAVBAR_COLOR_ENABLE)) {
                 intent.setAction(ACTION_PREF_NAVBAR_CHANGED);
                 intent.putExtra(EXTRA_NAVBAR_COLOR_ENABLE,
@@ -1940,6 +2014,9 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
             } else if (key.equals(PREF_KEY_NETWORK_MODE_TILE_LTE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 intent.putExtra(EXTRA_NMT_LTE, prefs.getBoolean(PREF_KEY_NETWORK_MODE_TILE_LTE, false));
+            } else if (key.equals(PREF_KEY_NETWORK_MODE_TILE_CDMA)) {
+                intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
+                intent.putExtra(EXTRA_NMT_CDMA, prefs.getBoolean(PREF_KEY_NETWORK_MODE_TILE_CDMA, false));
             } else if (key.equals(PREF_KEY_RINGER_MODE_TILE_MODE)) {
                 intent.setAction(ACTION_PREF_QUICKSETTINGS_CHANGED);
                 Set<String> modes = prefs.getStringSet(PREF_KEY_RINGER_MODE_TILE_MODE,
@@ -1974,6 +2051,14 @@ public class GravityBoxSettings extends Activity implements GravityBoxResultRece
                 intent.setAction(ACTION_PREF_DATA_TRAFFIC_CHANGED);
                 intent.putExtra(EXTRA_DT_INACTIVITY_MODE, Integer.valueOf(
                         prefs.getString(PREF_KEY_DATA_TRAFFIC_INACTIVITY_MODE, "0")));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_ON_DATA_ENABLED,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_ENABLED, -1));
+            } else if (key.equals(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED)) {
+                intent.setAction(ACTION_PREF_SMART_RADIO_CHANGED);
+                intent.putExtra(EXTRA_SR_ON_DATA_DISABLED,
+                        prefs.getInt(PREF_KEY_SMART_RADIO_ON_DATA_DISABLED, -1));
             }
             if (intent.getAction() != null) {
                 getActivity().sendBroadcast(intent);

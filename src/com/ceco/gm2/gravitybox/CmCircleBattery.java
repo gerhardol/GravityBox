@@ -16,14 +16,13 @@
 
 package com.ceco.gm2.gravitybox;
 
+import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryData;
+import com.ceco.gm2.gravitybox.BatteryInfoManager.BatteryStatusListener;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
 
 import de.robv.android.xposed.XposedBridge;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,21 +32,18 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.os.BatteryManager;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
-public class CmCircleBattery extends ImageView implements IconManagerListener {
+public class CmCircleBattery extends ImageView implements IconManagerListener, BatteryStatusListener {
     private static final String TAG = "GB:CircleBattery";
     private static final String PACKAGE_NAME = "com.android.systemui";
     private static final boolean DEBUG = false;
 
     private Handler mHandler;
-    private Context mContext;
-    private BatteryReceiver mBatteryReceiver = null;
 
     // state variables
     private boolean mAttached;      // whether or not attached to a window
@@ -89,53 +85,18 @@ public class CmCircleBattery extends ImageView implements IconManagerListener {
     };
 
     // keeps track of current battery level and charger-plugged-state
-    class BatteryReceiver extends BroadcastReceiver {
-        private boolean mIsRegistered = false;
+    @Override
+    public void onBatteryStatusChanged(BatteryData batteryData) {
+        mLevel = batteryData.level;
+        mIsCharging = batteryData.charging;
 
-        public BatteryReceiver(Context context) {
-        }
+        if (mAttached) {
+            LayoutParams l = getLayoutParams();
+            l.width = mCircleSize + getPaddingLeft()
+                    + (mIsDocked ? mCircleSize + getPaddingLeft() : 0);
+            setLayoutParams(l);
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final String action = intent.getAction();
-            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                mLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-                mIsCharging = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0;
-
-                if (mAttached) {
-                    LayoutParams l = getLayoutParams();
-                    l.width = mCircleSize + getPaddingLeft()
-                            + (mIsDocked ? mCircleSize + getPaddingLeft() : 0);
-                    setLayoutParams(l);
-
-                    invalidate();
-                }
-            }
-        }
-
-        private void registerSelf() {
-            if (!mIsRegistered) {
-                mIsRegistered = true;
-
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-                mContext.registerReceiver(mBatteryReceiver, filter);
-            }
-        }
-
-        private void unregisterSelf() {
-            if (mIsRegistered) {
-                mIsRegistered = false;
-                mContext.unregisterReceiver(this);
-            }
-        }
-
-        private void updateRegistration() {
-            if (mAttached) {
-                registerSelf();
-            } else {
-                unregisterSelf();
-            }
+            invalidate();
         }
     }
 
@@ -153,10 +114,7 @@ public class CmCircleBattery extends ImageView implements IconManagerListener {
     public CmCircleBattery(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        mContext = context;
         mHandler = new Handler();
-
-        mBatteryReceiver = new BatteryReceiver(mContext);
 
         // initialize and setup all paint variables
         // stroke width is later set in initSizeBasedStuff()
@@ -196,7 +154,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener {
         super.onAttachedToWindow();
         if (!mAttached) {
             mAttached = true;
-            mBatteryReceiver.updateRegistration();
             mHandler.postDelayed(mInvalidate, 250);
         }
     }
@@ -206,7 +163,6 @@ public class CmCircleBattery extends ImageView implements IconManagerListener {
         super.onDetachedFromWindow();
         if (mAttached) {
             mAttached = false;
-            mBatteryReceiver.updateRegistration();
             mRectLeft = null; // makes sure, size based variables get
                                 // recalculated on next attach
             mCircleSize = 0;    // makes sure, mCircleSize is reread from icons on

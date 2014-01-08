@@ -79,8 +79,8 @@
     <!-- QuickSettings strings -->
     <string name="quick_settings_sync_on">Sincronización activada</string>
     <string name="quick_settings_sync_off">Sincronización desactivada</string>
-    <string name="quick_settings_wifi_ap_on">Punto de acceso Wi-Fi activado</string>
-    <string name="quick_settings_wifi_ap_off">Punto de acceso Wi-Fi desactivado</string>
+    <string name="quick_settings_wifi_ap_on">Compartir Wi-Fi activado</string>
+    <string name="quick_settings_wifi_ap_off">No se comparte Wi-Fi</string>
     <string name="quick_settings_torch_on">Linterna activada</string>
     <string name="quick_settings_torch_off">Linterna desactivada</string>
     <string name="quick_settings_torch_off_notif">Toca para desactivar</string>
@@ -446,7 +446,7 @@
     <string name="pie_control_menu_title">Mostrar siempre botón de menú</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
-    <string name="qs_tile_ringer_mode">Modo de tono de llamada</string>
+    <string name="qs_tile_ringer_mode">Modo de sonido</string>
 
     <!-- Clock settings category -->
     <string name="pref_cat_clock_settings_title">Ajustes del reloj</string>
@@ -551,7 +551,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Ajustes del anillo de desbloqueo</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Habilitar disparadores en anillo de desbloqueo</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Interruptor principal para los disparadores del anillo de desbloqueo</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplicación destino %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Destino desde el anillo %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
 
@@ -872,6 +872,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Indicador de batería en porcentaje</string>
     <string name="battery_percent_text_size_title">Tamaño del indicador</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeño</string>
     <string name="battery_percent_text_size_even_smaller">Muy pequeño</string>
@@ -882,7 +883,7 @@
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Ajustes de batería</string>
-    
+
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Teclas de control del cursor</string>
     <string name="pref_navbar_cursor_control_summary">Activa las teclas de control del cursor en la barra de navegación cuando se muestra el teclado</string>
@@ -895,26 +896,96 @@
 
     <!-- Advanced reboot menu: require confirmation -->
     <string name="pref_reboot_confirm_required_title">Requerir confirmación para reiniciar</string>
-    
+
     <!-- Tiles: Hide on change -->
     <string name="pref_qs_hide_on_change_title">Cerrar al pulsar</string>
     <string name="pref_qs_hide_on_change_summary">Cierra la barra de estado automáticamente al pulsar en una casilla. Funciona en casillas de GravityBox y casillas predeterminadas modificadas.</string>
-  
+
     <!-- Power tweaks categories -->
     <string name="pref_cat_power_menu_title">Menú de apagado</string>
     <string name="pref_cat_power_other_title">Otro</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
     <string name="pref_reboot_allow_on_lockscreen_title">Permitir en pantalla de bloqueo</string>
-    
+
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">Modo de inactividad</string>
     <string name="inactivity_mode_default">Predeterminado</string>
     <string name="inactivity_mode_hide">Ocultar con inactividad</string>
     <string name="inactivity_mode_summary">Mostrar resumen y ocultar con inactividad</string>
-    
+
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Ajustes de botón personalizado</string>
     <string name="pref_navbar_custom_key_enable_title">Activar botón personalizado</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Usar modos de red CDMA</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Alternar rotación automática</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotación automática activada</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotación automática desactivada</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permitir cualquier widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permite colocar en la pantalla de bloqueo los widgets que solo pueden ser usados en el lanzador</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Mostrar menú de apagado</string>
+    <string name="hwkey_action_expand_notifications">Expandir panel de notificaciones</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir panel de ajustes rápidos</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Objetivos en anillo de barra de navegación</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Activador de objetivos en el anillo de barra de navegación (requiere reinicio)</string>
+    <string name="pref_navbar_ring_target_title">Objetivo de anillo %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Acciones de GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Cambiar modo de red</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Activar/desactivar datos móviles</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Activar/desactivar WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Activar/desactivar Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Activar/desactivar punto de acceso WiFi</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Activar/desactivar NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Activar/desactivar GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Estilo de fondo del objetivo</string>
+    <string name="nrt_bg_style_none">Ninguno</string>
+    <string name="nrt_bg_style_light">Claro</string>
+    <string name="nrt_bg_style_dark">Oscuro</string>
+    <string name="nrt_bg_style_black">Negro</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">No hacer nada</string>
+    <string name="smart_radio_action_summary">Cambiar a %s</string>
+    <string name="pref_cat_smart_radio_title">Modo de red inteligente</string>
+    <string name="pref_smart_radio_experimental_summary">¡EXPERIMENTAL! Podría afectar al cambio manual de modo de red</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Con datos móviles activados</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Con datos móviles desactivados</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contiene los ajustes relacionados con los controles \'Pie\'</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Activar animación de carga</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
     
 </resources>

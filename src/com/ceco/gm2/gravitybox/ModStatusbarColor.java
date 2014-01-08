@@ -398,6 +398,7 @@ public class ModStatusbarColor {
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_STATUSBAR_COLOR_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_NOTIF_BACKGROUND_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_DISABLE_ROAMING_INDICATORS_CHANGED);
+                    intentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
                     mPanelBar.getContext().registerReceiver(mBroadcastReceiver, intentFilter);
 
                     Context gbContext = mPanelBar.getContext().createPackageContext(GravityBox.PACKAGE_NAME,

@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.view.Gravity;
@@ -54,11 +53,11 @@ public class ModBatteryStyle {
     private static boolean mBatteryPercentTextEnabled;
     private static boolean mMtkPercentTextEnabled;
     private static StatusbarBatteryPercentage mPercentText;
-    private static int mPercentTextSize;
-    private static String mPercentSign;
     private static CmCircleBattery mCircleBattery;
     private static View mStockBattery;
     private static KitKatBattery mKitKatBattery;
+
+    private static XSharedPreferences mPrefs;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -77,26 +76,38 @@ public class ModBatteryStyle {
                     intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT)) {
                         mBatteryPercentTextEnabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT, false);
                         if (DEBUG) log("mPercentText changed to: " + mBatteryPercentTextEnabled);
-                        updatePercentText(null, false, false);
+                        updateBatteryStyle();
             } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_SIZE_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE)) {
-                        mPercentTextSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 16);
-                        if (DEBUG) log("mPercentTextSize changed to: " + mPercentTextSize);
-                        updatePercentText(null, true, false);
-            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED) &&
-                    intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE)) {
-                        mPercentSign = intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE);
-                        if (DEBUG) log("mPercentSign changed to: " + mPercentSign);
-                        updatePercentText(null, false, true);
+                    intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE) && mPercentText != null) {
+                        int textSize = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_SIZE, 16);
+                        mPercentText.setTextSize(textSize);
+                        if (DEBUG) log("PercentText size changed to: " + textSize);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_STYLE_CHANGED)
+                           && mPercentText != null) {
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE)) {
+                        String percentSign = intent.getStringExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_STYLE);
+                        mPercentText.setPercentSign(percentSign);
+                        if (DEBUG) log("PercentText sign changed to: " + percentSign);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM)) {
+                    boolean animENabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM, false);
+                    mPercentText.setChargeAnimEnabled(animENabled);
+                    if (DEBUG) log("PercentText charge anim changed to: " + animENabled);
+                }
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
+                mPrefs.reload();
+                mPercentText.setTextSize(mMtkPercentTextEnabled ? 16 : Integer.valueOf(mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                mPercentText.setPercentSign(mMtkPercentTextEnabled ? "%" : mPrefs.getString(
+                        GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
                 if (DEBUG) log("mMtkPercentText changed to: " + mMtkPercentTextEnabled);
-                updatePercentText(null, false, false);
+                updateBatteryStyle();
             }
         }
     };
 
-    public static void initResources(XSharedPreferences prefs, InitPackageResourcesParam resparam) {
+    public static void initResources(final XSharedPreferences prefs, InitPackageResourcesParam resparam) {
         try {
             // Before anything else, let's make sure we're not dealing with a Lenovo device
             // Lenovo is known for doing some deep customizations into UI, so let's just check
@@ -124,6 +135,10 @@ public class ModBatteryStyle {
 
                     ViewGroup vg = (ViewGroup) liparam.view.findViewById(
                             liparam.res.getIdentifier("signal_battery_cluster", "id", PACKAGE_NAME));
+
+                    mMtkPercentTextEnabled = Utils.isMtkDevice() ?
+                            Settings.Secure.getInt(vg.getContext().getContentResolver(), 
+                                    SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
 
                     // inject percent text if it doesn't exist
                     for (String bptId : batteryPercentTextIds) {
@@ -154,6 +169,12 @@ public class ModBatteryStyle {
                         vg.addView(mPercentText.getView());
                         if (DEBUG) log("Battery percent text injected");
                     }
+                    mPercentText.setTextSize(mMtkPercentTextEnabled ? 16 : Integer.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
+                    mPercentText.setPercentSign(mMtkPercentTextEnabled ? "%" : prefs.getString(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
+                    mPercentText.setChargeAnimEnabled(prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_ANIM, false));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
 
                     // GM2 specific - if there's already view with id "circle_battery", remove it
@@ -215,6 +236,7 @@ public class ModBatteryStyle {
 
     public static void init(final XSharedPreferences prefs, ClassLoader classLoader) {
         if (DEBUG) log("init");
+        mPrefs = prefs;
 
         try {
             Class<?> batteryControllerClass = XposedHelpers.findClass(CLASS_BATTERY_CONTROLLER, classLoader);
@@ -228,16 +250,8 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_STYLE, "1"));
                     mBatteryPercentTextEnabled = prefs.getBoolean(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT, false);
-                    mPercentTextSize = Integer.valueOf(prefs.getString(
-                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16"));
-                    mPercentSign = prefs.getString(
-                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%");
 
                     Context context = (Context) param.args[0];
-                    mMtkPercentTextEnabled = Utils.isMtkDevice() ?
-                            Settings.Secure.getInt(context.getContentResolver(), 
-                                    SETTING_MTK_BATTERY_PERCENTAGE, 0) == 1 : false;
-
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_STYLE_CHANGED);
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_BATTERY_PERCENT_TEXT_CHANGED);
@@ -249,7 +263,6 @@ public class ModBatteryStyle {
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
 
                     updateBatteryStyle();
-                    updatePercentText(null, true, true);
                     if (DEBUG) log("BatteryController constructed");
                 }
             });
@@ -258,12 +271,7 @@ public class ModBatteryStyle {
                     Context.class, Intent.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    Integer level = null;
-                    Intent intent = (Intent) param.args[1];
-                    if (intent != null) {
-                        level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-                    }
-                    updatePercentText(level, false, false);
+                    updateBatteryStyle();
                 }
             });
         }
@@ -294,29 +302,10 @@ public class ModBatteryStyle {
                 mKitKatBattery.setShowPercent(
                         mBatteryStyle == GravityBoxSettings.BATTERY_STYLE_KITKAT_PERCENT);
             }
-        } catch (Throwable t) {
-            XposedBridge.log(t);
-        }
-    }
 
-    private static void updatePercentText(Integer level, boolean updateSize, boolean updateStyle) {
-        try {
             if (mPercentText != null) {
-                if (level != null) {
-                    mPercentText.getView().setText(level + mPercentSign);
-                }
-                if (updateSize) {
-                    mPercentText.getView().setTextSize(1, mPercentTextSize);
-                }
-                if (updateStyle) {
-                    String text = (String) mPercentText.getView().getText();
-                    if (mPercentSign.equals("%")) {
-                        mPercentText.getView().setText(text + mPercentSign);
-                    } else {
-                        mPercentText.getView().setText(text.substring(0, text.length()-1));
-                    }
-                }
-                mPercentText.getView().setVisibility(
+                mPercentText.update();
+                mPercentText.setVisibility(
                         (mBatteryPercentTextEnabled || mMtkPercentTextEnabled) ?
                                 View.VISIBLE : View.GONE);
             }

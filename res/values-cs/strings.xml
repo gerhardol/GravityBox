@@ -563,7 +563,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Změnit standardní chování dlaždic</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Změní akce na dotek / dlouhý dotek pro zvolené dlaždice (vyžaduje restart)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Přehodí akce na dotek/dlouhý dotek a přidá podporu \'Zavřít po změně\' pro zvolené dlaždice (vyžaduje restart)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">SIM slot pro typ mobilní sítě</string>
@@ -835,6 +835,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Procentuální text stavu baterie</string>
     <string name="battery_percent_text_size_title">Velikost textu</string>
+    <string name="battery_percent_text_size_larger">Větší</string>
     <string name="battery_percent_text_size_normal">Normální</string>
     <string name="battery_percent_text_size_smaller">Menší</string>
     <string name="battery_percent_text_size_even_smaller">Ještě menší</string>
@@ -879,5 +880,72 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Volitelné tlačítko</string>
     <string name="pref_navbar_custom_key_enable_title">Povolit volitelné tlačítko</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Použít CDMA režimy sítě</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Přepnout auto rotaci</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto rotace zapnuta</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto rotace vypnuta</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Povolit všechny widgety</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Povolí i ty widgety na obrazovce uzamčení, které mohou být použity pouze vrámci spouštěče</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Zobrazit nabídku napájení</string>
+    <string name="hwkey_action_expand_notifications">Zobrazit panel upozornění</string>
+    <string name="hwkey_action_expand_quicksettings">Zobrazit panel nastavení</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Zkratky prstence navigační lišty</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Hlavní vypínač pro zkratky prstence navigační lišty (vyžaduje restart)</string>
+    <string name="pref_navbar_ring_target_title">Aplikace pro zkratku %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox Akce</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Přepnout režim sítě</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Přepnout mobilní data</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Přepnout WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Přepnout Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Přepnout WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Přepnout NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Přepnout GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Styl pozadí zkratky</string>
+    <string name="nrt_bg_style_none">Žádný</string>
+    <string name="nrt_bg_style_light">Světlý</string>
+    <string name="nrt_bg_style_dark">Tmavý</string>
+    <string name="nrt_bg_style_black">Černý</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Žádná akce</string>
+    <string name="smart_radio_action_summary">Přepnout na %s</string>
+    <string name="pref_cat_smart_radio_title">Inteligentní režim</string>
+    <string name="pref_smart_radio_experimental_summary">EXPERIMENTÁLNÍ! Může ovlivňovat manuální nastavení režimu mobilní sítě</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Po zapnutí mobilních dat</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Po vypnutí mobilních dat</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Obsahuje nastavení týkající se koláče</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Zapnout indikaci nabíjení</string>
 
 </resources>

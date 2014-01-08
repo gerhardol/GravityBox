@@ -301,7 +301,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Touches par rangée</string>
-    <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches de paramètres rapides à afficher par rangée. Les touches seront redimensionnées en conséquence. Uniquement en mode portrait</string>
+    <string name="pref_qs_tiles_per_row_summary">Définit le nombre de touches de paramètres rapides à afficher par rangée. Les touches seront redimensionnées en conséquence (s\'applique en mode portrait pour les téléphone et dans n\'importe quelle orientation pour les tablettes)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Afficher le jour de la semaine</string>
@@ -551,7 +551,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Cibles de l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Activer les cibles de l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Interrupteur général pour les cibles de l\'écran de déverrouillage</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Application cible %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Cible %s de l\'anneau</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Marge verticale anneau de déverrouillage</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Marge horizontale anneau de déverrouillage</string>
 
@@ -590,7 +590,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Remplacer action par défaut d\'une touche</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Remplace l\'action toucher/toucher long pour la touche sélectionnée (redémarrage nécessaire)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Permute les actions toucher/toucher long et ajoute le support \'Masquer après changement\' pour la touche sélectionnée (redémarrage nécessaire)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Emplacement SIM touche mode réseau</string>
@@ -873,6 +873,7 @@
     <string name="battery_percent_text_title">Texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_title">Taille du texte pourcentage de batterie</string>
     <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_larger">Plus grand</string>
     <string name="battery_percent_text_size_smaller">Plus petit</string>
     <string name="battery_percent_text_size_even_smaller">Encore plus petit</string>
     <string name="battery_percent_text_size_smallest">Le plus petit possible</string>
@@ -908,7 +909,7 @@
     <string name="pref_reboot_allow_on_lockscreen_title">Actif sur écran de déverrouillage</string>
 
     <!-- Data traffic monitor enhancements -->
-    <string name="pref_data_traffic_inactivity_mode_title">Mode d’inactivité</string>
+    <string name="pref_data_traffic_inactivity_mode_title">Mode d\'inactivité</string>
     <string name="inactivity_mode_default">Par défaut</string>
     <string name="inactivity_mode_hide">Masquer durant inactivité</string>
     <string name="inactivity_mode_summary">Afficher un résumé puis masquer durant l\'inactivité</string>
@@ -916,5 +917,72 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Paramètres touche personnalisée</string>
     <string name="pref_navbar_custom_key_enable_title">Active la touche personnalisée</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Utiliser les modes réseau CDMA</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Interrupteur rotation auto</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotation auto activée</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotation auto désactivée</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Autoriser tous les widgets</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Autorise tous les widgets qui ne sont habituellement utilisés que dans le lanceur</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Afficher le menu d\'extinction</string>
+    <string name="hwkey_action_expand_notifications">Développer le panneau de notifications</string>
+    <string name="hwkey_action_expand_quicksettings">Développer le panneau Paramètres Rapides</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Cibles de l\'anneau de navigation</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Interrupteur principal pour les cibles de l\'anneau de navigation (redémarrage nécessaire)</string>
+    <string name="pref_navbar_ring_target_title">Cible %d sur l\'anneau</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Actions de GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Commutateur de mode réseau</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Interrupteur données mobile</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Interrupteur WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Interrupteur Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Interrupteur Hotspot WiFi</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Interrupteur NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Interrupteur GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Style d\'arrière plan pour la cible</string>
+    <string name="nrt_bg_style_none">Aucun</string>
+    <string name="nrt_bg_style_light">Clair</string>
+    <string name="nrt_bg_style_dark">Sombre</string>
+    <string name="nrt_bg_style_black">Noir</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Ne rien faire</string>
+    <string name="smart_radio_action_summary">Commuter en %s</string>
+    <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
+    <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Données mobile activées</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Activer l\'animation lors du chargement</string>
 
 </resources>

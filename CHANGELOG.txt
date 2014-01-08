@@ -1,3 +1,56 @@
+Changelog 2.9.1 - 07/01/2014
+--------------------------------------
+- Introducing GravityBox Actions
+--- Interface for providing GravityBox specific functions to third party apps
+--- Any app that can utilize shortcuts can use GravityBox Actions (taskers, launchers, ...)
+--- Accessible from Launcher's list of widgets
+--- Actions can be used within GB App Launcher, lockscreen ring targets, navbar ring targets, QuickApp Tile, basically within any option that launches apps/shortcuts
+--- Available actions: 
+------ show GB app launcher, toggle BT/WiFi/Mobile data/WiFi AP/NFC/GPS, set network mode,
+------ toggle expanded desktop, expand notifications panel, expand quicksettings, 
+------ show recent apps, show power menu, toggle rotation lock, toggle screen recording, take screenshot,
+------ go to sleep, toggle torch
+- Navigation bar ring targets
+--- Allows up to 5 apps/shortcuts/GB Actions on navigation bar ring
+--- Customizable icon background (none, light, dark, black)
+- QuickSettings Tiles:
+--- Tiles per rows option applies to any orientation mode in case of tablet devices (thanks to bgcngm)
+--- Fixed Mobile signal tile hiding panels when Hide on Change off
+--- Network mode tile: option to use CDMA network modes instead of GSM
+- Battery percent text:
+--- Added non-intrusive battery charging animation
+--- Added one more size step to the list of sizes (larger)
+- Hardware Key Actions:
+--- Added action for toggling Rotation Lock (thanks to maqr)
+--- Added action for showing Power Menu
+--- Added action for expanding notifications panel
+--- Added action for expanding QuickSettings panel
+- Lockscreen tweaks:
+--- Option to allow any widget on lockscreen
+--- Hide clock for Zopper, Android Weather & Clock, Timely widgets
+- Implemented Smart Radio feature (EXPERIMENTAL) (under Phone tweaks/Mobile data category)
+--- Allows defining action to switch to one of common network modes when mobile data enabled or disabled
+--- EXPERIMENTAL: may affect/interfere with manual network mode switching under certain (untested) circumstances
+- Moved Pie Controls menu under root preference screen
+- Clear all recents:
+--- Long-press on clear all recents button removes all but current task 
+------ Current task will be automatically brought into front after clearing
+- Fixed screenshot from Power Menu and Tile for Moto X devices
+- Updated Chinese (Simplified) translation (thanks to liveasx)
+- Updated Chinese (Traditional) translation (thanks to Eric850130)
+- Updated Japanese translation (thanks to WedyDQ10)
+- Updated Polish translation (thanks to xtrem007)
+- Updated Spanish translation (thanks to jvbferrer)
+- Updated Portuguese (BR) translation (thanks to LaraCraft304)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Hungarian translation (thanks to ronin790)
+- Updated Russian translation (thanks to smb.roman AKA romashko)
+- Updated French translation (thanks to ch-vox)
+- Updated Italian translation (thanks to pesa1234)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Slovak and Czech translations
+- Updated Indonesian translation (thanks to awaaas)
+
 Changelog 2.8.5 - 29/12/2013
 --------------------------------------
 - Navigation bar: implemented cursor control keys

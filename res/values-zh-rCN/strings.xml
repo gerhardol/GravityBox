@@ -198,8 +198,8 @@
     <string name="pref_lockscreen_maximize_widgets_summary">若启用这个选项，锁屏画面的小工具默认都会被最大化</string>
 
     <!--  Power tweaks category -->
-    <string name="pref_cat_power_title">电源调整</string>
-    <string name="pref_cat_power_summary">包含各种与电源相关的调整选项</string>
+    <string name="pref_cat_power_title">电源键调整</string>
+    <string name="pref_cat_power_summary">包含各种与电源键相关的调整选项</string>
 
     <!--  Low battery LED flashing -->
     <string name="pref_flashing_led_disable_title">停用LED闪烁</string>
@@ -301,7 +301,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">每行磁贴数</string>
-    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放，适用于竖屏</string>
+    <string name="pref_qs_tiles_per_row_summary">定义快速设置内每行有几个磁贴，开关会根据您的设置自动缩放（适用于手机在纵向模式或平板上的任何方向模式）</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">显示周</string>
@@ -590,7 +590,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">覆盖默认磁贴行为</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆盖单击/长按选定磁贴的行为（需要重新启动）</string>
+    <string name="pref_qs_tile_behaviour_override_summary">交换单击/长按行为，并增加\'更改时隐藏\'选定磁贴的支持（需要重新启动）</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">网络模式磁贴SIM卡插槽</string>
@@ -630,7 +630,7 @@
     <!-- Ongoing notifications -->
     <string name="pref_ongoing_notifications_title">应用通知拦截器</string>
     <string name="pref_ongoing_notifications_summary">允许拦截选定应用的通知</string>
-    <string name="ongoing_notif_info">当一个应用的通知出现时，它将被添加到此列表中
+    <string name="ongoing_notif_info">当一个应用的通知出现时，它将被添加到此列表中。
         你可以决定当应用的通知下一次出现时是否将其拦截。请小心使用</string>
     <string name="ongoing_notif_reset_list">重置列表</string>
     <string name="ongoing_notif_reset_alert">是否确实要重置列表？
@@ -749,7 +749,7 @@
     <string name="caller_unkown_photo_result_not_successful">照片未更改</string>
 
     <!-- Minimum screen brightness warning -->
-    <string name="screen_brightness_min_warning">您的屏幕可能不支持低于20的值。如果您的屏幕亮不起来
+    <string name="screen_brightness_min_warning">您的屏幕可能不支持低于20的值。如果您的屏幕亮不起来，
         按住”音量+”键至少7秒钟将会还原亮度，调整亮度请使用更大的值</string>
 
     <!-- Navbar tweaks categories -->
@@ -858,7 +858,7 @@
     <string name="pref_cat_launcher_tweaks_title">启动器调整</string>
     <string name="pref_cat_launcher_tweaks_summary">仅适用于谷歌体验启动器</string>
     <string name="pref_cat_launcher_desktop_grid_title">桌面网格</string>
-    <string name="pref_launcher_desktop_grid_info_title">使用其他值可以突破默认值小部件布局，明智地使用，更改后启动器需要重新启动</string>
+    <string name="pref_launcher_desktop_grid_info_title">使用非默认的值可能破坏小部件的布局，请谨慎使用。改动将在启动器重新启动后生效</string>
     <string name="pref_launcher_desktop_grid_rows_title">行数</string>
     <string name="pref_launcher_desktop_grid_cols_title">列数</string>
     <string name="desktop_grid_default">默认</string>
@@ -872,20 +872,21 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">电量百分比</string>
     <string name="battery_percent_text_size_title">电量百分比大小</string>
+    <string name="battery_percent_text_size_larger">大</string>
     <string name="battery_percent_text_size_normal">标准</string>
     <string name="battery_percent_text_size_smaller">小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
     <string name="battery_percent_text_size_smallest">最小</string>
     <string name="battery_percent_text_style_title">电量百分比风格</string>
     <string name="battery_percent_text_style_default">默认</string>
-    <string name="battery_percent_text_style_numbers_only">只有数字（没百分号）</string>
+    <string name="battery_percent_text_style_numbers_only">仅数字（没百分比）</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">电量设置</string>
     
     <!-- Cursor control in navigation bar -->
-    <string name="pref_navbar_cursor_control_title">控制光标键</string>
-    <string name="pref_navbar_cursor_control_summary">允许在虚拟按键显示光标键控制键盘</string>
+    <string name="pref_navbar_cursor_control_title">光标控制键</string>
+    <string name="pref_navbar_cursor_control_summary">当显示键盘时，在虚拟按键中启用光标控制键</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">音量键唤醒</string>
@@ -894,23 +895,94 @@
     <string name="volume_rocker_wake_disabled">禁用</string>
 
     <!-- Advanced reboot menu: require confirmation -->
-    <string name="pref_reboot_confirm_required_title">要求重启确认</string>
+    <string name="pref_reboot_confirm_required_title">重启需要确认</string>
     
     <!-- Tiles: Hide on change -->
-    <string name="pref_qs_hide_on_change_title">隐藏更改</string>
-    <string name="pref_qs_hide_on_change_summary">单击瓷贴会自动收起状态栏，适用于GravityBox瓷贴和覆盖原厂瓷贴</string>
+    <string name="pref_qs_hide_on_change_title">更改时隐藏</string>
+    <string name="pref_qs_hide_on_change_summary">单击磁贴后自动收起快速设置，适用于GravityBox磁贴和被覆盖的原厂磁贴</string>
 
     <!-- Power tweaks categories -->
-    <string name="pref_cat_power_menu_title">电源菜单</string>
+    <string name="pref_cat_power_menu_title">电源键菜单</string>
     <string name="pref_cat_power_other_title">其它</string>
 
     <!-- Advanced reboot menu: Allow on lockscreen -->
-    <string name="pref_reboot_allow_on_lockscreen_title">允许锁屏</string>
+    <string name="pref_reboot_allow_on_lockscreen_title">允许在锁屏显示</string>
 
     <!-- Data traffic monitor enhancements -->
     <string name="pref_data_traffic_inactivity_mode_title">闲置模式</string>
     <string name="inactivity_mode_default">默认</string>
     <string name="inactivity_mode_hide">隐藏不活动</string>
     <string name="inactivity_mode_summary">显示摘要和隐藏不活动</string>
+    
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">自定义键设置</string>
+    <string name="pref_navbar_custom_key_enable_title">启用自定义键</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用CDMA网络模式</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">切换自动旋转</string>
+    <string name="hwkey_action_auto_rotation_enabled">自动旋转已启用</string>
+    <string name="hwkey_action_auto_rotation_disabled">自动旋转已停用</string>
+    
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">允许任何小部件</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">允许在锁屏显示小部件，一般可适用于桌面启动器</string>
+    
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">显示电源键菜单</string>
+    <string name="hwkey_action_expand_notifications">展开通知面板</string>
+    <string name="hwkey_action_expand_quicksettings">展开快速设置面板</string>
+    
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">虚拟按键环目标</string>
+    <string name="pref_navbar_ring_targets_enable_summary">虚拟按键环目标主开关（需要重新启动）</string>
+    <string name="pref_navbar_ring_target_title">环目标 %d</string>
+    
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox动作</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">切换网络模式</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">切换移动数据</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">切换WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">切换蓝牙</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">切换WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">切换NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">切换GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">目标背景风格</string>
+    <string name="nrt_bg_style_none">无</string>
+    <string name="nrt_bg_style_light">亮</string>
+    <string name="nrt_bg_style_dark">暗</string>
+    <string name="nrt_bg_style_black">黑</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">什么也不做</string>
+    <string name="smart_radio_action_summary">切换到%s</string>
+    <string name="pref_cat_smart_radio_title">智能网络</string>
+    <string name="pref_smart_radio_experimental_summary">试验中！可能会影响网络的手动切换模式</string>
+    <string name="pref_smart_radio_on_data_enabled_title">启用移动数据</string>
+    <string name="pref_smart_radio_on_data_disabled_title">禁用移动数据</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">包含Pie控制相关设置</string>
+    
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">启用充电动画</string>
 
 </resources>

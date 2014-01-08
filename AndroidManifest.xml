@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.gm2.gravitybox"
-    android:versionCode="58"
-    android:versionName="2.8.5" >
+    android:versionCode="61"
+    android:versionName="2.9.1" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -50,6 +50,19 @@
         <activity
             android:name="com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity"
             android:label="@string/pref_qs_tile_order_title" >
+        </activity>
+
+        <activity
+            android:name="com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity"
+            android:label="@string/shortcut_activity_title"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <service android:name=".GravityBoxService">

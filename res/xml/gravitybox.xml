@@ -140,6 +140,12 @@
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
+                android:key="pref_lockscreen_allow_any_widget"
+                android:title="@string/pref_lockscreen_allow_any_widget_title"
+                android:summary="@string/pref_lockscreen_allow_any_widget_summary"
+                android:defaultValue="false" />
+
+            <CheckBoxPreference 
                 android:key="pref_lockscreen_rotation"
                 android:title="@string/pref_lockscreen_rotation_title"
                 android:summary="@string/pref_lockscreen_rotation_summary"
@@ -274,6 +280,12 @@
             <CheckBoxPreference 
                 android:key="pref_network_mode_tile_lte"
                 android:title="@string/pref_network_mode_tile_lte_title"
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
+
+            <CheckBoxPreference 
+                android:key="pref_network_mode_tile_cdma"
+                android:title="@string/pref_network_mode_tile_cdma_title"
                 android:defaultValue="false"
                 android:dependency="pref_qs_management_enable" />
 
@@ -429,103 +441,6 @@
         </PreferenceScreen>
 
         <PreferenceScreen
-            android:key="pref_cat_pie_control"
-            android:title="@string/pie_control_title">
-
-            <ListPreference 
-                android:key="pref_pie_control_enable2"
-                android:title="@string/pie_control_enable_title"
-                android:entries="@array/pie_controls_enable_entries"
-                android:entryValues="@array/pie_controls_enable_values"
-                android:defaultValue="0" />
-
-            <ListPreference 
-                android:key="pref_pie_control_custom_key"
-                android:title="@string/pref_pie_control_custom_key_title"
-                android:entries="@array/pie_custom_key_entries"
-                android:entryValues="@array/pie_custom_key_values"
-                android:defaultValue="0" />
-
-            <CheckBoxPreference 
-                android:key="pref_pie_control_menu"
-                android:title="@string/pie_control_menu_title"
-                android:defaultValue="false" />
-
-            <MultiSelectListPreference
-                android:key="pref_pie_control_trigger_positions"
-                android:title="@string/pie_control_trigger_positions_title"
-                android:entries="@array/pie_control_trigger_position_entries"
-                android:entryValues="@array/pie_control_trigger_position_values"
-                android:defaultValue="@array/pie_control_trigger_position_default" />
-
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
-                    android:key="pref_pie_control_trigger_size"
-                    android:title="@string/pie_control_trigger_size_title"
-                    minimum="2"
-                    maximum="15"
-                    interval="1"
-                    monitorBoxEnabled="true"
-                    monitorBoxUnit="px"
-                    android:defaultValue="5" />
-
-            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
-                    android:key="pref_pie_control_size"
-                    android:title="@string/pie_control_size_title"
-                    minimum="500"
-                    maximum="1500"
-                    interval="10"
-                    android:defaultValue="1000" />
-
-            <CheckBoxPreference 
-                    android:key="pref_hwkeys_disable"
-                    android:title="@string/pref_hwkeys_disable_title"
-                    android:summary="@string/pref_hwkeys_disable_summary"
-                    android:defaultValue="false" />
-
-            <PreferenceCategory
-                android:key="pref_cat_pie_colors"
-                android:title="@string/pref_cat_pie_colors_title">
-
-                <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                    android:key="pref_pie_color_bg"
-                    android:title="@string/pref_pie_color_bg_title"
-                    android:defaultValue="@color/pie_background_color"
-                    alphaSlider="true" />
-    
-                <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                    android:key="pref_pie_color_fg"
-                    android:title="@string/pref_pie_color_fg_title"
-                    android:defaultValue="@color/pie_foreground_color"
-                    alphaSlider="false" />
-    
-                <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                    android:key="pref_pie_color_outline"
-                    android:title="@string/pref_pie_color_outline_title"
-                    android:defaultValue="@color/pie_outline_color"
-                    alphaSlider="true" />
-    
-                <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                    android:key="pref_pie_color_selected"
-                    android:title="@string/pref_pie_color_selected_title"
-                    android:defaultValue="@color/pie_selected_color"
-                    alphaSlider="true" />
-    
-                <net.margaritov.preference.colorpicker.ColorPickerPreference 
-                    android:key="pref_pie_color_text"
-                    android:title="@string/pref_pie_color_text_title"
-                    android:defaultValue="@color/pie_text_color"
-                    alphaSlider="false" />
-
-                <Preference
-                    android:key="pref_pie_color_reset"
-                    android:title="@string/pref_pie_color_reset_title"
-                    android:persistent="false" />
-
-            </PreferenceCategory>
-
-        </PreferenceScreen>
-
-        <PreferenceScreen
             android:key="pref_cat_battery_settings"
             android:title="@string/pref_cat_battery_settings_title">
 
@@ -556,6 +471,12 @@
                 android:entryValues="@array/battery_percent_text_style_values"
                 android:dependency="pref_battery_percent_text"
                 android:defaultValue="%" />
+
+            <CheckBoxPreference 
+                android:key="pref_battery_percent_text_anim"
+                android:title="@string/battery_percent_text_anim_title"
+                android:dependency="pref_battery_percent_text"
+                android:defaultValue="false" />
 
         </PreferenceScreen>
 
@@ -736,6 +657,28 @@
 
             </PreferenceScreen>
 
+            <PreferenceScreen 
+                android:key="pref_cat_navbar_ring_targets"
+                android:title="@string/pref_cat_navbar_ring_targets_title">
+
+                <SwitchPreference 
+                    android:key="pref_navbar_ring_targets_enable"
+                    android:title=""
+                    android:summary="@string/pref_navbar_ring_targets_enable_summary"
+                    android:defaultValue="false" />
+
+                <!-- Ring target prefs will be generated dynamically at runtime -->
+
+                <ListPreference
+                    android:key="pref_navbar_ring_targets_bg_style"
+                    android:title="@string/pref_navbar_ring_targets_bg_style_title"
+                    android:entries="@array/nrt_bg_style_entries"
+                    android:entryValues="@array/nrt_bg_style_values"
+                    android:defaultValue="NONE"
+                    android:dependency="pref_navbar_ring_targets_enable" />
+
+            </PreferenceScreen>
+
         </PreferenceCategory>
 
         <PreferenceCategory
@@ -807,6 +750,104 @@
                 monitorBoxEnabled="true"
                 monitorBoxUnit="%"
                 android:defaultValue="100" />
+
+        </PreferenceCategory>
+
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:key="pref_cat_pie_control"
+        android:title="@string/pie_control_title"
+        android:summary="@string/pie_control_summary">
+
+        <ListPreference 
+            android:key="pref_pie_control_enable2"
+            android:title="@string/pie_control_enable_title"
+            android:entries="@array/pie_controls_enable_entries"
+            android:entryValues="@array/pie_controls_enable_values"
+            android:defaultValue="0" />
+
+        <ListPreference 
+            android:key="pref_pie_control_custom_key"
+            android:title="@string/pref_pie_control_custom_key_title"
+            android:entries="@array/pie_custom_key_entries"
+            android:entryValues="@array/pie_custom_key_values"
+            android:defaultValue="0" />
+
+        <CheckBoxPreference 
+            android:key="pref_pie_control_menu"
+            android:title="@string/pie_control_menu_title"
+            android:defaultValue="false" />
+
+        <MultiSelectListPreference
+            android:key="pref_pie_control_trigger_positions"
+            android:title="@string/pie_control_trigger_positions_title"
+            android:entries="@array/pie_control_trigger_position_entries"
+            android:entryValues="@array/pie_control_trigger_position_values"
+            android:defaultValue="@array/pie_control_trigger_position_default" />
+
+        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_pie_control_trigger_size"
+                android:title="@string/pie_control_trigger_size_title"
+                minimum="2"
+                maximum="15"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="px"
+                android:defaultValue="5" />
+
+        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_pie_control_size"
+                android:title="@string/pie_control_size_title"
+                minimum="500"
+                maximum="1500"
+                interval="10"
+                android:defaultValue="1000" />
+
+        <CheckBoxPreference 
+                android:key="pref_hwkeys_disable"
+                android:title="@string/pref_hwkeys_disable_title"
+                android:summary="@string/pref_hwkeys_disable_summary"
+                android:defaultValue="false" />
+
+        <PreferenceCategory
+            android:key="pref_cat_pie_colors"
+            android:title="@string/pref_cat_pie_colors_title">
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_pie_color_bg"
+                android:title="@string/pref_pie_color_bg_title"
+                android:defaultValue="@color/pie_background_color"
+                alphaSlider="true" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_pie_color_fg"
+                android:title="@string/pref_pie_color_fg_title"
+                android:defaultValue="@color/pie_foreground_color"
+                alphaSlider="false" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_pie_color_outline"
+                android:title="@string/pref_pie_color_outline_title"
+                android:defaultValue="@color/pie_outline_color"
+                alphaSlider="true" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_pie_color_selected"
+                android:title="@string/pref_pie_color_selected_title"
+                android:defaultValue="@color/pie_selected_color"
+                alphaSlider="true" />
+
+            <net.margaritov.preference.colorpicker.ColorPickerPreference 
+                android:key="pref_pie_color_text"
+                android:title="@string/pref_pie_color_text_title"
+                android:defaultValue="@color/pie_text_color"
+                alphaSlider="false" />
+
+            <Preference
+                android:key="pref_pie_color_reset"
+                android:title="@string/pref_pie_color_reset_title"
+                android:persistent="false" />
 
         </PreferenceCategory>
 
@@ -1085,11 +1126,38 @@
             android:key="pref_cat_phone_mobile_data"
             android:title="@string/pref_cat_phone_mobile_data_title">
 
+            <PreferenceScreen
+                android:key="pref_cat_smart_radio"
+                android:title="@string/pref_cat_smart_radio_title"
+                android:summary="@string/pref_smart_radio_experimental_summary">
+
+                <Preference
+                    android:key="pref_smart_radio_experimental"
+                    android:title=""
+                    android:summary="@string/pref_smart_radio_experimental_summary"
+                    android:persistent="false" />
+
+                <com.ceco.gm2.gravitybox.preference.NetworkModePreference
+                    android:key="pref_smart_radio_on_data_enabled"
+                    android:title="@string/pref_smart_radio_on_data_enabled_title"
+                    android:summary="@string/smart_radio_action_do_nothing"
+                    android:defaultValue="-1" />
+
+                <com.ceco.gm2.gravitybox.preference.NetworkModePreference
+                    android:key="pref_smart_radio_on_data_disabled"
+                    android:title="@string/pref_smart_radio_on_data_disabled_title"
+                    android:summary="@string/smart_radio_action_do_nothing"
+                    android:defaultValue="-1" />
+
+            </PreferenceScreen>
+
+            <!--
             <CheckBoxPreference 
                 android:key="pref_national_roaming"
                 android:title="@string/pref_national_roaming_title"
                 android:summary="@string/pref_national_roaming_summary"
                 android:defaultValue="false" />
+            -->
 
             <CheckBoxPreference 
                 android:key="pref_mobile_data_slow2g_disable"

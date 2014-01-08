@@ -15,25 +15,20 @@
 
 package com.ceco.gm2.gravitybox;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Hashtable;
 import java.util.List;
 
-import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
+import com.ceco.gm2.gravitybox.GlowPadHelper.AppInfo;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.appwidget.AppWidgetHostView;
+import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.XResources;
 import android.graphics.Bitmap;
@@ -68,22 +63,21 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 
 public class ModLockscreen {
+    private static final String CLASS_PATH = "com.android.internal.policy.impl.keyguard";
     private static final String TAG = "GB:ModLockscreen";
-    private static final String CLASS_KGVIEW_MANAGER = "com.android.internal.policy.impl.keyguard.KeyguardViewManager";
-    private static final String CLASS_KG_HOSTVIEW = "com.android.internal.policy.impl.keyguard.KeyguardHostView";
-    private static final String CLASS_KG_SELECTOR_VIEW = "com.android.internal.policy.impl.keyguard.KeyguardSelectorView";
-    private static final String CLASS_TARGET_DRAWABLE = Utils.isMtkDevice() ?
-            "com.android.internal.policy.impl.keyguard.TargetDrawable" :
-            "com.android.internal.widget.multiwaveview.TargetDrawable";
-    private static final String CLASS_TRIGGER_LISTENER = "com.android.internal.policy.impl.keyguard.KeyguardSelectorView$1";
-    private static final String CLASS_KG_ABS_KEY_INPUT_VIEW =
-            "com.android.internal.policy.impl.keyguard.KeyguardAbsKeyInputView";
-    private static final String CLASS_KGVIEW_MEDIATOR = "com.android.internal.policy.impl.keyguard.KeyguardViewMediator";
-    private static final String CLASS_KG_UPDATE_MONITOR = "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor";
-    private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS =
-            "com.android.internal.policy.impl.keyguard.KeyguardUpdateMonitor.BatteryStatus";
-    private static final String CLASS_KG_VIEW_BASE = "com.android.internal.policy.impl.keyguard.KeyguardViewBase";
-    private static final String CLASS_KG_WIDGET_PAGER = "com.android.internal.policy.impl.keyguard.KeyguardWidgetPager";
+
+    private static final String CLASS_KGVIEW_MANAGER = CLASS_PATH + ".KeyguardViewManager";
+    private static final String CLASS_KG_HOSTVIEW = CLASS_PATH + ".KeyguardHostView";
+    private static final String CLASS_KG_SELECTOR_VIEW = CLASS_PATH + ".KeyguardSelectorView";
+    private static final String CLASS_TRIGGER_LISTENER = CLASS_PATH + ".KeyguardSelectorView$1";
+    private static final String CLASS_KG_ABS_KEY_INPUT_VIEW = CLASS_PATH + ".KeyguardAbsKeyInputView";
+    private static final String CLASS_KGVIEW_MEDIATOR = CLASS_PATH + ".KeyguardViewMediator";
+    private static final String CLASS_KG_UPDATE_MONITOR = CLASS_PATH + ".KeyguardUpdateMonitor";
+    private static final String CLASS_KG_UPDATE_MONITOR_BATTERY_STATUS = 
+            CLASS_PATH + ".KeyguardUpdateMonitor.BatteryStatus";
+    private static final String CLASS_KG_VIEW_BASE = CLASS_PATH + ".KeyguardViewBase";
+    private static final String CLASS_KG_WIDGET_PAGER = CLASS_PATH + ".KeyguardWidgetPager";
+    private static final String CLASS_KG_ACTIVITY_LAUNCHER = CLASS_PATH + ".KeyguardActivityLauncher";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_ARC = false;
 
@@ -97,14 +91,15 @@ public class ModLockscreen {
             "com.android.deskclock",
             "com.dvtonder.chronus",
             "net.nurik.roman.dashclock",
-            "com.roymam.android.notificationswidget"
+            "com.roymam.android.notificationswidget",
+            "org.zooper.zwfree",
+            "com.devexpert.weather",
+            "ch.bitspin.timely"
     ));
 
     private static XSharedPreferences mPrefs;
-    private static Hashtable<String, AppInfo> mAppInfoCache = new Hashtable<String, AppInfo>();
     private static Class<?>[] mLaunchActivityArgs = new Class<?>[] 
             { Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class };
-    private static Constructor<?> mTargetDrawableConstructor;
     private static Object mKeyguardHostView;
     private static Handler mHandler;
     private static Context mGbContext;
@@ -136,6 +131,7 @@ public class ModLockscreen {
             final Class<?> kgUpdateMonitorClass = XposedHelpers.findClass(CLASS_KG_UPDATE_MONITOR, null);
             final Class<?> kgViewBaseClass = XposedHelpers.findClass(CLASS_KG_VIEW_BASE, null);
             final Class<?> kgWidgetPagerClass = XposedHelpers.findClass(CLASS_KG_WIDGET_PAGER, null);
+            final Class<?> kgActivityLauncherClass = XposedHelpers.findClass(CLASS_KG_ACTIVITY_LAUNCHER, null);
 
             boolean enableMenuKey = prefs.getBoolean(
                     GravityBoxSettings.PREF_KEY_LOCKSCREEN_MENU_KEY, false);
@@ -337,7 +333,7 @@ public class ModLockscreen {
                         String app = prefs.getString(
                                 GravityBoxSettings.PREF_KEY_LOCKSCREEN_TARGETS_APP[i], null);
                         if (app != null) {
-                            AppInfo appInfo = getAppInfo(context, app);
+                            AppInfo appInfo = GlowPadHelper.getAppInfo(context, app);
                             if (appInfo != null) {
                                 appInfoList.add(appInfo);
                                 if (DEBUG) log("appInfoList.add: " + app);
@@ -353,24 +349,24 @@ public class ModLockscreen {
                     // create and fill custom targets with proper layout based on number of targets
                     switch(appInfoList.size()) {
                         case 1:
-                            newTargets.add(createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
                             newDescriptions.add(null);
                             newDirections.add(null);
-                            newTargets.add(createTargetDrawable(res, appInfoList.get(0)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0), mGlowPadView.getClass()));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
                         case 2:
-                            newTargets.add(createTargetDrawable(res, appInfoList.get(0)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(0), mGlowPadView.getClass()));
                             newDescriptions.add(appInfoList.get(0).name);
                             newDirections.add(null);
-                            newTargets.add(createTargetDrawable(res, appInfoList.get(1)));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(1), mGlowPadView.getClass()));
                             newDescriptions.add(appInfoList.get(1).name);
                             newDirections.add(null);
-                            newTargets.add(createTargetDrawable(res, null));
+                            newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
                             newDescriptions.add(null);
                             newDirections.add(null);
                             break;
@@ -379,10 +375,10 @@ public class ModLockscreen {
                         case 5:
                             for (int i=0; i<=4; i++) {
                                 if (i >= appInfoList.size()) {
-                                    newTargets.add(createTargetDrawable(res, null));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, null, mGlowPadView.getClass()));
                                     newDescriptions.add(null);
                                 } else {
-                                    newTargets.add(createTargetDrawable(res, appInfoList.get(i)));
+                                    newTargets.add(GlowPadHelper.createTargetDrawable(res, appInfoList.get(i), mGlowPadView.getClass()));
                                     newDescriptions.add(appInfoList.get(i).name);
                                 }
                                 newDirections.add(null);
@@ -556,6 +552,26 @@ public class ModLockscreen {
                     }
                 }
             });
+
+            XposedHelpers.findAndHookMethod(kgActivityLauncherClass, "launchActivity",
+                    Intent.class, boolean.class, boolean.class, Handler.class, Runnable.class, new XC_MethodHook() {
+                @SuppressLint("InlinedApi")
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    Intent intent = (Intent) param.args[0];
+                    if ("android.appwidget.action.KEYGUARD_APPWIDGET_PICK".equals(intent.getAction()) &&
+                            prefs.getBoolean(GravityBoxSettings.PREF_KEY_LOCKSCREEN_ALLOW_ANY_WIDGET, false)) {
+                        intent.removeExtra("categoryFilter");
+                        intent.putExtra("categoryFilter", AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
+                        Bundle options = new Bundle();
+                        options.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,
+                                AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN);
+                        intent.removeExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
+                        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS, options);
+                    }
+                }
+            });
+
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -645,78 +661,6 @@ public class ModLockscreen {
             }
         }
     };
-
-    private static class AppInfo {
-        public String key;
-        public Intent intent;
-        public Drawable icon;
-        public String name;
-    }
-
-    private static AppInfo getAppInfo(Context context, String app) {
-        try {
-            if (mAppInfoCache.containsKey(app)) {
-                if (DEBUG) log("AppInfo: returning from cache for " + app);
-                return mAppInfoCache.get(app);
-            }
-
-            AppInfo appInfo = new AppInfo();
-            appInfo.key = app;
-            appInfo.intent = Intent.parseUri(app, 0);
-            if (!appInfo.intent.hasExtra("mode")) {
-                return null;
-            }
-            final int mode = appInfo.intent.getIntExtra("mode", AppPickerPreference.MODE_APP);
-            Bitmap appIcon = null;
-            final Resources res = context.getResources();
-            if (mode == AppPickerPreference.MODE_APP) {
-                PackageManager pm = context.getPackageManager();
-                ActivityInfo ai = pm.getActivityInfo(appInfo.intent.getComponent(), 0);
-                appInfo.name = (String) ai.loadLabel(pm);
-                appIcon = Utils.drawableToBitmap(ai.loadIcon(pm));
-            } else if (mode == AppPickerPreference.MODE_SHORTCUT) {
-                appInfo.name = appInfo.intent.getStringExtra("label");
-                final String appIconPath = appInfo.intent.getStringExtra("icon");
-                if (appIconPath != null) {
-                    File f = new File(appIconPath);
-                    FileInputStream fis = new FileInputStream(f);
-                    appIcon = BitmapFactory.decodeStream(fis);
-                    fis.close();
-                }
-            }
-            if (appIcon != null) {
-                int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, 
-                        res.getDisplayMetrics());
-                appIcon = Bitmap.createScaledBitmap(appIcon, sizePx, sizePx, true);
-                appInfo.icon = new BitmapDrawable(res, appIcon);
-            }
-
-            mAppInfoCache.put(appInfo.key, appInfo);
-            if (DEBUG) log("AppInfo: storing to cache for " + app);
-            return appInfo;
-        } catch (Throwable t) {
-            log("Error getting app info for " + app + "! Error: " + t.getMessage());
-            return null;
-        }
-    }
-
-    private static Object createTargetDrawable(Resources res, AppInfo appInfo) throws Throwable {
-        if (mTargetDrawableConstructor == null) {
-            mTargetDrawableConstructor = XposedHelpers.findConstructorExact(
-                    XposedHelpers.findClass(CLASS_TARGET_DRAWABLE, null), 
-                    Resources.class, int.class);
-        }
-
-        final Object td = mTargetDrawableConstructor.newInstance(res, 0);
-        if (appInfo != null) {
-            Drawable d = appInfo.icon == null ? null : appInfo.icon.mutate();
-            XposedHelpers.setObjectField(td, "mDrawable", d);
-            XposedHelpers.callMethod(td, "resizeDrawables");
-            XposedHelpers.setAdditionalInstanceField(td, "mGbAppInfo", appInfo);
-        }
-
-        return td;
-    }
 
     static class HandleDrawable {
         Object mHd;

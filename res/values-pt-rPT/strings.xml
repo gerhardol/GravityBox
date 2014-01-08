@@ -286,7 +286,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Painéis por linha</string>
-    <string name="pref_qs_tiles_per_row_summary">Permite definir quantos painéis são mostrados por linha nas definições rápidas, sendo o seu tamanho ajustado automaticamente de acordo com a escolha (aplicável à orientação de ecrã vertical)</string>
+    <string name="pref_qs_tiles_per_row_summary">Permite definir quantos painéis são mostrados por cada linha nas definições rápidas, sendo o seu tamanho ajustado automaticamente de acordo com a escolha (aplicável à orientação de ecrã vertical em telefones ou qualquer orientação em tablets)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Mostrar dia da semana</string>
@@ -536,7 +536,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Definições do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Ativar alvos do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Ativação global dos alvos do anel de desbloqueio</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Aplicação %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Alvo número %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Desvio vertical do anel de desbloqueio</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Desvio horizontal do anel de desbloqueio</string>
 
@@ -575,7 +575,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Substituir comportamento padrão dos painéis</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Permite substituir o comportamento padrão dos painéis selecionados ao tocar / manter pressionado (necessário reiniciar)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Permite substituir o comportamento padrão dos painéis selecionados ao tocar / manter pressionado e adiciona suporte para a função \'Ocultar ao tocar\' (necessário reiniciar)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Modo de Rede por cartão SIM</string>
@@ -857,6 +857,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Texto de percentagem de bateria</string>
     <string name="battery_percent_text_size_title">Tamanho do tipo de letra da percentagem</string>
+    <string name="battery_percent_text_size_larger">Grande</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Pequeno</string>
     <string name="battery_percent_text_size_even_smaller">Mais pequeno</string>
@@ -901,5 +902,72 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Definições de tecla personalizável</string>
     <string name="pref_navbar_custom_key_enable_title">Ativar tecla personalizável</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Utilizar modos de rede CDMA</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Comutar rotação automática</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotação automática ativada</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotação automática desativada</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permitir qualquer widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permite a colocação de qualquer tipo de widget no ecrã de bloqueio, mesmo aqueles que normalmente só podem ser utilizados no inicializador</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Mostrar Menu Desligar</string>
+    <string name="hwkey_action_expand_notifications">Expandir painel de notificações</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de definições rápidas</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Alvos do anel de navegação</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Ativação global dos alvos do anel de navegação (necessário reiniciar)</string>
+    <string name="pref_navbar_ring_target_title">Alvo número %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Ações GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Alternar modo de rede</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Comutar dados móveis</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Comutar Wi-Fi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Comutar Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Comutar Ponto de Acesso Wi-Fi</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Comutar NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Comutar GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Estilo do fundo do alvo</string>
+    <string name="nrt_bg_style_none">Nenhum</string>
+    <string name="nrt_bg_style_light">Claro</string>
+    <string name="nrt_bg_style_dark">Escuro</string>
+    <string name="nrt_bg_style_black">Preto</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Não fazer nada</string>
+    <string name="smart_radio_action_summary">Alternar para %s</string>
+    <string name="pref_cat_smart_radio_title">Rádio inteligente</string>
+    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! Poderá afetar a comutação manual do modo de rede</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Quando dados móveis ativados</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Quando dados móveis desativados</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contém várias definições relacionadas com os controlos Pie</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Ativar animação durante carga</string>
 
 </resources>

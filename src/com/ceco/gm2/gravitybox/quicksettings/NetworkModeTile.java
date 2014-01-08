@@ -40,6 +40,7 @@ public class NetworkModeTile extends BasicTile {
     private boolean mAllow3gOnly;
     private boolean mAllow2g3g;
     private boolean mAllowLte;
+    private boolean mUseCdma;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -83,26 +84,32 @@ public class NetworkModeTile extends BasicTile {
                 switch (mNetworkType) {
                     case PhoneWrapper.NT_WCDMA_PREFERRED:
                     case PhoneWrapper.NT_GSM_WCDMA_AUTO:
+                    case PhoneWrapper.NT_CDMA_EVDO:
                         i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
                                 mAllowLte ? getPreferredLteMode() : 
-                                    PhoneWrapper.NT_GSM_ONLY);
+                                    mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
                         break;
                     case PhoneWrapper.NT_WCDMA_ONLY:
+                    case PhoneWrapper.NT_EVDO_ONLY:
                         if (!mAllow2g3g) {
                             i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE,
-                                    mAllowLte ? getPreferredLteMode() : PhoneWrapper.NT_GSM_ONLY);
+                                    mAllowLte ? getPreferredLteMode() : 
+                                        mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
                         } else {
-                            i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, PhoneWrapper.NT_WCDMA_PREFERRED);
+                            i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mUseCdma ?
+                                    PhoneWrapper.NT_CDMA_EVDO : PhoneWrapper.NT_WCDMA_PREFERRED);
                         }
                         break;
                     case PhoneWrapper.NT_GSM_ONLY:
+                    case PhoneWrapper.NT_CDMA_ONLY:
                         i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, mAllow3gOnly ?
-                                    PhoneWrapper.NT_WCDMA_ONLY : PhoneWrapper.NT_WCDMA_PREFERRED);
+                                    mUseCdma ? PhoneWrapper.NT_EVDO_ONLY : PhoneWrapper.NT_WCDMA_ONLY : 
+                                        mUseCdma ? PhoneWrapper.NT_CDMA_EVDO : PhoneWrapper.NT_WCDMA_PREFERRED);
                         break;
                     default:
                         if (PhoneWrapper.isLteNetworkType(mNetworkType)) {
                             i.putExtra(PhoneWrapper.EXTRA_NETWORK_TYPE, 
-                                    PhoneWrapper.NT_GSM_ONLY);
+                                    mUseCdma ? PhoneWrapper.NT_CDMA_ONLY : PhoneWrapper.NT_GSM_ONLY);
                         } else {
                             log("onClick: Unknown or unsupported network type: mNetworkType = " + mNetworkType);
                         }
@@ -120,6 +127,7 @@ public class NetworkModeTile extends BasicTile {
         ContentResolver cr = mContext.getContentResolver();
         mNetworkType = Settings.Global.getInt(cr, 
                 PhoneWrapper.PREFERRED_NETWORK_MODE, mDefaultNetworkType);
+        if (DEBUG) log("mNetworkType=" + mNetworkType + "; mDefaultNetworkType=" + mDefaultNetworkType);
     }
 
     @Override
@@ -143,7 +151,8 @@ public class NetworkModeTile extends BasicTile {
         } catch (NumberFormatException nfe) {
             log("onPreferenceInitialize: invalid value for network mode preference");
         }
-        updateFlags(value, prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_LTE, false));
+        updateFlags(value, prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_LTE, false),
+                prefs.getBoolean(GravityBoxSettings.PREF_KEY_NETWORK_MODE_TILE_CDMA, false));
     }
 
     @Override
@@ -156,6 +165,9 @@ public class NetworkModeTile extends BasicTile {
             }
             if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_LTE)) {
                 updateLteFlags(intent.getBooleanExtra(GravityBoxSettings.EXTRA_NMT_LTE, false));
+            }
+            if (intent.hasExtra(GravityBoxSettings.EXTRA_NMT_CDMA)) {
+                updateCdmaFlags(intent.getBooleanExtra(GravityBoxSettings.EXTRA_NMT_CDMA, false));
             }
         }
     }
@@ -171,9 +183,15 @@ public class NetworkModeTile extends BasicTile {
         if (DEBUG) log("updateLteFlags: mAllowLte=" + mAllowLte);
     }
 
-    private void updateFlags(int nmMode, boolean allowLte) {
+    private void updateCdmaFlags(boolean useCdma) {
+        mUseCdma = useCdma;
+        if (DEBUG) log("updateCdmaFlags: mUseCdma=" + mUseCdma);
+    }
+
+    private void updateFlags(int nmMode, boolean allowLte, boolean useCdma) {
         updateGsmFlags(nmMode);
         updateLteFlags(allowLte);
+        updateCdmaFlags(useCdma);
     }
 
     @Override
@@ -182,12 +200,15 @@ public class NetworkModeTile extends BasicTile {
         switch (mNetworkType) {
             case PhoneWrapper.NT_WCDMA_PREFERRED:
             case PhoneWrapper.NT_GSM_WCDMA_AUTO:
+            case PhoneWrapper.NT_CDMA_EVDO:
                 mDrawableId = R.drawable.ic_qs_2g3g_on;
                 break;
             case PhoneWrapper.NT_WCDMA_ONLY:
+            case PhoneWrapper.NT_EVDO_ONLY:
                 mDrawableId = R.drawable.ic_qs_3g_on;
                 break;
             case PhoneWrapper.NT_GSM_ONLY:
+            case PhoneWrapper.NT_CDMA_ONLY:
                 mDrawableId = R.drawable.ic_qs_2g_on;
                 break;
             default:

@@ -574,7 +574,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">覆蓋預設瓷貼操作</string>
-    <string name="pref_qs_tile_behaviour_override_summary">覆蓋輕觸/長按以選擇瓷貼的預設操作 (需要重新啟動)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">切換，輕觸，長按操作，並在已選定的瓷貼上新增"隱藏在變更"功能 (需要重新啟動)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">網路模式瓷貼 SIM 卡 卡槽</string>
@@ -854,6 +854,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">電池電量百分比文字</string>
     <string name="battery_percent_text_size_title">電池電量百分比文字大小</string>
+    <string name="battery_percent_text_size_larger">較大</string>
     <string name="battery_percent_text_size_normal">正常</string>
     <string name="battery_percent_text_size_smaller">較小</string>
     <string name="battery_percent_text_size_even_smaller">更小</string>
@@ -898,5 +899,69 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">自訂按鍵設定</string>
     <string name="pref_navbar_custom_key_enable_title">啟用自訂按鍵</string>
+    
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">使用 CDMA 網路模式</string>
+    
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">切換自動旋轉</string>
+    <string name="hwkey_action_auto_rotation_enabled">自動旋轉已啟用</string>
+    <string name="hwkey_action_auto_rotation_disabled">自動旋轉已停用</string>
+    
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">允許任何小工具</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">允許鎖定畫面桌面小工具，僅可使用於一般桌面啟動器</string>
+    
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">顯示電源選單</string>
+    <string name="hwkey_action_expand_notifications">展開通知面板</string>
+    <string name="hwkey_action_expand_quicksettings">展開 QuickSettings 面板</string>
+    
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">導航環目標</string>
+    <string name="pref_navbar_ring_targets_enable_summary">滑動導航環目標總管 (需要重新啟動)</string>
+    <string name="pref_navbar_ring_target_title">導航環目標 %d</string>
+    
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox 操作</string>
+    
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">切換網路模式</string>
+    
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">切換行動數據</string>
+    
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">切換 WiFi</string>
+    
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">切換藍牙</string>
+    
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">切換 WiFi 行動熱點</string>
+    
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">切換 NFC</string>
+    
+     <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">切換 GPS</string>
+    
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">目標背景風格</string>
+    <string name="nrt_bg_style_none">無</string>
+    <string name="nrt_bg_style_light">亮</string>
+    <string name="nrt_bg_style_dark">暗</string>
+    <string name="nrt_bg_style_black">黑色</string>
+    
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">無任何操作</string>
+    <string name="smart_radio_action_summary">切換至 %s</string>
+    <string name="pref_cat_smart_radio_title">智慧型無線網路</string>
+    <string name="pref_smart_radio_experimental_summary">實驗性功能! 將可能影響手動網路模式切換</string>
+    <string name="pref_smart_radio_on_data_enabled_title">行動數據已啟用</string>
+    <string name="pref_smart_radio_on_data_disabled_title">行動數據已停用</string>
+    
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">包含 Pie 控制的相關設定</string>
  
 </resources>

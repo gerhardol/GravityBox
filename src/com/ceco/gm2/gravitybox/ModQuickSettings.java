@@ -320,6 +320,7 @@ public class ModQuickSettings {
         int textSize = 12;
 
         final Resources res = container.getResources();
+        final Context context = container.getContext();
         int imgMarginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 27, res.getDisplayMetrics());
         int imgMarginBottom = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
@@ -327,7 +328,7 @@ public class ModQuickSettings {
         final int imgResId = res.getIdentifier("image", "id", PACKAGE_NAME);
         final int rssiImgResId = res.getIdentifier("rssi_image", "id", PACKAGE_NAME);
 
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
             switch (mNumColumns) {
                 case 4: 
                     textSize = 10;
@@ -925,11 +926,12 @@ public class ModQuickSettings {
         @Override
         protected void afterHookedMethod(final MethodHookParam param) throws Throwable {
             if (DEBUG) log("qsContainerView updateResources called");
-            // do this only for portrait mode
+            // do this only for portrait mode on phones, but also for any orientation mode on tablets
             FrameLayout fl = (FrameLayout) param.thisObject;
-            final int orientation = fl.getContext().getResources().getConfiguration().orientation;
+            final Context context = fl.getContext();
+            final int orientation = context.getResources().getConfiguration().orientation;
             updateTileLayout(fl, orientation);
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(context)) {
                 XposedHelpers.setIntField(param.thisObject, "mNumColumns", mNumColumns);
                 fl.requestLayout();
             }
@@ -967,7 +969,7 @@ public class ModQuickSettings {
                         lp.width = (int) ((colSpan * cellWidth) + (colSpan - 1) * mCellGap);
     
                         if (mLpOriginalHeight == -1) mLpOriginalHeight = lp.height;
-                        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        if (orientation == Configuration.ORIENTATION_PORTRAIT || !Utils.isPhoneUI(mContext)) {
                             if (numColumns > 3) {
                                 lp.height = (lp.width * numColumns-1) / numColumns;
                             } else {

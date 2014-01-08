@@ -32,10 +32,13 @@ public class PhoneWrapper {
     private static final String TAG = "GB:PhoneWrapper";
     private static final boolean DEBUG = false;
 
-    public static final int NT_WCDMA_PREFERRED = 0;
-    public static final int NT_GSM_ONLY = 1;
-    public static final int NT_WCDMA_ONLY = 2;
-    public static final int NT_GSM_WCDMA_AUTO = 3;
+    public static final int NT_WCDMA_PREFERRED = 0;             // GSM/WCDMA (WCDMA preferred) (2g/3g)
+    public static final int NT_GSM_ONLY = 1;                    // GSM Only (2g)
+    public static final int NT_WCDMA_ONLY = 2;                  // WCDMA ONLY (3g)
+    public static final int NT_GSM_WCDMA_AUTO = 3;              // GSM/WCDMA Auto (2g/3g)
+    public static final int NT_CDMA_EVDO = 4;                   // CDMA/EVDO Auto (2g/3g)
+    public static final int NT_CDMA_ONLY = 5;                   // CDMA Only (2G)
+    public static final int NT_EVDO_ONLY = 6;                   // Evdo Only (3G)
     public static final int NT_LTE_CDMA_EVDO = 8; 
     public static final int NT_LTE_GSM_WCDMA = 9;
     public static final int NT_LTE_CMDA_EVDO_GSM_WCDMA = 10;
@@ -55,6 +58,21 @@ public class PhoneWrapper {
 
     private static void log(String msg) {
         XposedBridge.log(TAG + ": " + msg);
+    }
+
+    public static String getNetworkModeNameFromValue(int networkMode) {
+        switch(networkMode) {
+            case NT_GSM_ONLY: return "GSM (2G)";
+            case NT_WCDMA_PREFERRED:
+            case NT_GSM_WCDMA_AUTO: return "GSM/WCDMA Auto (2G/3G)";
+            case NT_WCDMA_ONLY: return "WCDMA (3G)";
+            case NT_CDMA_EVDO: return "CDMA/EvDo Auto";
+            case NT_CDMA_ONLY: return "CDMA";
+            case NT_EVDO_ONLY: return "EvDo";
+            case NT_LTE_CDMA_EVDO: return "LTE (CDMA)";
+            case NT_LTE_GSM_WCDMA: return "LTE (GSM)";
+            default: return "Undefined";
+        }
     }
 
     private static BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

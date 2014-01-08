@@ -301,7 +301,7 @@
 
     <!-- QuickSettings tiles per row -->
     <string name="pref_qs_tiles_per_row_title">Tiles per row</string>
-    <string name="pref_qs_tiles_per_row_summary">Defines how many QuickSettings tiles to display per one row. Tiles will be resized accordingly. Applies to portrait mode.</string>
+    <string name="pref_qs_tiles_per_row_summary">Defines how many QuickSettings tiles to display per one row, being tiles resized accordingly (applies to portrait mode on phones or any orientation mode on tablets)</string>
 
     <!--  Status bar clock - show day of week -->
     <string name="pref_statusbar_clock_dow_title">Show day of week</string>
@@ -551,7 +551,7 @@
     <string name="pref_cat_lockscreen_ring_settings_title">Unlock ring settings</string>
     <string name="pref_lockscreen_ring_targets_enable_title">Enable unlock ring targets</string>
     <string name="pref_lockscreen_ring_targets_enable_summary">Master switch for unlock ring targets</string>
-    <string name="pref_lockscreen_ring_targets_app_title">Target application %s</string>
+    <string name="pref_lockscreen_ring_targets_app_title">Ring target %s</string>
     <string name="pref_lockscreen_ring_vertical_offset_title">Unlock ring vertical offset</string>
     <string name="pref_lockscreen_ring_horizontal_offset_title">Unlock ring horizontal offset</string>
 
@@ -590,7 +590,7 @@
 
     <!-- QuickSettings: override AOSP tile behaviour -->
     <string name="pref_qs_tile_behaviour_override_title">Override default tile behaviour</string>
-    <string name="pref_qs_tile_behaviour_override_summary">Overrides touch/long-touch behaviour for selected tiles (requires reboot)</string>
+    <string name="pref_qs_tile_behaviour_override_summary">Swaps touch/long-touch behaviour and adds \'Hide on change\' support for selected tiles (requires reboot)</string>
 
     <!-- QuickSettings: SIM Slot for network mode tile -->
     <string name="pref_qs_network_mode_sim_slot_title">Network mode tile SIM slot</string>
@@ -872,6 +872,7 @@
     <!-- Battery percent text -->
     <string name="battery_percent_text_title">Battery percent text</string>
     <string name="battery_percent_text_size_title">Battery percent text size</string>
+    <string name="battery_percent_text_size_larger">Larger</string>
     <string name="battery_percent_text_size_normal">Normal</string>
     <string name="battery_percent_text_size_smaller">Smaller</string>
     <string name="battery_percent_text_size_even_smaller">Even smaller</string>
@@ -916,5 +917,72 @@
     <!-- Navigation bar custom key (previously as App launcher key) -->
     <string name="pref_cat_navbar_custom_key_title">Custom key settings</string>
     <string name="pref_navbar_custom_key_enable_title">Enable custom key</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Use CDMA network modes</string>
+
+    <!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Toggle auto rotation</string>
+    <string name="hwkey_action_auto_rotation_enabled">Auto rotation enabled</string>
+    <string name="hwkey_action_auto_rotation_disabled">Auto rotation disabled</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Allow any widget</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Allows those widgets on lockscreen that can normally be used within launcher only</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Show power menu</string>
+    <string name="hwkey_action_expand_notifications">Expand notifications panel</string>
+    <string name="hwkey_action_expand_quicksettings">Expand QuickSettings panel</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Navigation ring targets</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Master switch for navigation ring targets (requires reboot)</string>
+    <string name="pref_navbar_ring_target_title">Ring target %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">GravityBox Actions</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Switch network mode</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Toggle mobile data</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Toggle WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Toggle Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Toggle WiFi AP</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Toggle NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Toggle GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Target background style</string>
+    <string name="nrt_bg_style_none">None</string>
+    <string name="nrt_bg_style_light">Light</string>
+    <string name="nrt_bg_style_dark">Dark</string>
+    <string name="nrt_bg_style_black">Black</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Do nothing</string>
+    <string name="smart_radio_action_summary">Switch to %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! May affect manual network mode switching</string>
+    <string name="pref_smart_radio_on_data_enabled_title">On mobile data enabled</string>
+    <string name="pref_smart_radio_on_data_disabled_title">On mobile data disabled</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contains Pie related settings</string>
+
+    <!-- Battery percent text: option for charging animation -->
+    <string name="battery_percent_text_anim_title">Enable charging animation</string>
 
 </resources>

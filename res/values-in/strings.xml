@@ -881,4 +881,41 @@
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Pengaturan baterai</string>
 
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Tombol kontrol kursor</string>
+    <string name="pref_navbar_cursor_control_summary">Menghidupkan tombol pengontrol kursor di navbar ketika papan ketik muncul</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Tombol volume untuk menghidupkan layar</string>
+    <string name="volume_rocker_wake_default">Bawaan sistem</string>
+    <string name="volume_rocker_wake_enabled">Dihidupkan</string>
+    <string name="volume_rocker_wake_disabled">Dimatikan</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Membutuhkan konfirmasi restart</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Sembunyikan ketika berganti</string>
+    <string name="pref_qs_hide_on_change_summary">Menutup statusbar secara otomatis ketika sebuah kotak ditekan. Hanya berlaku untuk kotak yang buat oleh GravityBox dan kotak bawaan yang dipaksa.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu power</string>
+    <string name="pref_cat_power_other_title">Lainnya</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Bolehkan di lockscreen</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Mode ketika tidak aktif</string>
+    <string name="inactivity_mode_default">Bawaan</string>
+    <string name="inactivity_mode_hide">Sembunyikan ketika tidak aktif</string>
+    <string name="inactivity_mode_summary">Tunjukkan rangkuman dan sembunyikan ketika tidak aktif</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Pengaturan tombol kustom</string>
+    <string name="pref_navbar_custom_key_enable_title">Hidupkan tombol kustom</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Gunakan mode jaringan CDMA</string>
+
 </resources>

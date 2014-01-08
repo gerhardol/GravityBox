@@ -199,4 +199,13 @@ public class WifiManagerWrapper {
             XposedBridge.log(t);
         }
     }
+
+    public void toggleWifiApEnabled() {
+        final int wifiApState = getWifiApState();
+        if (wifiApState == WIFI_AP_STATE_ENABLED) {
+            setWifiApEnabled(false);
+        } else if (wifiApState == WIFI_AP_STATE_DISABLED) {
+            setWifiApEnabled(true);
+        }
+    }
 }

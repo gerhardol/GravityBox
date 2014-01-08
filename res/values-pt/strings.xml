@@ -9,7 +9,6 @@
     <string name="battery_style_circle_percent">Indicador de bateria circular com porcentagem</string>
     <string name="battery_style_kitkat">Bateria do KitKat</string>
     <string name="battery_style_kitkat_percent">Bateria do KitKat com porcentagem</string>
-    <string name="battery_percent_text_title">Texto da porcentagem de bateria</string>
     <string name="battery_style_none">Nenhum</string>
 
     <string name="vol_music_controls_title">Teclas de volume trocam de faixa</string>
@@ -86,6 +85,7 @@
     <string name="quick_settings_wifi_turning_on">Ligando&#8230;</string>
     <string name="quick_settings_nfc_on">NFC ativado</string>
     <string name="quick_settings_nfc_off">NFC desativado</string>
+    <string name="quick_settings_camera_error_connect">Não foi possível conectar-se à camera</string>
 
     <!-- QuickSettings settings -->
     <string name="quick_settings_title">Configurações rápidas na Barra de Status</string>
@@ -117,6 +117,7 @@
     <string name="qs_tile_stay_awake">Manter ligado</string>
     <string name="qs_tile_screenshot">Captura de tela</string>
     <string name="qs_tile_nfc">NFC</string>
+    <string name="qs_tile_camera">Camera</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Escolha a cor</string>
@@ -270,7 +271,7 @@
     <string name="pref_cat_phone_summary">Contém diversos ajustes relacionados com o telefone</string>
 
     <!-- Flip action while ringing -->
-    <string name="pref_phone_flip_title">Ação ao virar o telefone enquanto recebe uma chamada</string>
+    <string name="pref_phone_flip_title">Ação ao virar o tel. enquanto recebe uma chamada</string>
     <string name="pref_phone_flip_summary">Permite definir uma ação para executar quando o telefone for virado para baixo enquanto está tocando</string>
     <string name="phone_flip_action_none">Nenhuma ação</string>
     <string name="phone_flip_action_mute">Mudo</string>
@@ -371,7 +372,7 @@
     <string name="pie_control_trigger_top">Borda superior do ecrã</string>
 
     <!-- Button backlight options -->
-    <string name="pref_button_backlight_mode_title">Modo de luz de fundo</string>
+    <string name="pref_button_backlight_mode_title">Modo da luz de fundo</string>
     <string name="button_backlight_mode_default">Padrão</string>
     <string name="button_backlight_mode_disable">Desativar luz de fundo</string>
     <string name="button_backlight_mode_always_on">Sempre ligado enquanto a tela estiver ligada</string>
@@ -388,7 +389,7 @@
 
     <!-- Disable navigation keys for pie -->
     <string name="pref_hwkeys_disable_title">Desativar botões de navegação</string>
-    <string name="pref_hwkeys_disable_summary">Desabilitar toque nos botões da barra de navegação quando os controles circulares estiverem ativos</string>
+    <string name="pref_hwkeys_disable_summary">Desabilita o toque nos botões da barra de navegação quando os controles circulares estiverem ativos</string>
 
     <!-- Option for GB dark theme -->
     <string name="pref_gb_theme_dark_title">Usar tema escuro</string>
@@ -427,7 +428,7 @@
     <string name="qs_tile_gps_locked">GPS travado</string>
 
     <!-- Pie control: always show menu button -->
-    <string name="pie_control_menu_title">Exibir sempre botão Menu</string>
+    <string name="pie_control_menu_title">Sempre exibir o botão Menu</string>
 
     <!-- Ringer mode tile (for non-MTK) -->
     <string name="qs_tile_ringer_mode">Modo de toque</string>
@@ -453,7 +454,7 @@
     <string name="pref_tm_navbar_lockscreen_title">Barra de Navegação na tela de bloqueio</string>
 
     <!-- Hide alarm icon -->
-    <string name="pref_alarm_icon_hide_title">Esconder indicador de alarme</string>
+    <string name="pref_alarm_icon_hide_title">Esconder o indicador de alarme</string>
 
     <!-- Screen dim level -->
     <string name="pref_screen_dim_level_title">Nível de brilho dim</string>
@@ -589,7 +590,7 @@
     <string name="pie_controls_enabled_expanded_navbar">Quando a área de trabalho expandida esconder a barra de navegação</string>
 
     <!-- Icon coloring: preserve stock battery icon -->
-    <string name="pref_statusbar_color_skip_battery_title">Deixe o ícone de bateria padrão intácto</string>
+    <string name="pref_statusbar_color_skip_battery_title">Deixar o ícone da bateria padrão intácto</string>
     <string name="pref_statusbar_color_skip_battery_summary">Use caso a bateria padrão tenha sido substituída por aplicativos de terceiros</string>
 
     <!-- Unplug turns on screen -->
@@ -601,7 +602,7 @@
     <string name="pref_volume_adjust_mute_summary">Desabilita o som tocado ao ajustar o volume usando as teclas de volume</string>
 
     <!-- Call vibrations -->
-    <string name="pref_call_vibrations_title">Vibração de chamada</string>
+    <string name="pref_call_vibrations_title">Vibração da chamada</string>
     <string name="call_vibration_connected">Quando a chamada for conectada</string>
     <string name="call_vibration_disconnected">Quando a chamada for desconectada</string>
     <string name="call_vibration_waiting">Quando uma chamada está em espera</string>
@@ -797,5 +798,111 @@
     <!-- Disable data network type icons -->
     <string name="pref_disable_data_network_type_icons_title">Desabilitar os indicadores de dados do tipo de rede</string>
     <string name="pref_disable_data_network_type_icons_summary">Permite desabilitar os indicadores 3G/G próximos a barra de sinal</string>
+
+    <!-- HW Keys Navigation Bar warning -->
+    <string name="hwkey_navbar_warning">Para habilitar ações de suporte para a barra de navegação, é necessário sobrescrever 
+        o padrão do sistema nos menu de tweaks da barra de navegação</string>
+
+    <!-- Lockscreen Torch -->
+    <string name="pref_hwkey_lockscreen_torch_title">Tocha na tela de bloqueio</string>
+    <string name="hwkey_ls_torch_disabled">Desabilitado</string>
+    <string name="hwkey_ls_torch_home_longpress">Ao manter pressionado HOME</string>
+    <string name="hwkey_ls_torch_voldown_longpress">Ao manter pressionado Volume-</string>
+
+    <!-- QuickSettings management master switch -->
+    <string name="pref_qs_management_enable_summary">Alternador principal para o manuseio das configurações rápidas (requer reinício)</string>
+
+    <!-- AppPickerPreference: shortcut support -->
+    <string name="app_picker_applications">Aplicativos</string>
+    <string name="app_picker_shortcuts">Lançadores</string>
+    <string name="app_picker_shortcut_null_intent">Impossível criar lançadores porque a atividade não retornou uma intenção de lançador</string>
+    <string name="app_picker_shortcut_cancelled">A criação do lançador foi cancelada pelo aplicativo alvo</string>
+
+    <!-- Navigation bar: swap back and recents key -->
+    <string name="pref_navbar_swap_keys_title">Swap Back and Teclas recentes</string>
+
+    <!-- Unlock ring Torch -->
+    <string name="pref_lockscreen_ring_torch_title">Habilitar tocha</string>
+    <string name="pref_lockscreen_ring_torch_summary">Alterna a tocha enquanto desbloqueia e uma alavanca é pressionada</string>
+
+    <!-- Volume panel timeout -->
+    <string name="pref_volume_panel_timeout_title">Tempo máximo do painel de volume</string>
+
+    <!-- Ringer tile modes -->
+    <string name="pref_qs_ringer_mode_title">Modo de campanhia</string>
+    <string name="ringer_mode_silent">Silencioso</string>
+    <string name="ringer_mode_vibrate">Vibrar</string>
+    <string name="ringer_mode_sound">Som</string>
+    <string name="ringer_mode_sound_vibrate">Som e vibração</string>
+
+    <!-- Fix location issue (Android 4.2.1 JIT bug) -->
+    <string name="fix_location_title">Consertar o problema de localização</string>
+    <string name="fix_location_summary">Habilita caso você note que a distância não está sendo calculada corretamente enquanto usar aplicativos de tracking (Requer reinício)</string>
+
+    <!-- Launcher tweaks -->
+    <string name="pref_cat_launcher_tweaks_title">Launcher tweaks</string>
+    <string name="pref_cat_launcher_tweaks_summary">Aplicável somente ao launcher Google Experience</string>
+    <string name="pref_cat_launcher_desktop_grid_title">Grade da área de trabalho</string>
+    <string name="pref_launcher_desktop_grid_info_title">Usando outros valores ao envez do padrão pode quebrar o layout dos widgets. As mudanças requerem que o launcher seja reiniciado</string>
+    <string name="pref_launcher_desktop_grid_rows_title">Número de linhas</string>
+    <string name="pref_launcher_desktop_grid_cols_title">Número de colunas</string>
+    <string name="desktop_grid_default">padrão</string>
+
+    <!-- Screen off effects -->
+    <string name="screen_off_effect_title">Efeito ao desligar a tela</string>
+    <string name="screen_off_effect_default">Padrão do sistema</string>
+    <string name="screen_off_effect_crt">Efeito de TV</string>
+    <string name="screen_off_effect_fade">Desvanecer</string>
+
+    <!-- Battery percent text -->
+    <string name="battery_percent_text_title">Texto de porcentagem da bateria</string>
+    <string name="battery_percent_text_size_title">Tamanho do texto de porcentagem da bateria</string>
+    <string name="battery_percent_text_size_normal">Normal</string>
+    <string name="battery_percent_text_size_smaller">Pequeno</string>
+    <string name="battery_percent_text_size_even_smaller">Minúsculo</string>
+    <string name="battery_percent_text_size_smallest">Microscópio</string>
+    <string name="battery_percent_text_style_title">Estilo do texto de porcentagem da bateria</string>
+    <string name="battery_percent_text_style_default">Padrão</string>
+    <string name="battery_percent_text_style_numbers_only">Somente números (sem porcentagem)</string>
+
+    <!-- Battery settings category -->
+    <string name="pref_cat_battery_settings_title">Configurações da bateria</string>
+
+    <!-- Cursor control in navigation bar -->
+    <string name="pref_navbar_cursor_control_title">Teclas de controle do cursor</string>
+    <string name="pref_navbar_cursor_control_summary">Habilita teclas de controle do cursor na barra de navegação enquanto o teclado está sendo mostrado.</string>
+
+    <!-- Volume rocker wake -->
+    <string name="pref_volume_rocker_wake_title">Volume rocker wake</string>
+    <string name="volume_rocker_wake_default">Padrão do sistema</string>
+    <string name="volume_rocker_wake_enabled">Habilitado</string>
+    <string name="volume_rocker_wake_disabled">Desabilitado</string>
+
+    <!-- Advanced reboot menu: require confirmation -->
+    <string name="pref_reboot_confirm_required_title">Requer confirmação de reinício</string>
+
+    <!-- Tiles: Hide on change -->
+    <string name="pref_qs_hide_on_change_title">Ocultar ao mudar</string>
+    <string name="pref_qs_hide_on_change_summary">Recolhe as caixas da barra de status automaticamente com um único toque. Aplicavél as caixas do GravityBox e substitúi as caixas padrões.</string>
+
+    <!-- Power tweaks categories -->
+    <string name="pref_cat_power_menu_title">Menu de energia</string>
+    <string name="pref_cat_power_other_title">Outro</string>
+
+    <!-- Advanced reboot menu: Allow on lockscreen -->
+    <string name="pref_reboot_allow_on_lockscreen_title">Permitir na tela de bloqueio</string>
+
+    <!-- Data traffic monitor enhancements -->
+    <string name="pref_data_traffic_inactivity_mode_title">Modo de inatividade</string>
+    <string name="inactivity_mode_default">Padrão</string>
+    <string name="inactivity_mode_hide">Ocultar quando em invatividade</string>
+    <string name="inactivity_mode_summary">Mostra resumo e oculta quando em invatividade</string>
+
+    <!-- Navigation bar custom key (previously as App launcher key) -->
+    <string name="pref_cat_navbar_custom_key_title">Configuração de tecla personalizada</string>
+    <string name="pref_navbar_custom_key_enable_title">Habilitar tecla personalizada</string>
+
+    <!-- Network mode tile: CDMA support -->
+    <string name="pref_network_mode_tile_cdma_title">Usar modo de rede CDMA</string>
 
 </resources>
