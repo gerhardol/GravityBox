@@ -104,6 +104,23 @@
                 android:order="3" />
 
             <CheckBoxPreference
+                android:key="pref_lockscreen_bg_blur_effect"
+                android:title="@string/pref_lockscreen_bg_blur_effect_title"
+                android:defaultValue="false"
+                android:order="4" />
+
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_lockscreen_bg_opacity"
+                android:title="@string/pref_lockscreen_bg_opacity_title"
+                minimum="0"
+                maximum="100"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="%" 
+                android:defaultValue="50"
+                android:order="5" />
+
+            <CheckBoxPreference
                 android:key="pref_lockscreen_shade_disable"
                 android:title="@string/pref_lockscreen_shade_disable_title"
                 android:summary="@string/pref_lockscreen_shade_disable_summary"
@@ -148,7 +165,6 @@
             <CheckBoxPreference 
                 android:key="pref_lockscreen_rotation"
                 android:title="@string/pref_lockscreen_rotation_title"
-                android:summary="@string/pref_lockscreen_rotation_summary"
                 android:defaultValue="false" />
 
             <CheckBoxPreference 
@@ -168,6 +184,13 @@
                 android:title="@string/pref_statusbar_lock_policy_title"
                 android:entries="@array/statusbar_lock_policy_entries"
                 android:entryValues="@array/statusbar_lock_policy_values"
+                android:defaultValue="0" />
+
+            <ListPreference
+                android:key="pref_lockscreen_statusbar_clock"
+                android:title="@string/pref_lockscreen_sb_clock_title"
+                android:entries="@array/lockscreen_sb_clock_entries"
+                android:entryValues="@array/lockscreen_sb_clock_values"
                 android:defaultValue="0" />
 
         </PreferenceCategory>
@@ -269,6 +292,38 @@
 
             </PreferenceScreen>
 
+            <PreferenceScreen
+                android:key="pref_cat_quick_app_tile_2"
+                android:title="@string/pref_cat_quickapp_tile_2_title"
+                android:dependency="pref_qs_management_enable">
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                    android:key="pref_quickapp_default_2"
+                    android:title="@string/pref_quickapp_default_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                    android:key="pref_quickapp_slot1_2"
+                    android:title="@string/pref_quickapp_slot1_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                    android:key="pref_quickapp_slot2_2"
+                    android:title="@string/pref_quickapp_slot2_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                    android:key="pref_quickapp_slot3_2"
+                    android:title="@string/pref_quickapp_slot3_title"
+                    android:summary="@string/app_picker_none" />
+
+                <com.ceco.gm2.gravitybox.preference.AppPickerPreference
+                    android:key="pref_quickapp_slot4_2"
+                    android:title="@string/pref_quickapp_slot4_title"
+                    android:summary="@string/app_picker_none" />
+
+            </PreferenceScreen>
+
             <ListPreference
                 android:key="pref_network_mode_tile_mode" 
                 android:title="@string/pref_network_mode_tile_mode_title"
@@ -295,6 +350,13 @@
                 android:entries="@array/ringer_mode_entries"
                 android:entryValues="@array/ringer_mode_values"
                 android:defaultValue="@array/ringer_mode_values" />
+
+            <CheckBoxPreference 
+                android:key="pref_qs_tile_span_disable"
+                android:title="@string/pref_qs_tile_span_disable_title"
+                android:summary="@string/pref_qs_tile_span_disable_summary"
+                android:defaultValue="false"
+                android:dependency="pref_qs_management_enable" />
 
             <ListPreference
                 android:key="pref_qs_network_mode_sim_slot" 
@@ -472,11 +534,13 @@
                 android:dependency="pref_battery_percent_text"
                 android:defaultValue="%" />
 
-            <CheckBoxPreference 
-                android:key="pref_battery_percent_text_anim"
-                android:title="@string/battery_percent_text_anim_title"
+            <ListPreference 
+                android:key="battery_percent_text_charging"
+                android:title="@string/battery_percent_text_charging_title"
                 android:dependency="pref_battery_percent_text"
-                android:defaultValue="false" />
+                android:entries="@array/bpt_charging_entries"
+                android:entryValues="@array/bpt_charging_values"
+                android:defaultValue="0" />
 
         </PreferenceScreen>
 
@@ -606,6 +670,13 @@
                 android:title="@string/pref_navbar_enable_title"
                 android:summary="@string/pref_navbar_enable_summary" />
 
+            <CheckBoxPreference 
+                android:key="pref_navbar_always_on_bottom"
+                android:title="@string/pref_navbar_always_on_bottom_title"
+                android:summary="@string/pref_navbar_always_on_bottom_summary"
+                android:defaultValue="false"
+                android:dependency="pref_navbar_override" />
+
         </PreferenceCategory>
 
         <PreferenceCategory
@@ -653,6 +724,12 @@
                     android:key="pref_navbar_custom_key_doubletap"
                     android:title="@string/pref_hwkey_doubletap_title"
                     android:defaultValue="0"
+                    android:dependency="pref_navbar_custom_key_enable" />
+
+                <CheckBoxPreference 
+                    android:key="pref_navbar_custom_key_swap"
+                    android:title="@string/pref_navbar_custom_key_swap_title"
+                    android:defaultValue="false"
                     android:dependency="pref_navbar_custom_key_enable" />
 
             </PreferenceScreen>
@@ -1187,6 +1264,18 @@
             android:defaultValue="false" />
 
         <CheckBoxPreference 
+            android:key="pref_vol_force_music_control"
+            android:title="@string/pref_vol_force_music_control_title"
+            android:summary="@string/pref_vol_force_music_control_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="pref_vol_swap_keys"
+            android:title="@string/pref_vol_swap_keys_title"
+            android:summary="@string/pref_vol_swap_keys_summary"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference 
             android:key="pref_safe_media_volume"
             android:title="@string/pref_safe_media_volume_title"
             android:summary="@string/pref_safe_media_volume_summary"
@@ -1298,7 +1387,14 @@
             <CheckBoxPreference
                 android:key="pref_hwkey_home_doubletap_disable"
                 android:title="@string/pref_hwkey_doubletap_disable_title"
-                android:defaultValue="false" />
+                android:defaultValue="false"
+                android:disableDependentsState="true" />
+
+            <ListPreference
+                android:key="pref_hwkey_home_doubletap"
+                android:title="@string/pref_hwkey_doubletap_title"
+                android:defaultValue="0"
+                android:dependency="pref_hwkey_home_doubletap_disable" />
 
         </PreferenceCategory>
 
@@ -1414,21 +1510,25 @@
         android:title="@string/pref_cat_misc_title"
         android:summary="@string/pref_cat_misc_summary">
 
-        <ListPreference 
-            android:key="pref_recents_clear_all2"
-            android:title="@string/recents_clear_all_title"
-            android:entries="@array/recents_clear_entries"
-            android:entryValues="@array/recents_clear_values"
-            android:defaultValue="53" />
+        <PreferenceCategory
+            android:key="pref_cat_misc_recents_panel"
+            android:title="@string/pref_cat_misc_recents_panel_title">
 
-        <ListPreference 
-            android:key="pref_rambar"
-            android:title="@string/pref_rambar_title"
-            android:entries="@array/rambar_entries"
-            android:entryValues="@array/rambar_values"
-            android:defaultValue="0" />
+            <ListPreference 
+                android:key="pref_recents_clear_all2"
+                android:title="@string/recents_clear_all_title"
+                android:entries="@array/recents_clear_entries"
+                android:entryValues="@array/recents_clear_values"
+                android:defaultValue="53" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <ListPreference 
+                android:key="pref_rambar"
+                android:title="@string/pref_rambar_title"
+                android:entries="@array/rambar_entries"
+                android:entryValues="@array/rambar_values"
+                android:defaultValue="0" />
+
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_top"
                 android:title="@string/pref_recent_clear_margin_top_title"
                 minimum="0"
@@ -1438,7 +1538,7 @@
                 monitorBoxUnit="px"
                 android:defaultValue="0" />
 
-        <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
                 android:key="pref_recent_clear_margin_bottom"
                 android:title="@string/pref_recent_clear_margin_bottom_title"
                 minimum="0"
@@ -1447,6 +1547,36 @@
                 monitorBoxEnabled="true"
                 monitorBoxUnit="px"
                 android:defaultValue="0" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory
+            android:key="pref_cat_misc_other"
+            android:title="@string/pref_cat_misc_other_title">
+
+            <CheckBoxPreference
+                android:key="pref_ime_fullscreen_disable"
+                android:title="@string/pref_ime_fullscreen_disable_title"
+                android:defaultValue="false" />
+
+            <com.ceco.gm2.gravitybox.preference.SeekBarPreference
+                android:key="pref_torch_auto_off"
+                android:title="@string/pref_torch_auto_off_title"
+                android:summary="@string/pref_torch_auto_off_summary"
+                minimum="0"
+                maximum="60"
+                interval="1"
+                monitorBoxEnabled="true"
+                monitorBoxUnit="m"
+                android:defaultValue="10" />
+
+            <CheckBoxPreference
+                android:key="pref_force_overflow_menu_button"
+                android:title="@string/pref_force_overflow_menu_button_title"
+                android:summary="@string/pref_force_overflow_menu_button_summary"
+                android:defaultValue="false" />
+
+        </PreferenceCategory>
 
     </PreferenceScreen>
 

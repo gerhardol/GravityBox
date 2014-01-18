@@ -36,12 +36,17 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
     private String mPercentSign;
     private BatteryData mBatteryData;
     private ValueAnimator mChargeAnim;
-    private boolean mChargeAnimEnabled;
+    private int mChargingStyle;
+
+    public static final int CHARGING_STYLE_NONE = 0;
+    public static final int CHARGING_STYLE_STATIC = 1;
+    public static final int CHARGING_STYLE_ANIMATED = 2;
 
     public StatusbarBatteryPercentage(TextView clockView) {
         mPercentage = clockView;
         mDefaultColor = mIconColor = mPercentage.getCurrentTextColor();
         mPercentSign = "";
+        mChargingStyle = CHARGING_STYLE_NONE;
     }
 
     private boolean startChargingAnimation() {
@@ -99,11 +104,8 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
     public void setTextColor(int color) {
         mIconColor = color;
-        final boolean animWasRunning = stopChargingAnimation();
-        mPercentage.setTextColor(mIconColor);
-        if (animWasRunning) {
-            startChargingAnimation();
-        }
+        stopChargingAnimation();
+        update();
     }
 
     public void setTextSize(int size) {
@@ -115,8 +117,8 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
         update();
     }
 
-    public void setChargeAnimEnabled(boolean enabled) {
-        mChargeAnimEnabled = enabled;
+    public void setChargingStyle(int style) {
+        mChargingStyle = style;
         update();
     }
 
@@ -125,10 +127,19 @@ public class StatusbarBatteryPercentage implements IconManagerListener, BatteryS
 
         mPercentage.setText(mBatteryData.level + mPercentSign);
 
-        if (mChargeAnimEnabled && mBatteryData.charging && mBatteryData.level < 100) {
-            startChargingAnimation();
+        if (mBatteryData.charging && mBatteryData.level < 100) {
+            if (mChargingStyle == CHARGING_STYLE_STATIC) {
+                stopChargingAnimation();
+                mPercentage.setTextColor(Color.GREEN);
+            } else if (mChargingStyle == CHARGING_STYLE_ANIMATED) {
+                startChargingAnimation();
+            } else {
+                stopChargingAnimation();
+                mPercentage.setTextColor(mIconColor);
+            }
         } else {
             stopChargingAnimation();
+            mPercentage.setTextColor(mIconColor);
         }
     }
 

@@ -1,3 +1,39 @@
+Changelog 2.9.2 - 12/01/2014
+--------------------------------------
+- GravityBox Actions:
+--- Improved handling of launching actions (e.g. actions performed on unlock ring won't dismiss keyguard)
+--- Added action for launching Google Now
+--- Added actions for media control: play/pause,previous,next (available within GB features only)
+--- Added action for killing foreground app (available within GB features only)
+--- Added action for switching to previous app (available withn GB features only)
+- QuickSettings management:
+--- Added USB Tethering tile
+--- Added secondary QuickApp tile
+- Added battery percent text charging styles: none, static, animated
+- Lockscreen tweaks: 
+--- Added option for adjusting opacity of custom background
+--- Option for setting statusbar clock visibility policy (thanks to bgcngm)
+--- Improved handling of unlock ring torch: prevents torch from turning on when swiping across unlock ring
+- Media tweaks:
+--- Option to force control of music volume instead of ringer volume
+--- Option for volume keys swap based on display rotation (thanks to evant)
+- Misc tweaks:
+--- Option to disable fullscreen keyboard
+--- Option for defining Torch Auto Off (LED protection)
+- Fixed Xperia transparency issues (thanks to bgcngm)
+- Improved soft reboot function for better compatibility with different devices
+- Added Korean translations (thanks to SDKoongchi)
+- Updated French translation (thanks to ch-vox)
+- Updated Polish translations (thanks to xtrem007)
+- Updated Chinese (Simplified) translations (thanks to liveasx)
+- Updated Chinese (Traditional) translations (thanks to Eric850130)
+- Updated Italian translations (thanks to pesa1234)
+- Updated Japanese translations (thanks to WedyDQ10)
+- Updated Spanish translations (thanks to jvbferrer)
+- Updated Portuguese (PT) translation (thanks to bgcngm)
+- Updated Hungarian translation (thanks to benjoe1)
+- Updated Slovak and Czech translations
+
 Changelog 2.9.1 - 07/01/2014
 --------------------------------------
 - Introducing GravityBox Actions

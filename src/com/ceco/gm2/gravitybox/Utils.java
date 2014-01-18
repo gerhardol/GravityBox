@@ -16,6 +16,7 @@
 package com.ceco.gm2.gravitybox;
 
 import de.robv.android.xposed.XposedBridge;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -28,10 +29,18 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Vibrator;
+import android.renderscript.Allocation;
+import android.renderscript.Allocation.MipmapControl;
+import android.renderscript.Element;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import java.io.File;
 import java.util.*;
+
 import static de.robv.android.xposed.XposedHelpers.callStaticMethod;
 import static de.robv.android.xposed.XposedHelpers.findClass;
 
@@ -48,7 +57,7 @@ public class Utils {
     private static int mDeviceType = -1;
     private static Boolean mIsMtkDevice = null;
     private static Boolean mIsXperiaDevice = null;
-    private static Boolean mIsLenovoSmartphone = null;
+    private static Boolean mHasLenovoCustomUI = null;
     private static Boolean mIsWifiOnly = null;
     private static String mDeviceCharacteristics = null;
     
@@ -62,7 +71,20 @@ public class Utils {
 
     // Supported MTK devices
     private static final Set<String> MTK_DEVICES = new HashSet<String>(Arrays.asList(
-        new String[] {"mt6572","mt6575","mt6577","mt8377","mt6582","mt6589","mt8389"}
+        new String[] {
+                // Single-core SoC
+                "mt6575",
+                // Dual-core SoC
+                "mt6572",
+                "mt6577",
+                "mt8377",
+                // Quad-core SoC
+                "mt6582",
+                "mt6589",
+                "mt8389",
+                // Octa-core SoC
+                "mt6592"
+        }
     ));
 
     private static void log(String message) {
@@ -121,9 +143,12 @@ public class Utils {
         return mIsMtkDevice;
     }
 
-    public static boolean isMt65x2Device() {
-        return (Build.HARDWARE.toLowerCase().contains("mt6572") || 
-                Build.HARDWARE.toLowerCase().contains("mt6582"));
+    public static boolean isMt6572Device() {
+        return (Build.HARDWARE.toLowerCase().contains("mt6572"));
+    }
+
+    public static boolean isMt6582Device() {
+        return (Build.HARDWARE.toLowerCase().contains("mt6582"));
     }
 
     public static boolean isXperiaDevice() {
@@ -134,17 +159,12 @@ public class Utils {
         return mIsXperiaDevice;
     }
 
-    public static boolean isLenovoSmartphone() {
-        if (mIsLenovoSmartphone != null) return mIsLenovoSmartphone;
+    public static boolean hasLenovoCustomUI() {
+        if (mHasLenovoCustomUI != null) return mHasLenovoCustomUI;
 
-        // The goal after all is to check if phone (doesn't apply to tablets) is running a stock Lenovo ROM
-        // (due to deep changes usually made to UI)
-
-        // TODO: implement a better way of doing this as the actual check may provide false positives
-        // in case of ported ROMs which may be more close to AOSP but where property was set so that
-        // device will show up as being Lenovo
-        mIsLenovoSmartphone = !isTablet() && Build.MANUFACTURER.equalsIgnoreCase("lenovo");
-        return mIsLenovoSmartphone;
+        File f = new File("/system/framework/lenovo-res.apk");
+        mHasLenovoCustomUI = f.exists();
+        return mHasLenovoCustomUI;
     }
 
     public static boolean hasGeminiSupport() {
@@ -297,6 +317,39 @@ public class Utils {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    @SuppressLint("NewApi")
+    public static Bitmap blurBitmap(Context context, Bitmap bmp) {
+        return blurBitmap(context, bmp, 14);
+    }
+
+    public static Bitmap blurBitmap(Context context, Bitmap bmp, float radius) {
+        Bitmap out = Bitmap.createBitmap(bmp);
+        RenderScript rs = RenderScript.create(context);
+
+        Allocation input = Allocation.createFromBitmap(
+                rs, bmp, MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
+        Allocation output = Allocation.createTyped(rs, input.getType());
+
+        ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+        script.setInput(input);
+        script.setRadius(radius);
+        script.forEach(output);
+
+        output.copyTo(out);
+
+        rs.destroy();
+        return out;
+    }
+
+    public static void performSoftReboot() {
+        try {
+            SystemProp.set("ctl.restart", "surfaceflinger");
+            SystemProp.set("ctl.restart", "zygote");
+        } catch (Throwable t) {
+            XposedBridge.log(t);
+        }
     }
 
     static class SystemProp extends Utils {

@@ -43,6 +43,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         XposedBridge.log("GB:Device type: " + (Utils.isTablet() ? "tablet" : "phone"));
         XposedBridge.log("GB:Is MTK device: " + Utils.isMtkDevice());
         XposedBridge.log("GB:Is Xperia device: " + Utils.isXperiaDevice());
+        XposedBridge.log("GB:Has Lenovo custom UI: " + Utils.hasLenovoCustomUI());
         XposedBridge.log("GB:Has telephony support: " + Utils.hasTelephonySupport());
         XposedBridge.log("GB:Has Gemini support: " + Utils.hasGeminiSupport());
         XposedBridge.log("GB:Android SDK: " + Build.VERSION.SDK_INT);
@@ -84,7 +85,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // Common
         ModVolumeKeySkipTrack.init(prefs);
-        ModVolKeyCursor.initZygote(prefs);
+        ModInputMethod.initZygote(prefs);
         ModCallCard.initZygote();
         ModStatusbarColor.initZygote(prefs);
         PhoneWrapper.initZygote(prefs);
@@ -96,6 +97,11 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
         ModPhone.initZygote(prefs);
         ModExpandedDesktop.initZygote(prefs);
         ConnectivityServiceWrapper.initZygote();
+        ModViewConfig.initZygote(prefs);
+
+        if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_NAVBAR_OVERRIDE, false)) {
+            ModNavigationBar.initZygote(prefs);
+        }
     }
 
     @Override
@@ -112,7 +118,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             FixDevOptions.initPackageResources(prefs, resparam);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && !Utils.isLenovoSmartphone() &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoCustomUI() &&
                 resparam.packageName.equals(ModQuickSettings.PACKAGE_NAME)) {
             ModQuickSettings.initResources(prefs, resparam);
         }
@@ -127,7 +133,7 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
 
         // MTK Specific
         if (Utils.isMtkDevice()) {
-            if (Utils.hasGeminiSupport() && !Utils.isMt65x2Device() &&
+            if (Utils.hasGeminiSupport() && !Utils.isMt6572Device() &&
                     lpparam.packageName.equals(ModSignalIconHide.PACKAGE_NAME)) {
                 ModSignalIconHide.init(prefs, lpparam.classLoader);
             }
@@ -203,7 +209,8 @@ public class GravityBox implements IXposedHookZygoteInit, IXposedHookInitPackage
             ModCallCard.init(prefs, lpparam.classLoader);
         }
 
-        if (Build.VERSION.SDK_INT > 16 && lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
+        if (Build.VERSION.SDK_INT > 16 && !Utils.hasLenovoCustomUI() &&
+                lpparam.packageName.equals(ModQuickSettings.PACKAGE_NAME) &&
                 prefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_ENABLE, true)) {
             ModQuickSettings.init(prefs, lpparam.classLoader);
         }

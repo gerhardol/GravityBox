@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
+import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -231,8 +231,16 @@ public class AppLauncher {
     };
 
     private void startActivity(Context context, Intent intent) {
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
+        // if intent is a GB action of broadcast type, handle it directly here
+        if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+            newIntent.putExtras(intent);
+            context.sendBroadcast(newIntent);
+        // otherwise start activity
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            context.startActivity(intent);
+        }
     }
 
     private void updateAppSlot(int slot, String value) {

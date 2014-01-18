@@ -24,11 +24,11 @@ import com.ceco.gm2.gravitybox.GravityBoxSettings;
 import com.ceco.gm2.gravitybox.R;
 import com.ceco.gm2.gravitybox.Utils;
 import com.ceco.gm2.gravitybox.preference.AppPickerPreference;
+import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
 
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -53,17 +53,23 @@ public class QuickAppTile extends BasicTile {
     private static final String TAG = "GB:QuickAppTile";
     private static final boolean DEBUG = false;
 
-    public static final String SETTING_QUICKAPP_DEFAULT = "quick_app_default";
-    public static final String SETTING_QUICKAPP_SLOT1 = "quick_app_slot1";
-    public static final String SETTING_QUICKAPP_SLOT2 = "quick_app_slot2";
-    public static final String SETTING_QUICKAPP_SLOT3 = "quick_app_slot3";
-    public static final String SETTING_QUICKAPP_SLOT4 = "quick_app_slot4";
+    private static int[] TILEVIEW_ID = new int[] { R.id.quickapp_tileview, R.id.quickapp_tileview_2 };
+    private static int[] LAYOUT_ID = new int[] { 
+        R.layout.quick_settings_tile_quick_app, R.layout.quick_settings_tile_quick_app_2 };
+
+    private String KEY_QUICKAPP_DEFAULT = GravityBoxSettings.PREF_KEY_QUICKAPP_DEFAULT;
+    private String KEY_QUICKAPP_SLOT1 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT1;
+    private String KEY_QUICKAPP_SLOT2 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT2;
+    private String KEY_QUICKAPP_SLOT3 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT3;
+    private String KEY_QUICKAPP_SLOT4 = GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT4;
+    private String ACTION_PREF_QUICKAPP_CHANGED = GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED;
 
     private AppInfo mMainApp;
     private List<AppInfo> mAppSlots;
     private PackageManager mPm;
     private Dialog mDialog;
     private Handler mHandler;
+    private int mId = 1;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -177,12 +183,26 @@ public class QuickAppTile extends BasicTile {
     };
 
     public QuickAppTile(Context context, Context gbContext, Object statusBar, Object panelBar) {
+        this(context, gbContext, statusBar, panelBar, 1);
+    }
+
+    public QuickAppTile(Context context, Context gbContext, Object statusBar, Object panelBar, int id) {
         super(context, gbContext, statusBar, panelBar);
 
         mHandler = new Handler();
 
+        mId = id;
+        if (mId > 1) {
+            KEY_QUICKAPP_DEFAULT += "_" + mId;
+            KEY_QUICKAPP_SLOT1 += "_" + mId;
+            KEY_QUICKAPP_SLOT2 += "_" + mId;
+            KEY_QUICKAPP_SLOT3 += "_" + mId;
+            KEY_QUICKAPP_SLOT4 += "_" + mId;
+            ACTION_PREF_QUICKAPP_CHANGED += "_" + mId;
+        }
+
         mPm = context.getPackageManager();
-        mMainApp = new AppInfo(R.id.quickapp_tileview);
+        mMainApp = new AppInfo(TILEVIEW_ID[mId-1]);
         mAppSlots = new ArrayList<AppInfo>();
         mAppSlots.add(new AppInfo(R.id.quickapp1));
         mAppSlots.add(new AppInfo(R.id.quickapp2));
@@ -264,7 +284,7 @@ public class QuickAppTile extends BasicTile {
 
     @Override
     protected int onGetLayoutId() {
-        return R.layout.quick_settings_tile_quick_app;
+        return LAYOUT_ID[mId-1];
     }
 
     @Override
@@ -277,12 +297,25 @@ public class QuickAppTile extends BasicTile {
     }
 
     @Override
+    protected void startActivity(Intent intent) {
+        // if intent is a GB action of broadcast type, handle it directly here
+        if (ShortcutActivity.isGbBroadcastShortcut(intent)) {
+            Intent newIntent = new Intent(intent.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+            newIntent.putExtras(intent);
+            mContext.sendBroadcast(newIntent);
+        // otherwise let super class handle it
+        } else {
+            super.startActivity(intent);
+        }
+    }
+
+    @Override
     protected void onPreferenceInitialize(XSharedPreferences prefs) {
-        updateMainApp(prefs.getString(GravityBoxSettings.PREF_KEY_QUICKAPP_DEFAULT, null));
-        updateSubApp(0, prefs.getString(GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT1, null));
-        updateSubApp(1, prefs.getString(GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT2, null));
-        updateSubApp(2, prefs.getString(GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT3, null));
-        updateSubApp(3, prefs.getString(GravityBoxSettings.PREF_KEY_QUICKAPP_SLOT4, null));
+        updateMainApp(prefs.getString(KEY_QUICKAPP_DEFAULT, null));
+        updateSubApp(0, prefs.getString(KEY_QUICKAPP_SLOT1, null));
+        updateSubApp(1, prefs.getString(KEY_QUICKAPP_SLOT2, null));
+        updateSubApp(2, prefs.getString(KEY_QUICKAPP_SLOT3, null));
+        updateSubApp(3, prefs.getString(KEY_QUICKAPP_SLOT4, null));
     }
 
     @Override
@@ -290,7 +323,7 @@ public class QuickAppTile extends BasicTile {
         super.onBroadcastReceived(context, intent);
         if (DEBUG) log("onBroadcastReceived: " + intent.toString());
 
-        if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED)) {
+        if (intent.getAction().equals(ACTION_PREF_QUICKAPP_CHANGED)) {
             if (intent.hasExtra(GravityBoxSettings.EXTRA_QUICKAPP_DEFAULT)) {
                 updateMainApp(intent.getStringExtra(GravityBoxSettings.EXTRA_QUICKAPP_DEFAULT));
             }

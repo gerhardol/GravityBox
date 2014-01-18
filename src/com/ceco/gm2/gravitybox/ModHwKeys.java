@@ -47,6 +47,9 @@ import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
+
+import com.ceco.gm2.gravitybox.shortcuts.ShortcutActivity;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
 import de.robv.android.xposed.XSharedPreferences;
@@ -77,6 +80,10 @@ public class ModHwKeys {
     public static final String ACTION_SHOW_APP_LAUCNHER = "gravitybox.intent.action.SHOW_APP_LAUNCHER";
     public static final String ACTION_TOGGLE_ROTATION_LOCK = "gravitybox.intent.action.TOGGLE_ROTATION_LOCK";
     public static final String ACTION_SLEEP = "gravitybox.intent.action.SLEEP";
+    public static final String ACTION_MEDIA_CONTROL = "gravitybox.intent.action.MEDIA_CONTROL";
+    public static final String EXTRA_MEDIA_CONTROL = "mediaControl";
+    public static final String ACTION_KILL_FOREGROUND_APP = "gravitybox.intent.action.KILL_FOREGROUND_APP";
+    public static final String ACTION_SWITCH_PREVIOUS_APP = "gravitybox.intent.action.SWICTH_PREVIOUS_APP";
 
     public static final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
 
@@ -105,6 +112,7 @@ public class ModHwKeys {
     private static int mLockscreenTorch = 0;
     private static boolean mHomeDoubletapDisabled;
     private static int mHomeDoubletapDefaultAction;
+    private static int mHomeDoubletapAction = 0;
     private static int mBackLongpressAction = 0;
     private static int mBackDoubletapAction = 0;
     private static int mRecentsSingletapAction = 0;
@@ -151,6 +159,7 @@ public class ModHwKeys {
         MENU_LONGPRESS,
         MENU_DOUBLETAP,
         HOME_LONGPRESS,
+        HOME_DOUBLETAP,
         BACK_LONGPRESS,
         BACK_DOUBLETAP,
         RECENTS_SINGLETAP,
@@ -190,12 +199,27 @@ public class ModHwKeys {
                     if (Build.VERSION.SDK_INT > 17 && mPhoneWindowManager != null) {
                         try {
                             XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
-                                    mHomeDoubletapDisabled ? 0 : mHomeDoubletapDefaultAction);
+                                    mHomeDoubletapDisabled ? 0 : 
+                                        mHomeDoubletapAction == 0 ? mHomeDoubletapDefaultAction : 1);
                         } catch (Throwable t) {
                             log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
                                     t.getMessage());
                         }
                     }
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP)) {
+                    mHomeDoubletapAction = intent.getIntExtra(
+                            GravityBoxSettings.EXTRA_HWKEY_HOME_DOUBLETAP, 0);
+                    if (mPhoneWindowManager != null) {
+                        try {
+                            XposedHelpers.setIntField(mPhoneWindowManager, "mDoubleTapOnHomeBehavior",
+                                    mHomeDoubletapAction == 0 ? mHomeDoubletapDefaultAction : 1);
+                        } catch (Throwable t) {
+                            log("PhoneWindowManager: Error settings mDoubleTapOnHomeBehavior: " +
+                                    t.getMessage());
+                        }
+                    }
+                    if (DEBUG) log("Home double-tap action set to: " + mHomeDoubletapAction);
                 }
             } else if (action.equals(GravityBoxSettings.ACTION_PREF_HWKEY_BACK_LONGPRESS_CHANGED)) {
                 mBackLongpressAction = value;
@@ -282,6 +306,18 @@ public class ModHwKeys {
                 toggleAutoRotation();
             } else if (action.equals(ACTION_SLEEP)) {
                 goToSleep();
+            } else if (action.equals(ACTION_MEDIA_CONTROL) && intent.hasExtra(EXTRA_MEDIA_CONTROL)) {
+                final int keyCode = intent.getIntExtra(EXTRA_MEDIA_CONTROL, 0);
+                if (DEBUG) log("MEDIA CONTROL: keycode=" + keyCode);
+                if (keyCode == KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ||
+                        keyCode == KeyEvent.KEYCODE_MEDIA_PREVIOUS ||
+                        keyCode == KeyEvent.KEYCODE_MEDIA_NEXT) {
+                    injectKey(keyCode);
+                }
+            } else if (action.equals(ACTION_KILL_FOREGROUND_APP) && mPhoneWindowManager != null) {
+                killForegroundApp();
+            } else if (action.equals(ACTION_SWITCH_PREVIOUS_APP) && mPhoneWindowManager != null) {
+                switchToLastApp();
             }
         }
     };
@@ -296,6 +332,8 @@ public class ModHwKeys {
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_MENU_DOUBLETAP, "0"));
                 mHomeLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_LONGPRESS, "0"));
+                mHomeDoubletapAction = Integer.valueOf(
+                        prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_HOME_DOUBLETAP, "0"));
                 mBackLongpressAction = Integer.valueOf(
                         prefs.getString(GravityBoxSettings.PREF_KEY_HWKEY_BACK_LONGPRESS, "0"));
                 mBackDoubletapAction = Integer.valueOf(
@@ -633,7 +671,7 @@ public class ModHwKeys {
 
                 @Override
                 protected Object replaceHookedMethod(MethodHookParam param) throws Throwable {
-                    if (!hasAction(HwKey.HOME)) {
+                    if (mHomeLongpressAction == GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
                         XposedBridge.invokeOriginalMethod(param.method, param.thisObject, param.args);
                         return null;
                     }
@@ -674,6 +712,20 @@ public class ModHwKeys {
                                 param.thisObject, "mDoubleTapOnHomeBehavior");
                         if (mHomeDoubletapDisabled) {
                             XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 0);
+                        } else if (mHomeDoubletapAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                            XposedHelpers.setIntField(param.thisObject, "mDoubleTapOnHomeBehavior", 1);
+                        }
+                    }
+                });
+
+                XposedHelpers.findAndHookMethod(classPhoneWindowManager,
+                        "handleDoubleTapOnHome", new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        if (mHomeDoubletapAction != GravityBoxSettings.HWKEY_ACTION_DEFAULT) {
+                            XposedHelpers.setBooleanField(param.thisObject, "mHomeConsumed", true);
+                            performAction(HwKeyTrigger.HOME_DOUBLETAP);
+                            param.setResult(null);
                         }
                     }
                 });
@@ -731,6 +783,9 @@ public class ModHwKeys {
             intentFilter.addAction(ACTION_SHOW_APP_LAUCNHER);
             intentFilter.addAction(ACTION_TOGGLE_ROTATION_LOCK);
             intentFilter.addAction(ACTION_SLEEP);
+            intentFilter.addAction(ACTION_MEDIA_CONTROL);
+            intentFilter.addAction(ACTION_KILL_FOREGROUND_APP);
+            intentFilter.addAction(ACTION_SWITCH_PREVIOUS_APP);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
 
             if (DEBUG) log("Phone window manager initialized");
@@ -877,6 +932,8 @@ public class ModHwKeys {
             action = mCustomKeyLongpressAction;
         } else if (keyTrigger == HwKeyTrigger.CUSTOM_DOUBLETAP) {
             action = mCustomKeyDoubletapAction;
+        } else if (keyTrigger == HwKeyTrigger.HOME_DOUBLETAP) {
+            action = mHomeDoubletapAction;
         }
 
         if (DEBUG) log("Action for HWKEY trigger " + keyTrigger + " = " + action);
@@ -1119,8 +1176,16 @@ public class ModHwKeys {
                         }
 
                         Intent i = Intent.parseUri(appInfo, 0);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        mContext.startActivity(i);
+                        // if intent is a GB action of broadcast type, handle it directly here
+                        if (ShortcutActivity.isGbBroadcastShortcut(i)) {
+                            Intent newIntent = new Intent(i.getStringExtra(ShortcutActivity.EXTRA_ACTION));
+                            newIntent.putExtras(i);
+                            mContext.sendBroadcast(newIntent);
+                        // otherwise start activity
+                        } else {
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            mContext.startActivity(i);
+                        }
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(mContext, mStrCustomAppMissing, Toast.LENGTH_SHORT).show();
                     } catch (Throwable t) {

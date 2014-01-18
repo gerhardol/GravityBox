@@ -217,7 +217,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Habilitar rotação da tela de bloqueio</string>
-    <string name="pref_lockscreen_rotation_summary">AVISO: Pode rodar o anel de desbloqueio em alguns dispositivo caso a tela de bloqueio do AOSP tenha sido modificada pelo fornecedor</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Habilitar tecla de Menu</string>
@@ -904,5 +903,122 @@
 
     <!-- Network mode tile: CDMA support -->
     <string name="pref_network_mode_tile_cdma_title">Usar modo de rede CDMA</string>
+
+<!--  HW Key Action: Toggle auto rotation -->
+    <string name="hwkey_action_auto_rotation">Alternar rotação automática</string>
+    <string name="hwkey_action_auto_rotation_enabled">Rotação automática habilitada</string>
+    <string name="hwkey_action_auto_rotation_disabled">Rotação automática desabilitada</string>
+
+    <!-- Allow any widget on Lockscreen -->
+    <string name="pref_lockscreen_allow_any_widget_title">Permitir todos os widgets</string>
+    <string name="pref_lockscreen_allow_any_widget_summary">Permite aqueles widgets que, normalmente não podem ser usados, a serem usados na tela de bloqueio</string>
+
+    <!-- HW Key Actions: Show power menu, expand notifications, expand quick settings -->
+    <string name="hwkey_action_show_power_menu">Mostrar menu de energia</string>
+    <string name="hwkey_action_expand_notifications">Expandir painel de notificações</string>
+    <string name="hwkey_action_expand_quicksettings">Expandir painel de configurações rápidas</string>
+
+    <!-- Navigation bar ring targets -->
+    <string name="pref_cat_navbar_ring_targets_title">Atalhos da barra de navegação</string>
+    <string name="pref_navbar_ring_targets_enable_summary">Chave-mestra para atalhos da barra de navegação (requer reinício)</string>
+    <string name="pref_navbar_ring_target_title">Atalho %d</string>
+
+    <!-- Shortcut activity title -->
+    <string name="shortcut_activity_title">Ações GravityBox</string>
+
+    <!-- Network mode shortcut -->
+    <string name="shortcut_network_mode">Mudar modo de rede</string>
+
+    <!-- Toggle mobile data shortcut -->
+    <string name="shortcut_mobile_data">Alternar dados móveis</string>
+
+    <!-- Toggle WiFi shortcut -->
+    <string name="shortcut_wifi">Alternar WiFi</string>
+
+    <!-- Toggle Bluetooth shortcut -->
+    <string name="shortcut_bluetooth">Alternar Bluetooth</string>
+
+    <!-- Toggle WiFi AP shortcut -->
+    <string name="shortcut_wifi_ap">Alternar acesso portátil WiFi</string>
+
+    <!-- Toggle NFC shortcut -->
+    <string name="shortcut_nfc">Alternar NFC</string>
+
+    <!-- Toggle GPS shortcut -->
+    <string name="shortcut_gps">Alternar GPS</string>
+
+    <!-- Navigation bar ring targets background style -->
+    <string name="pref_navbar_ring_targets_bg_style_title">Estilo do fundo do atalho</string>
+    <string name="nrt_bg_style_none">Nenhum</string>
+    <string name="nrt_bg_style_light">Claro</string>
+    <string name="nrt_bg_style_dark">Escuro</string>
+    <string name="nrt_bg_style_black">Preto</string>
+
+    <!-- Smart Radio -->
+    <string name="smart_radio_action_do_nothing">Não fazer nada</string>
+    <string name="smart_radio_action_summary">Mudar para %s</string>
+    <string name="pref_cat_smart_radio_title">Smart radio</string>
+    <string name="pref_smart_radio_experimental_summary">EXPERIMENTAL! Pode afetar alteração manual de rede</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Quando dados móveis ativos</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Quando dados móveis inativos</string>
+
+    <!-- Pie category summary -->
+    <string name="pie_control_summary">Contém configurações da PIE</string>
+
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Opacidade do fundo</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Controles de mídia</string>
+    <string name="shortcut_media_play_pause">Play/pause</string>
+    <string name="shortcut_media_previous">Anterior</string>
+    <string name="shortcut_media_next">Próxima</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indicação de carregamento</string>
+    <string name="bpt_charging_none">Nenhum</string>
+    <string name="bpt_charging_static">Estático</string>
+    <string name="bpt_charging_animated">Animado</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Visibilidade do relógio na barra de status</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Esconder em widgets não relacionados ao relógio</string>
+    <string name="lockscreen_sb_clock_always_hide">Sempre esconder</string>
+    <string name="lockscreen_sb_clock_always_show">Sempre mostrar</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Configurações de atalhos de aplicativos 2</string>
+    <string name="qs_tile_quickapp_2">Aplicativo rápido 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Forçar controle de mídia</string>
+    <string name="pref_vol_force_music_control_summary">Quando habilitado, os botões de volume controlam o volume de mídia em vez do volume de toque</string>
+    
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Painel de recentes</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Outras configurações</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Desabilitar teclado em tela-cheia</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Auto desligar lanterna</string>
+    <string name="pref_torch_auto_off_summary">Desligar a lanterna automaticamente após um tempo determinado. Defina 0 para desabilitar (não recomendado)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Reorientar botões de volume</string>
+    <string name="pref_vol_swap_keys_summary">Inverte os botões de volume quando a orientação da tela se altera</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efeito borrado</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Disable tile spanning</string>
+    <string name="pref_qs_tile_span_disable_summary">Disables spanning of user, brightness and settings tiles in landscape</string>
 
 </resources>

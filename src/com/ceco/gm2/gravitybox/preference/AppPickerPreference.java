@@ -416,6 +416,8 @@ public class AppPickerPreference extends DialogPreference
                 ComponentName cn = new ComponentName(mResolveInfo.activityInfo.packageName,
                         mResolveInfo.activityInfo.name);
                 mCreateShortcutIntent.setComponent(cn);
+                // mark intent so we can later identify it comes from GB
+                mCreateShortcutIntent.putExtra("gravitybox", true);
             }
         }
 

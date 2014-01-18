@@ -230,7 +230,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Hidupkan rotasi lockscreen</string>
-    <string name="pref_lockscreen_rotation_summary">PERINGATAN: dapat merubah target bukaan kunci yang telah dimodifikasi oleh vendor pada beberapa perangkat</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Hidupkan tombol menu</string>

@@ -89,10 +89,11 @@ public class ModBatteryStyle {
                         mPercentText.setPercentSign(percentSign);
                         if (DEBUG) log("PercentText sign changed to: " + percentSign);
                 }
-                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM)) {
-                    boolean animENabled = intent.getBooleanExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_ANIM, false);
-                    mPercentText.setChargeAnimEnabled(animENabled);
-                    if (DEBUG) log("PercentText charge anim changed to: " + animENabled);
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_CHARGING)) {
+                    int chargingStyle = intent.getIntExtra(GravityBoxSettings.EXTRA_BATTERY_PERCENT_TEXT_CHARGING,
+                            StatusbarBatteryPercentage.CHARGING_STYLE_NONE);
+                    mPercentText.setChargingStyle(chargingStyle);
+                    if (DEBUG) log("PercentText charging style changed to: " + chargingStyle);
                 }
             } else if (intent.getAction().equals(ACTION_MTK_BATTERY_PERCENTAGE_SWITCH)) {
                 mMtkPercentTextEnabled = intent.getIntExtra(EXTRA_MTK_BATTERY_PERCENTAGE_STATE, 0) == 1;
@@ -173,8 +174,8 @@ public class ModBatteryStyle {
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_SIZE, "16")));
                     mPercentText.setPercentSign(mMtkPercentTextEnabled ? "%" : prefs.getString(
                             GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_STYLE, "%"));
-                    mPercentText.setChargeAnimEnabled(prefs.getBoolean(
-                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_ANIM, false));
+                    mPercentText.setChargingStyle(Integer.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_BATTERY_PERCENT_TEXT_CHARGING, "0")));
                     ModStatusbarColor.registerIconManagerListener(mPercentText);
 
                     // GM2 specific - if there's already view with id "circle_battery", remove it

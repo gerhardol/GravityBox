@@ -54,6 +54,10 @@ public abstract class AShortcut implements IIconListAdapterItem {
     }
 
     protected abstract String getAction();
+
+    // Default action type is broadcast. Can be overriden.
+    protected String getActionType() { return "broadcast"; }
+
     protected abstract String getShortcutName();
     protected abstract ShortcutIconResource getIconResource();
 
@@ -61,6 +65,7 @@ public abstract class AShortcut implements IIconListAdapterItem {
         Intent launchIntent = new Intent(mContext, ShortcutActivity.class);
         launchIntent.setAction(ShortcutActivity.ACTION_LAUNCH_ACTION);
         launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION, getAction());
+        launchIntent.putExtra(ShortcutActivity.EXTRA_ACTION_TYPE, getActionType());
         launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         Intent intent = new Intent();

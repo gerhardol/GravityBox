@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ceco.gm2.gravitybox"
-    android:versionCode="61"
-    android:versionName="2.9.1" >
+    android:versionCode="62"
+    android:versionName="2.9.2" >
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -84,6 +84,8 @@
                 <action android:name="gravitybox.intent.action.RECORDING_STOP" />
             </intent-filter>
         </service>
+
+        <service android:name=".KeyguardImageService" />
 
         <meta-data
             android:name="xposedmodule"

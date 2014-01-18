@@ -86,6 +86,9 @@
     <string name="quick_settings_nfc_on">NFC オン</string>
     <string name="quick_settings_nfc_off">NFC オフ</string>
     <string name="quick_settings_camera_error_connect">カメラ接続不可</string>
+    <string name="quick_settings_usb_tether_off">未接続</string>
+    <string name="quick_settings_usb_tether_connected">テザリングオフ</string>
+    <string name="quick_settings_usb_tether_on">テザリング</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">ステータスバークイック設定タイル</string>
@@ -117,6 +120,7 @@
     <string name="qs_tile_stay_awake">画面常時点灯</string>
     <string name="qs_tile_screenshot">スクリーンショット</string>
     <string name="qs_tile_camera">カメラ</string>
+    <string name="qs_tile_usb_tethering">USBテザリング</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">カラーピッカー</string>
@@ -216,7 +220,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">ロック画面での回転を有効化</string>
-    <string name="pref_lockscreen_rotation_summary">警告: AOSPロック画面がキャリアにより改変されている場合ロックをスキップできてしまう可能性があります。</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">メニューキーを有効化</string>
@@ -414,7 +417,7 @@
 
     <!-- QuickApp tile settings -->
     <string name="qs_tile_quickapp">クイックアプリ</string>
-    <string name="pref_cat_quickapp_tile_title">クイックアプリタイル設定</string>
+    <string name="pref_cat_quickapp_tile_title">クイックアプリタイルの設定</string>
     <string name="pref_quickapp_default_title">メインアプリ</string>
     <string name="pref_quickapp_slot1_title">長押しアプリスロット1</string>
     <string name="pref_quickapp_slot2_title">長押しアプリスロット2</string>
@@ -959,8 +962,69 @@
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">パイ関連の設定を変更します。</string>
+    
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">背景の透過度</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">充電中にアニメーションする</string>
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">メディア操作</string>
+    <string name="shortcut_media_play_pause">再生/一時停止</string>
+    <string name="shortcut_media_previous">前へ</string>
+    <string name="shortcut_media_next">次へ</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">充電中の表示</string>
+    <string name="bpt_charging_none">なし</string>
+    <string name="bpt_charging_static">静止</string>
+    <string name="bpt_charging_animated">アニメ</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">ステータスバーの時計表示</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">時計ウィジェットがあれば非表示</string>
+    <string name="lockscreen_sb_clock_always_hide">非表示</string>
+    <string name="lockscreen_sb_clock_always_show">表示</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">クイックアプリタイル2の設定</string>
+    <string name="qs_tile_quickapp_2">クイックアプリ2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">メディア音量操作を強制</string>
+    <string name="pref_vol_force_music_control_summary">有効にすると音量キーで着信音の代わりにメディアの音量を変更します。</string>
+    
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">最近のアプリパネル</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">その他の設定</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">全画面キーボードを無効化</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">ライトの自動オフ</string>
+    <string name="pref_torch_auto_off_summary">指定した時間が経った後ライトを自動的にオフにします。0にすると無効にします。(非推奨)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">回転時音量キー入れ替え</string>
+    <string name="pref_vol_swap_keys_summary">画面を回転した時音量キーを入れ替えます。</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">ぼかし効果</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">タイルのスペースを無効化</string>
+    <string name="pref_qs_tile_span_disable_summary">横画面でのユーザー、画面の明るさと設定タイルのスペースを無くします。</string>
+    
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">メニューボタン表示を強制</string>
+    <string name="pref_force_overflow_menu_button_summary">再起動すると反映されます。</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">常に下部に表示</string>
+    <string name="pref_navbar_always_on_bottom_summary">横画面でもナビバーを下に表示するようにします。(要再起動)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">ナビバーリングターゲットが有効なため使用できません。</string>
     
 </resources>

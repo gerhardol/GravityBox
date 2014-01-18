@@ -20,6 +20,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.XResources;
+import android.media.AudioManager;
+import android.view.Surface;
+import android.view.WindowManager;
 import android.os.Build;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
@@ -32,11 +35,16 @@ public class ModAudio {
     private static final String CLASS_VOLUME_STREAM_STATE = "android.media.AudioService$VolumeStreamState";
     private static final String CLASS_AUDIO_SYSTEM = "android.media.AudioSystem";
     private static final String CLASS_AUDIO_SERVICE = "android.media.AudioService";
-    private static final int STREAM_MUSIC = 3;
-    private static final int VOLUME_STEPS = 30;
     private static final boolean DEBUG = false;
 
+    private static final int STREAM_MUSIC = 3;
+    private static final int VOLUME_STEPS = 30;
+    private static final int DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS = 5000;
+
     private static boolean mSafeMediaVolumeEnabled;
+    private static boolean mVolForceMusicControl;
+    private static boolean mSwapVolumeKeys;
+    private static HandleChangeVolume mHandleChangeVolume;
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -51,6 +59,13 @@ public class ModAudio {
                 mSafeMediaVolumeEnabled = intent.getBooleanExtra(
                         GravityBoxSettings.EXTRA_SAFE_MEDIA_VOLUME_ENABLED, false);
                 if (DEBUG) log("Safe headset media volume set to: " + mSafeMediaVolumeEnabled);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED)) {
+                mVolForceMusicControl = intent.getBooleanExtra(
+                        GravityBoxSettings.EXTRA_VOL_FORCE_MUSIC_CONTROL, false);
+                if (DEBUG) log("Force music volume control set to: " + mVolForceMusicControl);
+            } else if (intent.getAction().equals(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED)) {
+                mSwapVolumeKeys = intent.getBooleanExtra(GravityBoxSettings.EXTRA_VOL_SWAP_KEYS, false);
+                if (DEBUG) log("Swap volume keys set to: " + mSwapVolumeKeys);
             }
         }
     };
@@ -58,6 +73,9 @@ public class ModAudio {
     public static void initZygote(final XSharedPreferences prefs) {
         try {
             final Class<?> classAudioService = XposedHelpers.findClass(CLASS_AUDIO_SERVICE, null);
+            final Class<?> classAudioSystem = XposedHelpers.findClass(CLASS_AUDIO_SYSTEM, null);
+
+            mSwapVolumeKeys = prefs.getBoolean(GravityBoxSettings.PREF_KEY_VOL_SWAP_KEYS, false);
 
             if (prefs.getBoolean(GravityBoxSettings.PREF_KEY_MUSIC_VOLUME_STEPS, false)
                     && Utils.shouldAllowMoreVolumeSteps()) {
@@ -65,14 +83,22 @@ public class ModAudio {
             }
 
             XposedBridge.hookAllConstructors(classAudioService, new XC_MethodHook() {
-    
+
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Context context = (Context) XposedHelpers.getObjectField(param.thisObject, "mContext");
                     if (context == null) return;
-    
+
+                    mHandleChangeVolume = new HandleChangeVolume(context);
+                    XposedHelpers.findAndHookMethod(classAudioService, "adjustMasterVolume", 
+                            int.class, int.class, mHandleChangeVolume);
+                    XposedHelpers.findAndHookMethod(classAudioService, "adjustSuggestedStreamVolume", 
+                            int.class, int.class, int.class, mHandleChangeVolume);
+
                     IntentFilter intentFilter = new IntentFilter();
                     intentFilter.addAction(GravityBoxSettings.ACTION_PREF_SAFE_MEDIA_VOLUME_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_FORCE_MUSIC_CONTROL_CHANGED);
+                    intentFilter.addAction(GravityBoxSettings.ACTION_PREF_VOL_SWAP_KEYS_CHANGED);
                     context.registerReceiver(mBroadcastReceiver, intentFilter);
                     if (DEBUG) log("AudioService constructed. Broadcast receiver registered");
                 }
@@ -105,6 +131,38 @@ public class ModAudio {
                     }
                 });
             }
+
+            mVolForceMusicControl = prefs.getBoolean(
+                    GravityBoxSettings.PREF_KEY_VOL_FORCE_MUSIC_CONTROL, false);
+            XposedHelpers.findAndHookMethod(classAudioService, "getActiveStreamType",
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    if (mVolForceMusicControl &&
+                            (Integer) param.args[0] == AudioManager.USE_DEFAULT_STREAM_TYPE) {
+                        final boolean voiceCapable = XposedHelpers.getBooleanField(
+                                param.thisObject, "mVoiceCapable");
+                        final boolean isInComm = (Boolean) XposedHelpers.callMethod(
+                                param.thisObject, "isInCommunication");
+                        boolean activeMusic = (Boolean) XposedHelpers.callStaticMethod(
+                                classAudioSystem, "isStreamActive",
+                                STREAM_MUSIC, DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS);
+                        if (Build.VERSION.SDK_INT > 17) {
+                            activeMusic = activeMusic || (Boolean) XposedHelpers.callStaticMethod(
+                                    classAudioSystem, "isStreamActiveRemotely",
+                                    STREAM_MUSIC, DEFAULT_STREAM_TYPE_OVERRIDE_DELAY_MS);
+                        }
+                        final boolean isRemoteMusic = (Boolean) XposedHelpers.callMethod(
+                                param.thisObject, "checkUpdateRemoteStateIfActive",
+                                STREAM_MUSIC);
+
+                        if (voiceCapable && !isInComm && !activeMusic && !isRemoteMusic) {
+                            param.setResult(STREAM_MUSIC);
+                            if (DEBUG) log("getActiveStreamType: Forcing music stream");
+                        }
+                    }
+                }
+            });
         } catch(Throwable t) {
             XposedBridge.log(t);
         }
@@ -144,6 +202,49 @@ public class ModAudio {
 
         } catch(Throwable t) {
             XposedBridge.log(t);
+        }
+    }
+
+    private static class HandleChangeVolume extends XC_MethodHook {
+        private WindowManager mWm;
+
+        public HandleChangeVolume(Context context) {
+            mWm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        }
+
+        @Override
+        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+            if (mSwapVolumeKeys) {
+                try {
+                    if ((Integer) param.args[0] != 0) {
+                        if (DEBUG) log("Original direction = " + param.args[0]);
+                        int orientation = getDirectionFromOrientation();
+                        param.args[0] = orientation * (Integer) param.args[0];
+                        if (DEBUG) log("Modified direction = " + param.args[0]);
+                    }
+                } catch (Throwable t) {
+                    XposedBridge.log(t);
+                }
+            }
+        }
+
+        private int getDirectionFromOrientation() {
+            int rotation = mWm.getDefaultDisplay().getRotation();
+            switch (rotation) {
+                case Surface.ROTATION_0:
+                    if (DEBUG) log("Rotation = 0");
+                    return 1;
+                case Surface.ROTATION_90:
+                    if (DEBUG) log("Rotation = 90");
+                    return -1;
+                case Surface.ROTATION_180:
+                    if (DEBUG) log("Rotation = 180");
+                    return -1;
+                case Surface.ROTATION_270:
+                default:
+                    if (DEBUG) log("Rotation = 270");
+                    return 1;
+            }
         }
     }
 }

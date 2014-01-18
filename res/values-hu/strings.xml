@@ -101,6 +101,9 @@
     <string name="quick_settings_nfc_on">NFC bekapcsolva</string>
     <string name="quick_settings_nfc_off">NFC kikapcsolva</string>
     <string name="quick_settings_camera_error_connect">Nem lehetséges a kamerához való csatlakozás</string>
+    <string name="quick_settings_usb_tether_off">Szétkapcsolva</string>
+    <string name="quick_settings_usb_tether_connected">Megosztás kikapcsolva</string>
+    <string name="quick_settings_usb_tether_on">Megosztás</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Állapotsáv Gyorsbeállítások csempéi</string>
@@ -133,6 +136,7 @@
     <string name="qs_tile_screenshot">Képernyőkép</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Kamera</string>
+    <string name="qs_tile_usb_tethering">USB internetmegosztás</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Szín választó</string>
@@ -187,6 +191,7 @@
     <string name="lockscreen_bg_default">Alapértelmezett háttérkép</string>
     <string name="lockscreen_bg_color">Szín kitöltés</string>
     <string name="lockscreen_bg_image">Egyéni kép</string>
+    <string name="lockscreen_bg_last_screen">Képernyő kikapcsoláskori háttér</string>
     <string name="pref_lockscreen_bg_color_title">Egyéni szín beállítása</string>
     <string name="pref_lockscreen_bg_color_summary">Lehetővé teszi egyéni háttérszín beállítását a Zárképernyőhöz</string>
     <string name="pref_lockscreen_bg_image_title">Egyéni kép beállítása</string>
@@ -232,7 +237,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Zárképernyő elforgatás engedélyezése</string>
-    <string name="pref_lockscreen_rotation_summary">FIGYELEM: megfordíthatja a feloldó kör célirányát olyan eszközön, ahol AOSP zárképernyő már a gyártó által módosítva van</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Menü gomb engedélyezése</string>
@@ -429,13 +433,13 @@
     <string name="app_picker_none">(Semmi)</string>
 
     <!-- QuickApp tile settings -->
-    <string name="qs_tile_quickapp">Gyors Program elérés</string>
-    <string name="pref_cat_quickapp_tile_title">Gyors Program elérés csempe beállítások</string>
+    <string name="qs_tile_quickapp">Gyors Programelérés</string>
+    <string name="pref_cat_quickapp_tile_title">Gyors Programelérés csempe beállítások</string>
     <string name="pref_quickapp_default_title">Elsődleges program</string>
-    <string name="pref_quickapp_slot1_title">Hosszú érintés program hely 1</string>
-    <string name="pref_quickapp_slot2_title">Hosszú érintés program hely 2</string>
-    <string name="pref_quickapp_slot3_title">Hosszú érintés program hely 3</string>
-    <string name="pref_quickapp_slot4_title">Hosszú érintés program hely 4</string>
+    <string name="pref_quickapp_slot1_title">Hosszú érintés programhely 1</string>
+    <string name="pref_quickapp_slot2_title">Hosszú érintés programhely 2</string>
+    <string name="pref_quickapp_slot3_title">Hosszú érintés programhely 3</string>
+    <string name="pref_quickapp_slot4_title">Hosszú érintés programhely 4</string>
 
     <!-- GPS Tile (for non-MTK) -->
     <string name="qs_tile_gps_enabled">GPS bekapcsolva</string>
@@ -877,14 +881,14 @@
     <string name="battery_percent_text_size_smallest">Legkisebb</string>
     <string name="battery_percent_text_style_title">Akkumlátor százalék szöveg stílusa</string>
     <string name="battery_percent_text_style_default">Alapértelmezett</string>
-    <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos jelző nélkül)</string>
+    <string name="battery_percent_text_style_numbers_only">Csak számok (százalékos ikon nélkül)</string>
 
     <!-- Battery settings category -->
     <string name="pref_cat_battery_settings_title">Akkumlátor beállítások</string>
 
     <!-- Cursor control in navigation bar -->
     <string name="pref_navbar_cursor_control_title">Kurzor irányítás gombok</string>
-    <string name="pref_navbar_cursor_control_summary">Engedélyezi a kurzor irányító gombokat a navigációs sávon aktív billentyűzetnél</string>
+    <string name="pref_navbar_cursor_control_summary">Megjeleníti a kurzor mozgató gombokat a navigációs sávon a billentyűzet használatakor</string>
 
     <!-- Volume rocker wake -->
     <string name="pref_volume_rocker_wake_title">Ébresztés hangerő gombokkal</string>
@@ -973,14 +977,81 @@
     <string name="smart_radio_action_do_nothing">Ne tegyen semmit</string>
     <string name="smart_radio_action_summary">Kapcsoljon ide %s</string>
     <string name="pref_cat_smart_radio_title">Okos rádió</string>
-    <string name="pref_smart_radio_experimental_summary">KÍSÉRLETI! Hatással lehet a kézi hálózati mód váltásra</string>
+    <string name="pref_smart_radio_experimental_summary">KÍSÉRLETI! Hatással lehet a kézi hálózati mód váltásra. Automatikusan kapcsolja a kiválasztott hálózati üzemmódot, amikor a mobil adatátvitel be- vagy kikapcsolásra kerül (például automatikussá tehető a 3G-re váltás a mobil adatátvitel bekapcsolásakor és a 2G-re váltás mobil adatátvitel kikapcsolásakor az akkumlátor üzemidejének megóvása céljából)</string>
     <string name="pref_smart_radio_on_data_enabled_title">Mobil adatátvitel esetén engedélyezve</string>
     <string name="pref_smart_radio_on_data_disabled_title">Mobil adatátvitel esetén letiltva</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Pie vezérlővel kapcsolatos beállítások</string>
     
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Töltés animáció engedélyezve</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Háttér átlátszóság</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Média vezérlő</string>
+    <string name="shortcut_media_play_pause">Lejátszás/Szünet</string>
+    <string name="shortcut_media_previous">Előző</string>
+    <string name="shortcut_media_next">Következő</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Töltés kijelzés</string>
+    <string name="bpt_charging_none">Semmilyen</string>
+    <string name="bpt_charging_static">Statikus</string>
+    <string name="bpt_charging_animated">Animált</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Óra láthatósága az állapotsávon</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Elrejtve ismert, órához kapcsolódó widget esetén</string>
+    <string name="lockscreen_sb_clock_always_hide">Mindig elrejtve</string>
+    <string name="lockscreen_sb_clock_always_show">Mindig mutatva</string>
+    
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Gyors Programelérés csempe 2 beállítások</string>
+    <string name="qs_tile_quickapp_2">Gyors Programelérés 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Média hangerő vezérlés kényszerítés</string>
+    <string name="pref_vol_force_music_control_summary">Ha engedélyezve van, a hangerő gombok a média hangerőt vezérlik a csengés hangerő helyett</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Nemrég használt alkalmazások panel</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Egyéb beállítások</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Teljes képernyős billentyűzet letiltása</string>
+    
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Zseblámpa automatikus kikapcsolása</string>
+    <string name="pref_torch_auto_off_summary">Kikapcsolja a zseblámpát meghatározott idő után. Letiltáshoz állíts be 0-t (nem javasolt)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Hangerőszabályzó gombok megfordítása</string>
+    <string name="pref_vol_swap_keys_summary">Felcseréli a hangerőszabályzó gombokat elforgatott képernyőnél</string>
+    
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Elmosódás effekt</string>
+    
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Csempe kiterjeszkedés letiltása</string>
+    <string name="pref_qs_tile_span_disable_summary">Letiltja a tulajdonos, fényerő és a beállítások csempék két csempeszélességre való kiterjeszkedését fekvő tájolásnál</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Overflow menü gomb kényszerítése</string>
+    <string name="pref_force_overflow_menu_button_summary">Újraindítás szükséges</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Mindig alul</string>
+    <string name="pref_navbar_always_on_bottom_summary">Navigációs sáv alsó pozícióba kényszerítése fekvő tájolásnál (újraindítás szükséges)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Nem használható, ha a navigációs sáv kör célpontok funkció engedélyeze van</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Pozíció felcserélése menü gombbal</string>
 
 </resources>

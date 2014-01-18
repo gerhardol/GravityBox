@@ -86,6 +86,9 @@
     <string name="quick_settings_nfc_on">NFC Włączone</string>
     <string name="quick_settings_nfc_off">NFC Wyłączone</string>
     <string name="quick_settings_camera_error_connect">Nie można połączyć się z aparatem</string>
+    <string name="quick_settings_usb_tether_off">Rozłączony</string>
+    <string name="quick_settings_usb_tether_connected">Tethering wyłączony</string>
+    <string name="quick_settings_usb_tether_on">Tethering</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Kafelki Szybkich Ustawień</string>
@@ -118,6 +121,7 @@
     <string name="qs_tile_screenshot">Zrzut ekranu</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Aparat</string>
+    <string name="qs_tile_usb_tethering">Tethering USB</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Wybór koloru</string>
@@ -217,7 +221,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Włącz obracanie Ekranu blokady</string>
-    <string name="pref_lockscreen_rotation_summary">UWAGA: Może zamienić cele na pierścieniu odblokowania w niektórych urządzeniach, gdy ekran blokady AOSP został zmodyfikowany przez sprzedawcę</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Włącz klawisz menu</string>
@@ -963,7 +966,60 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Zawiera ustawienia związane z Pie</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Włącz animację ładowania</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Widoczność tła</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Kontrola mediów</string>
+    <string name="shortcut_media_play_pause">Odtwarzanie/pauza</string>
+    <string name="shortcut_media_previous">Poprzedni</string>
+    <string name="shortcut_media_next">Następny</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Wskaźnik ładowania</string>
+    <string name="bpt_charging_none">Żaden</string>
+    <string name="bpt_charging_static">Statyczny</string>
+    <string name="bpt_charging_animated">Animowany</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Widoczność zegara paska statusu</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Ukryj przy znanych widżetach zegarków</string>
+    <string name="lockscreen_sb_clock_always_hide">Zawsze ukrywaj</string>
+    <string name="lockscreen_sb_clock_always_show">Zawsze pokazuj</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Ustawienia kafelka Szybkiej Aplikacji 2</string>
+    <string name="qs_tile_quickapp_2">Szybka Aplikacja 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Wymuś kontrolę głośności mediów</string>
+    <string name="pref_vol_force_music_control_summary">Gdy włączone, klawisze głośności regulują głośność mediów zamiast głośności dzwonka</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Panel ostatnich aplikacji</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Inne ustawienia</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Wyłącz pełnoekranową klawiaturę</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Auto-wyłączanie latarki</string>
+    <string name="pref_torch_auto_off_summary">Ustawia czas, po którym latarka zostanie wyłączona. Wartość 0 wyłącza funkcję (nie zalecane)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Zmiana orientacji kl. głośności</string>
+    <string name="pref_vol_swap_keys_summary">Zamienia klawisze głośności, gdy ekran jest obrócony</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Efekt rozmycia</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Wyłącz rozciąganie kafelków</string>
+    <string name="pref_qs_tile_span_disable_summary">Wyłącza rozciąganie kafelków użytkownika, jasności i ustawień dla poziomej orientacji ekranu</string>
 
 </resources>

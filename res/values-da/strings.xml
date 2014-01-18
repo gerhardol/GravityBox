@@ -184,7 +184,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation af låseskærm til</string>
-    <string name="pref_lockscreen_rotation_summary">ADVARSEL: Kan flytte rundt på mål på lås-op-ringen på nogle apparater såfremt AOSP låseskærmen er ændret af sælger</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Oplåsning med menu-tast til</string>
@@ -253,5 +252,9 @@
 
     <!-- Device type -->
     <string name="device_phone">telefon</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Ombyt lydstyrkeknapper</string>
+    <string name="pref_vol_swap_keys_summary">Ombyt lydstyrkeknapper, når skærmen roteres</string>
 
 </resources>

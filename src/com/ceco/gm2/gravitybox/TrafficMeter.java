@@ -29,6 +29,9 @@ import android.view.View;
 import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import com.ceco.gm2.gravitybox.StatusBarIconManager.ColorInfo;
 import com.ceco.gm2.gravitybox.StatusBarIconManager.IconManagerListener;
@@ -146,7 +149,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
 
     public void startTrafficUpdates() {
         if (mAttached && getConnectAvailable()) {
-            mTotalRxBytes = TrafficStats.getTotalRxBytes();
+            mTotalRxBytes = getTotalReceivedBytes();
             mLastUpdateTime = SystemClock.elapsedRealtime();
             mTrafficBurstStartTime = Long.MIN_VALUE;
 
@@ -200,7 +203,7 @@ public class TrafficMeter extends TextView implements IconManagerListener {
                 return;
             }
 
-            long currentRxBytes = TrafficStats.getTotalRxBytes();
+            long currentRxBytes = getTotalReceivedBytes();
             long newBytes = currentRxBytes - mTotalRxBytes;
 
             if (mTrafficMeterHide && newBytes == 0) {
@@ -256,6 +259,41 @@ public class TrafficMeter extends TextView implements IconManagerListener {
             setVisibility(View.GONE);
             setText("");
         }
+    }
+
+    private long getTotalReceivedBytes() {
+        String line;
+        String[] segs;
+        long received = 0;
+        int i;
+        long tmp = 0;
+        boolean isNum;
+        try {
+            FileReader fr = new FileReader("/proc/net/dev");
+            BufferedReader in = new BufferedReader(fr, 500);
+            while ((line = in.readLine()) != null) {
+                line = line.trim();
+                if (line.startsWith("rmnet") || line.startsWith("eth") || line.startsWith("wlan")) {
+                    segs = line.split(":")[1].split(" ");
+                    for (i = 0; i < segs.length; i++) {
+                        isNum = true;
+                        try {
+                            tmp = Long.parseLong(segs[i]);
+                        } catch (Exception e) {
+                            isNum = false;
+                        }
+                        if (isNum == true) {
+                            received = received + tmp;
+                            break;
+                        }
+                    }
+                }
+            }
+            in.close();
+        } catch (IOException e) {
+            return -1;
+        }
+        return received;
     }
 
     public void setTrafficMeterEnabled(boolean enabled) {

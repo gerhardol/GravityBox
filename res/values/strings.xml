@@ -101,6 +101,9 @@
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_camera_error_connect">Can\'t connect to camera</string>
+    <string name="quick_settings_usb_tether_off">Disconnected</string>
+    <string name="quick_settings_usb_tether_connected">Tethering off</string>
+    <string name="quick_settings_usb_tether_on">Tethering</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Statusbar QuickSettings tiles</string>
@@ -133,6 +136,7 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Camera</string>
+    <string name="qs_tile_usb_tethering">USB Tethering</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -187,6 +191,7 @@
     <string name="lockscreen_bg_default">Default wallpaper</string>
     <string name="lockscreen_bg_color">Color fill</string>
     <string name="lockscreen_bg_image">Custom image</string>
+    <string name="lockscreen_bg_last_screen">Last screen</string>
     <string name="pref_lockscreen_bg_color_title">Set custom color</string>
     <string name="pref_lockscreen_bg_color_summary">Allows to set custom background color for lockscreen</string>
     <string name="pref_lockscreen_bg_image_title">Set custom image</string>
@@ -232,7 +237,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Enable lockscreen rotation</string>
-    <string name="pref_lockscreen_rotation_summary">WARNING: can swap unlock ring targets on some devices in case AOSP lockscreen has been modified by vendor</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Enable menu key</string>
@@ -982,7 +986,74 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contains Pie related settings</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Enable charging animation</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Background opacity</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Media control</string>
+    <string name="shortcut_media_play_pause">Play/pause</string>
+    <string name="shortcut_media_previous">Previous</string>
+    <string name="shortcut_media_next">Next</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Charging indication</string>
+    <string name="bpt_charging_none">None</string>
+    <string name="bpt_charging_static">Static</string>
+    <string name="bpt_charging_animated">Animated</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Statusbar clock visibility</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Hide on known clock-related widgets</string>
+    <string name="lockscreen_sb_clock_always_hide">Always hide</string>
+    <string name="lockscreen_sb_clock_always_show">Always show</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">QuickApp tile 2 settings</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Force media volume control</string>
+    <string name="pref_vol_force_music_control_summary">When enabled, volume keys control media volume instead of ringer volume</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Recents panel</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Other settings</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Disable fullscreen keyboard</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Torch auto off</string>
+    <string name="pref_torch_auto_off_summary">Turns off torch after specified amount of time. Set to 0 to disable (not recommended)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Reorient volume keys</string>
+    <string name="pref_vol_swap_keys_summary">Swap volume keys when the screen is rotated</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Blur effect</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Disable tile spanning</string>
+    <string name="pref_qs_tile_span_disable_summary">Disables spanning of user, brightness and settings tiles in landscape</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Force overflow menu button</string>
+    <string name="pref_force_overflow_menu_button_summary">Requires reboot</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Always on bottom</string>
+    <string name="pref_navbar_always_on_bottom_summary">Forces navbar to be on bottom for landscape orientation (requires reboot)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Cannot be used while navigation bar ring targets are enabled</string>
+
+    <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Swap with menu key</string>
 
 </resources>

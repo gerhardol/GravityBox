@@ -322,12 +322,7 @@ public class ModPowerMenu {
             if (mode == 0) {
                 pm.reboot(null);
             } else if (mode == 1) {
-                Class<?> classSm = XposedHelpers.findClass("android.os.ServiceManager", null);
-                Class<?> classIpm = XposedHelpers.findClass("android.os.IPowerManager.Stub", null);
-                IBinder b = (IBinder) XposedHelpers.callStaticMethod(
-                        classSm, "getService", Context.POWER_SERVICE);
-                Object ipm = XposedHelpers.callStaticMethod(classIpm, "asInterface", b);
-                XposedHelpers.callMethod(ipm, "crash", "Hot reboot");
+                Utils.performSoftReboot();
             } else if (mode == 2) {
                 pm.reboot("recovery");
             } else if (mode == 3) {

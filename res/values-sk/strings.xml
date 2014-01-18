@@ -85,6 +85,9 @@
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
     <string name="quick_settings_camera_error_connect">Nie je možné spustiť fotoaparát</string>
+    <string name="quick_settings_usb_tether_off">Odpojené</string>
+    <string name="quick_settings_usb_tether_connected">Zdieľanie vyp</string>
+    <string name="quick_settings_usb_tether_on">Zdieľanie zap</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -116,6 +119,7 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotoaparát</string>
+    <string name="qs_tile_usb_tethering">USB prístupový bod</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výber farby</string>
@@ -214,7 +218,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotácia obrazovky uzamknutia</string>
-    <string name="pref_lockscreen_rotation_summary">POZOR: môže prehodiť skratky odomykacieho prstenca na niektorých zariadeniach, ak bola obrazovka uzamknutia modifikovaná výrobcom</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Povoliť menu tlačidlo</string>
@@ -943,7 +946,49 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Obsahuje nastavenia týkajúce sa koláča</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Zapnúť indikáciu nabíjania</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Viditeľnosť pozadia</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Ovládanie médií</string>
+    <string name="shortcut_media_play_pause">Prehrať/pauza</string>
+    <string name="shortcut_media_previous">Predchádzajúca</string>
+    <string name="shortcut_media_next">Nasledujúca</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indikácia nabíjania</string>
+    <string name="bpt_charging_none">Žiadna</string>
+    <string name="bpt_charging_static">Statická</string>
+    <string name="bpt_charging_animated">Animovaná</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Viditeľnosť hodín stavového riadku</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Skryť pre známe widgety hodín</string>
+    <string name="lockscreen_sb_clock_always_hide">Vždy skryť</string>
+    <string name="lockscreen_sb_clock_always_show">Vždy zobraziť</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Nastavenia QuickApp dlaždice 2</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Vynútiť ovládanie hlasitosti médií</string>
+    <string name="pref_vol_force_music_control_summary">Ak povolené, tlačidlá hlasitosti budú ovládať úroveň hlasitosti médií namiesto úrovne hlasitosti zvonenia</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Panel aktívnych úloh</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Iné nastavenia</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Zakázať klávesnicu na celú obrazovku</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Prevrátiť tlačidlá hlasistosti</string>
+    <string name="pref_vol_swap_keys_summary">V prípade otočenia obrazovky bude prevrátené ovládanie tlačidiel hlasitosti</string>
 
 </resources>

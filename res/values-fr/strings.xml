@@ -101,6 +101,9 @@
     <string name="quick_settings_nfc_on">NFC on</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_camera_error_connect">Pas de connexion à l\'appareil</string>
+    <string name="quick_settings_usb_tether_off">Déconnecté</string>
+    <string name="quick_settings_usb_tether_connected">Partage de connexion off</string>
+    <string name="quick_settings_usb_tether_on">Partage de connexion</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Touches des paramètres rapides</string>
@@ -133,6 +136,7 @@
     <string name="qs_tile_screenshot">Capture d\'écran</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Appareil photo</string>
+    <string name="qs_tile_usb_tethering">Partage de connexion USB</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Sélecteur de couleur</string>
@@ -187,6 +191,7 @@
     <string name="lockscreen_bg_default">Par défaut</string>
     <string name="lockscreen_bg_color">Couleur</string>
     <string name="lockscreen_bg_image">Image personnalisée</string>
+    <string name="lockscreen_bg_last_screen">Dernier écran</string>
     <string name="pref_lockscreen_bg_color_title">Couleur personnalisée</string>
     <string name="pref_lockscreen_bg_color_summary">Permet de définir la couleur d\'arrière-plan personnalisée pour l\'écran de déverrouillage</string>
     <string name="pref_lockscreen_bg_image_title">Image personnalisée</string>
@@ -232,7 +237,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotation écran de déverrouillage</string>
-    <string name="pref_lockscreen_rotation_summary">ATTENTION : peut modifier les cibles de l\'anneau de déverrouillage sur certains appareils dans le cas où l\'écran de déverrouillage aurait été personnalisé par le fabricant</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Activation touche menu</string>
@@ -562,7 +566,7 @@
     <!-- Phone tweaks categories -->
     <string name="pref_cat_phone_telephony_title">Téléphonie</string>
     <string name="pref_cat_phone_messaging_title">Messagerie</string>
-    <string name="pref_cat_phone_mobile_data_title">Données mobile</string>
+    <string name="pref_cat_phone_mobile_data_title">Données mobiles</string>
 
     <!-- Messaging: Strip unicode -->
     <string name="pref_mms_unicode_stripping_title">Alléger unicode</string>
@@ -573,7 +577,7 @@
 
     <!-- Disable slow 2G data warning -->
     <string name="pref_mobile_data_slow2g_disable_title">Désactiver l\'avertissement faible débit 2G</string>
-    <string name="pref_mobile_data_slow2g_disable_summary">Désactive l\'avertissement lié au faible débit des données lorsque l\'on active les données mobile dans les paramètres rapides de SIM en mode 2G</string>
+    <string name="pref_mobile_data_slow2g_disable_summary">Désactive l\'avertissement lié au faible débit des données lorsque l\'on active les données mobiles dans les paramètres rapides de SIM en mode 2G</string>
 
     <!-- Follow stock battery color -->
     <string name="pref_sbcolor_follow_stock_battery_title">Adopter la couleur de batterie d\'origine</string>
@@ -838,7 +842,7 @@
 
     <!-- Unlock ring Torch -->
     <string name="pref_lockscreen_ring_torch_title">Activer la torche</string>
-    <string name="pref_lockscreen_ring_torch_summary">Allume/éteind la torche par un appui long sur l\'anneau de déverrouillage</string>
+    <string name="pref_lockscreen_ring_torch_summary">Allume/éteint la torche par un appui long sur l\'anneau de déverrouillage</string>
 
     <!-- Volume panel timeout -->
     <string name="pref_volume_panel_timeout_title">Temporisation du panneau de volume</string>
@@ -947,7 +951,7 @@
     <string name="shortcut_network_mode">Commutateur de mode réseau</string>
 
     <!-- Toggle mobile data shortcut -->
-    <string name="shortcut_mobile_data">Interrupteur données mobile</string>
+    <string name="shortcut_mobile_data">Interrupteur données mobiles</string>
 
     <!-- Toggle WiFi shortcut -->
     <string name="shortcut_wifi">Interrupteur WiFi</string>
@@ -976,13 +980,80 @@
     <string name="smart_radio_action_summary">Commuter en %s</string>
     <string name="pref_cat_smart_radio_title">Réseau intelligent</string>
     <string name="pref_smart_radio_experimental_summary">EXPÉRIMENTAL ! Peut affecter la gestion manuelle du mode réseau</string>
-    <string name="pref_smart_radio_on_data_enabled_title">Données mobile activées</string>
-    <string name="pref_smart_radio_on_data_disabled_title">Données mobile désactivées</string>
+    <string name="pref_smart_radio_on_data_enabled_title">Données mobiles activées</string>
+    <string name="pref_smart_radio_on_data_disabled_title">Données mobiles désactivées</string>
 
     <!-- Pie category summary -->
     <string name="pie_control_summary">Contient les paramètres liés aux touches flottantes (Pie control)</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Activer l\'animation lors du chargement</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Opacité du fond d\'écran</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Contrôle des médias</string>
+    <string name="shortcut_media_play_pause">Lecture/pause</string>
+    <string name="shortcut_media_previous">Précédent</string>
+    <string name="shortcut_media_next">Suivant</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indication de charge</string>
+    <string name="bpt_charging_none">Aucune</string>
+    <string name="bpt_charging_static">Statique</string>
+    <string name="bpt_charging_animated">Animée</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Visibilité horloge barre d\'état</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Masquer lors de l\'affichage de widgets relatifs à l\'horloge</string>
+    <string name="lockscreen_sb_clock_always_hide">Toujours masquée</string>
+    <string name="lockscreen_sb_clock_always_show">Toujours affichée</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Paramètres de la touche Appli Rapide 2</string>
+    <string name="qs_tile_quickapp_2">Appli Rapide 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Forcer le contrôle du volume des médias</string>
+    <string name="pref_vol_force_music_control_summary">Si activé, les touches de volume contrôlent le volume des médias au lieu de celui de la sonnerie</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Panneau applications récentes</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Autres paramètres</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Désactiver le clavier plein écran</string>
+
+    <!-- Torch auto-off -->
+    <string name="pref_torch_auto_off_title">Extinction auto de la torche</string>
+    <string name="pref_torch_auto_off_summary">Éteint la torche après un laps de temps spécifié. Mettre 0 pour désactiver (non recommandé)</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Réorientation des touches de volume</string>
+    <string name="pref_vol_swap_keys_summary">Permute les touches de volume après une rotation d\'écran</string>
+
+    <!-- Lockscreen: custom background blur effect -->
+    <string name="pref_lockscreen_bg_blur_effect_title">Effet de floutage</string>
+
+    <!-- Tiles: Disable tile spanning -->
+    <string name="pref_qs_tile_span_disable_title">Désactiver l\'élargissement de touche</string>
+    <string name="pref_qs_tile_span_disable_summary">Désactive l\'élargissement des touches utilisateur, luminosité, et paramètres en orientation paysage</string>
+
+    <!-- Force overflow menu button -->
+    <string name="pref_force_overflow_menu_button_title">Forcer le dépassement du bouton menu</string>
+    <string name="pref_force_overflow_menu_button_summary">Nécessite un redémarrage</string>
+
+    <!-- Navbar: always on bottom -->
+    <string name="pref_navbar_always_on_bottom_title">Toujours en bas</string>
+    <string name="pref_navbar_always_on_bottom_summary">Force la barre de navigation à être en bas d\'écran en orientation paysage (nécessite un redémarrage)</string>
+
+    <!-- Summary for Home key long-press action disabled because of navring targets -->
+    <string name="pref_hwkey_home_longpress_disabled_summary">Ne peut pas être utilisé lorsque les cibles de la barre de navigation sont actives</string>
+
+     <!-- Navbar custom key: swap with menu key -->
+    <string name="pref_navbar_custom_key_swap_title">Intervertir avec la touche menu</string>
 
 </resources>

@@ -85,6 +85,9 @@
     <string name="quick_settings_nfc_on">NFC zap</string>
     <string name="quick_settings_nfc_off">NFC vyp</string>
     <string name="quick_settings_camera_error_connect">Nelze spustit fotoaparát</string>
+    <string name="quick_settings_usb_tether_off">Odpojeno</string>
+    <string name="quick_settings_usb_tether_connected">Sdílení vyp</string>
+    <string name="quick_settings_usb_tether_on">Sdílení zap</string>
 
     <!--  QuickSettings settings -->
     <string name="quick_settings_title">Dlaždice QuickSettings panelu</string>
@@ -116,6 +119,7 @@
     <string name="qs_tile_screenshot">Screenshot</string>
     <string name="qs_tile_nfc">NFC</string>
     <string name="qs_tile_camera">Fotoaparát</string>
+    <string name="qs_tile_usb_tethering">USB přístupový bod</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Výběr barvy</string>
@@ -214,7 +218,6 @@
 
     <!-- Lockscreen rotation -->
     <string name="pref_lockscreen_rotation_title">Rotace obrazovky uzamčení</string>
-    <string name="pref_lockscreen_rotation_summary">POZOR: může přehodit zkratky odemykacího prstence na některých zařízeních, pokud byla obrazovka uzamčení modifikována výrobcem</string>
 
     <!-- Lockscreen menu key -->
     <string name="pref_lockscreen_menu_key_title">Povolit menu tlačítko</string>
@@ -945,7 +948,49 @@
     <!-- Pie category summary -->
     <string name="pie_control_summary">Obsahuje nastavení týkající se koláče</string>
 
-    <!-- Battery percent text: option for charging animation -->
-    <string name="battery_percent_text_anim_title">Zapnout indikaci nabíjení</string>
+    <!-- Shortcut for Google Now -->
+    <string name="shortcut_google_now">Google Now</string>
+
+    <!-- Lockscreen background opacity -->
+    <string name="pref_lockscreen_bg_opacity_title">Viditelnost pozadí</string>
+
+    <!-- GB Actions: Media control shorctut -->
+    <string name="shortcut_media_control">Ovládání médií</string>
+    <string name="shortcut_media_play_pause">Přehrát/pauza</string>
+    <string name="shortcut_media_previous">Předchozí</string>
+    <string name="shortcut_media_next">Následující</string>
+
+    <!-- Battery percent text: charging indication -->
+    <string name="battery_percent_text_charging_title">Indikace nabíjení</string>
+    <string name="bpt_charging_none">Žádná</string>
+    <string name="bpt_charging_static">Statická</string>
+    <string name="bpt_charging_animated">Animovaná</string>
+
+    <!-- Lockscreen statusbar clock visibility -->
+    <string name="pref_lockscreen_sb_clock_title">Viditelnost hodin stavového řádku</string>
+    <string name="lockscreen_sb_clock_hide_on_widget">Skrýt pro známé widgety hodin</string>
+    <string name="lockscreen_sb_clock_always_hide">Vždy skrýt</string>
+    <string name="lockscreen_sb_clock_always_show">Vždy zobrazit</string>
+
+    <!-- QuickApp Tile #2 -->
+    <string name="pref_cat_quickapp_tile_2_title">Nastavení QuickApp dlaždice 2</string>
+    <string name="qs_tile_quickapp_2">Quick App 2</string>
+
+    <!-- Force music volume control -->
+    <string name="pref_vol_force_music_control_title">Vynutit ovládání hlasitosti médií</string>
+    <string name="pref_vol_force_music_control_summary">Pokud povoleno, tlačítka hlasitosti budou ovládat úroveň hlasitosti médií namísto úrovně hlasitosti vyzvánění</string>
+
+    <!-- Misc tweaks: category for recents panel related tweaks -->
+    <string name="pref_cat_misc_recents_panel_title">Panel aktivních úloh</string>
+
+    <!-- Misc tweaks: category for other settings -->
+    <string name="pref_cat_misc_other_title">Jiná nastavení</string>
+
+    <!-- Disable fullscreen keyboard -->
+    <string name="pref_ime_fullscreen_disable_title">Zakázat klávesnici na celou obrazovku</string>
+
+    <!-- Swap volume keys when the screen is rotated -->
+    <string name="pref_vol_swap_keys_title">Převrátit tlačítka hlasistosti</string>
+    <string name="pref_vol_swap_keys_summary">V případě otočení obrazovky bude převráceno ovládání tlačítek hlasitosti</string>
 
 </resources>

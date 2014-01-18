@@ -126,10 +126,12 @@
         <item>@string/qs_tile_stay_awake</item>
         <item>@string/qs_tile_quickrecord</item>
         <item>@string/qs_tile_quickapp</item>
+        <item>@string/qs_tile_quickapp_2</item>
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
+        <item>@string/qs_tile_usb_tethering</item>
     </string-array>
 
     <string-array name="qs_tile_values" translatable="false">
@@ -158,10 +160,12 @@
         <item>stay_awake_tileview</item>
         <item>quickrecord_tileview</item>
         <item>quickapp_tileview</item>
+        <item>quickapp_tileview_2</item>
         <item>expanded_tileview</item>
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
+        <item>usb_tether_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_entries" translatable="false">
@@ -186,10 +190,12 @@
         <item>@string/qs_tile_stay_awake</item>
         <item>@string/qs_tile_quickrecord</item>
         <item>@string/qs_tile_quickapp</item>
+        <item>@string/qs_tile_quickapp_2</item>
         <item>@string/qs_tile_expanded_desktop</item>
         <item>@string/qs_tile_screenshot</item>
         <item>@string/qs_tile_gravitybox</item>
         <item>@string/qs_tile_camera</item>
+        <item>@string/qs_tile_usb_tethering</item>
     </string-array>
 
     <string-array name="qs_tile_aosp_values" translatable="false">
@@ -214,10 +220,12 @@
         <item>stay_awake_tileview</item>
         <item>quickrecord_tileview</item>
         <item>quickapp_tileview</item>
+        <item>quickapp_tileview_2</item>
         <item>expanded_tileview</item>
         <item>screenshot_tileview</item>
         <item>gravitybox_tileview</item>
         <item>camera_tileview</item>
+        <item>usb_tether_tileview</item>
     </string-array>
 
     <string-array name="qs_tile_override_entries" translatable="false">
@@ -242,12 +250,14 @@
         <item>@string/lockscreen_bg_default</item>
         <item>@string/lockscreen_bg_color</item>
         <item>@string/lockscreen_bg_image</item>
+        <item>@string/lockscreen_bg_last_screen</item>
     </string-array>
 
     <string-array name="lockscreen_bg_values" translatable="false">
         <item>default</item>
         <item>color</item>
         <item>image</item>
+        <item>last_screen</item>
     </string-array>
 
     <string-array name="hwkey_action_entries" tanslatable="false">
@@ -295,6 +305,7 @@
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_entries" translatable="false">
+        <item>100ms</item>
         <item>200ms</item>
         <item>300ms</item>
         <item>400ms</item>
@@ -302,6 +313,7 @@
     </string-array>
 
     <string-array name="hwkey_doubletap_speed_values" translatable="false">
+        <item>100</item>
         <item>200</item>
         <item>300</item>
         <item>400</item>
@@ -802,6 +814,30 @@
         <item>LIGHT</item>
         <item>DARK</item>
         <item>BLACK</item>
+    </string-array>
+
+    <string-array name="bpt_charging_entries" translatable="false">
+        <item>@string/bpt_charging_none</item>
+        <item>@string/bpt_charging_static</item>
+        <item>@string/bpt_charging_animated</item>
+    </string-array>
+
+    <string-array name="bpt_charging_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="lockscreen_sb_clock_entries" translatable="false">
+        <item>@string/lockscreen_sb_clock_hide_on_widget</item>
+        <item>@string/lockscreen_sb_clock_always_hide</item>
+        <item>@string/lockscreen_sb_clock_always_show</item>
+    </string-array>
+
+    <string-array name="lockscreen_sb_clock_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

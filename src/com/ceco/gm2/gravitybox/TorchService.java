@@ -20,10 +20,12 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -45,6 +47,8 @@ public class TorchService extends Service {
     private Notification mTorchNotif;
     private PendingIntent mPendingIntent;
     private WakeLock mPartialWakeLock;
+    private int mTorchTimeout;
+    private Handler mHandler;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -67,6 +71,11 @@ public class TorchService extends Service {
         mPendingIntent = PendingIntent.getService(this, 0, intent, 0);
         builder.setContentIntent(mPendingIntent);
         mTorchNotif = builder.build();
+
+        SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences",
+                Context.MODE_WORLD_READABLE);
+        mTorchTimeout = prefs.getInt(GravityBoxSettings.PREF_KEY_TORCH_AUTO_OFF, 10)*60*1000;
+        mHandler = new Handler();
     }
 
     @Override
@@ -104,7 +113,11 @@ public class TorchService extends Service {
 
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE); 
             mPartialWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-            mPartialWakeLock.acquire(3600000);
+            mPartialWakeLock.acquire(mTorchTimeout > 0 ? mTorchTimeout : 3600000);
+            mHandler.removeCallbacks(mTorchTimeoutRunnable);
+            if (mTorchTimeout > 0) {
+                mHandler.postDelayed(mTorchTimeoutRunnable, mTorchTimeout);
+            }
         } catch (Exception e) {
             mTorchStatus = TORCH_STATUS_ERROR;
             e.printStackTrace();
@@ -120,6 +133,7 @@ public class TorchService extends Service {
 
     private synchronized void setTorchOff() {
         try {
+            mHandler.removeCallbacks(mTorchTimeoutRunnable);
             if (mPartialWakeLock != null && mPartialWakeLock.isHeld()) {
                 mPartialWakeLock.release();
                 mPartialWakeLock = null;
@@ -150,4 +164,11 @@ public class TorchService extends Service {
         setTorchOff();
         super.onDestroy();
     }
+
+    private Runnable mTorchTimeoutRunnable = new Runnable() {
+        @Override
+        public void run() {
+            setTorchOff();
+        }
+    };
 }

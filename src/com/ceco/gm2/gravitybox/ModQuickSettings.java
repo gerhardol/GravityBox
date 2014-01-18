@@ -43,6 +43,7 @@ import com.ceco.gm2.gravitybox.quicksettings.TileOrderActivity;
 import com.ceco.gm2.gravitybox.quicksettings.TorchTile;
 import com.ceco.gm2.gravitybox.quicksettings.GravityBoxTile;
 import com.ceco.gm2.gravitybox.quicksettings.SyncTile;
+import com.ceco.gm2.gravitybox.quicksettings.UsbTetherTile;
 import com.ceco.gm2.gravitybox.quicksettings.VolumeTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiApTile;
 import com.ceco.gm2.gravitybox.quicksettings.WifiTile;
@@ -122,6 +123,7 @@ public class ModQuickSettings {
     private static Set<String> mOverrideTileKeys;
     private static XSharedPreferences mPrefs;
     private static boolean mHideOnChange;
+    private static boolean mQsTileSpanDisable;
 
     private static float mGestureStartX;
     private static float mGestureStartY;
@@ -168,7 +170,9 @@ public class ModQuickSettings {
             R.id.gps_tileview,
             R.id.ringer_mode_tileview,
             R.id.nfc_tileview,
-            R.id.camera_tileview
+            R.id.camera_tileview,
+            R.id.usb_tether_tileview,
+            R.id.quickapp_tileview_2
         ));
         if (Utils.isMtkDevice()) {
             mCustomGbTileKeys.add(R.id.wifi_tileview);
@@ -221,6 +225,9 @@ public class ModQuickSettings {
                 }
                 if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE)) {
                     mHideOnChange = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_HIDE_ON_CHANGE, false);
+                }
+                if (intent.hasExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE)) {
+                    mQsTileSpanDisable = intent.getBooleanExtra(GravityBoxSettings.EXTRA_QS_TILE_SPAN_DISABLE, false);
                 }
             }
 
@@ -434,6 +441,7 @@ public class ModQuickSettings {
 
             mAutoSwitch = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_AUTOSWITCH, false);
             mHideOnChange = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QUICK_SETTINGS_HIDE_ON_CHANGE, false);
+            mQsTileSpanDisable = mPrefs.getBoolean(GravityBoxSettings.PREF_KEY_QS_TILE_SPAN_DISABLE, false);
 
             try {
                 mQuickPulldown = Integer.valueOf(mPrefs.getString(
@@ -512,7 +520,14 @@ public class ModQuickSettings {
             });
 
             XposedHelpers.findAndHookMethod(mQuickSettingsTileViewClass, "setColumnSpan",
-                    int.class, XC_MethodReplacement.DO_NOTHING);
+                    int.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mQsTileSpanDisable) {
+                        param.setResult(null);
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
@@ -532,8 +547,13 @@ public class ModQuickSettings {
 
             IntentFilter intentFilter = new IntentFilter(GravityBoxSettings.ACTION_PREF_QUICKSETTINGS_CHANGED);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED);
+            intentFilter.addAction(GravityBoxSettings.ACTION_PREF_QUICKAPP_CHANGED_2);
             intentFilter.addAction(GravityBoxSettings.ACTION_PREF_EXPANDED_DESKTOP_MODE_CHANGED);
             intentFilter.addAction(AudioManager.RINGER_MODE_CHANGED_ACTION);
+            intentFilter.addAction(UsbTetherTile.ACTION_TETHER_STATE_CHANGED);
+            intentFilter.addAction(UsbTetherTile.ACTION_USB_STATE);
+            intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
+            intentFilter.addAction(UsbTetherTile.ACTION_MEDIA_UNSHARED);
             mContext.registerReceiver(mBroadcastReceiver, intentFilter);
         }
     };
@@ -626,6 +646,10 @@ public class ModQuickSettings {
                 qAppTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(qAppTile);
 
+                QuickAppTile qAppTile2 = new QuickAppTile(mContext, mGbContext, mStatusBar, mPanelBar, 2);
+                qAppTile2.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(qAppTile2);
+
                 ExpandedDesktopTile edTile = new ExpandedDesktopTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 edTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(edTile);
@@ -641,6 +665,10 @@ public class ModQuickSettings {
                 CameraTile camTile = new CameraTile(mContext, mGbContext, mStatusBar, mPanelBar);
                 camTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
                 mTiles.add(camTile);
+
+                UsbTetherTile utTile = new UsbTetherTile(mContext, mGbContext, mStatusBar, mPanelBar);
+                utTile.setupQuickSettingsTile(mContainerView, inflater, mPrefs, mQuickSettings);
+                mTiles.add(utTile);
 
                 mBroadcastSubReceivers = new ArrayList<BroadcastSubReceiver>();
                 for (AQuickSettingsTile t : mTiles) {

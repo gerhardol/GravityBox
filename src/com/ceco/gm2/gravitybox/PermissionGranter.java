@@ -29,6 +29,8 @@ public class PermissionGranter {
     private static final String CLASS_PACKAGE_PARSER_PACKAGE = "android.content.pm.PackageParser.Package";
 
     private static final String PERM_CAMERA = "android.permission.CAMERA";
+    private static final String PERM_CHANGE_NETWORK_STATE = "android.permission.CHANGE_NETWORK_STATE";
+    private static final String PERM_BROADCAST_STICKY = "android.permission.BROADCAST_STICKY";
 
     private static void log(String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -64,6 +66,31 @@ public class PermissionGranter {
                                     "appendInts", gpGids, bpGids);
 
                             if (DEBUG) log(pkgName + ": Permission added: " + pCamera);
+                        }
+
+                        // Add android.permission.CHANGE_NETWORK_STATE and android.permission.BROADCAST_STICKY
+                        // needed by Usb Tethering Tile
+                        if (!grantedPerms.contains(PERM_CHANGE_NETWORK_STATE)) {
+                            final Object pCns = XposedHelpers.callMethod(permissions, "get",
+                                    PERM_CHANGE_NETWORK_STATE);
+                            grantedPerms.add(PERM_CHANGE_NETWORK_STATE);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pCns, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pCns);
+                        }
+                        if (!grantedPerms.contains(PERM_BROADCAST_STICKY)) {
+                            final Object pBs = XposedHelpers.callMethod(permissions, "get",
+                                    PERM_BROADCAST_STICKY);
+                            grantedPerms.add(PERM_BROADCAST_STICKY);
+                            int[] gpGids = (int[]) XposedHelpers.getObjectField(extras, "gids");
+                            int[] bpGids = (int[]) XposedHelpers.getObjectField(pBs, "gids");
+                            gpGids = (int[]) XposedHelpers.callStaticMethod(param.thisObject.getClass(), 
+                                    "appendInts", gpGids, bpGids);
+
+                            if (DEBUG) log(pkgName + ": Permission added: " + pBs);
                         }
                     }
                 }

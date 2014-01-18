@@ -33,14 +33,22 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class ShortcutActivity extends ListActivity {
-    protected static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
-    protected static final String EXTRA_ACTION = "action";
-    protected static final String EXTRA_DATA = "actionData";
+    public static final String ACTION_LAUNCH_ACTION = "gravitybox.intent.action.LAUNCH_ACTION";
+    public static final String EXTRA_ACTION = "action";
+    public static final String EXTRA_ACTION_TYPE = "actionType";
 
     private Context mContext;
     private IconListAdapter mListAdapter;
     private Button mBtnCancel;
-    
+    private boolean mInvokedFromGb;
+
+    public static boolean isGbBroadcastShortcut(Intent intent) {
+        return (intent != null && intent.getAction() != null &&
+                intent.getAction().equals(ShortcutActivity.ACTION_LAUNCH_ACTION) &&
+                intent.hasExtra(ShortcutActivity.EXTRA_ACTION_TYPE) &&
+                intent.getStringExtra(ShortcutActivity.EXTRA_ACTION_TYPE).equals("broadcast"));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +71,7 @@ public class ShortcutActivity extends ListActivity {
                     finish();
                 }
             });
+            mInvokedFromGb = intent.hasExtra("gravitybox");
             return;
         } else if (intent.getAction().equals(ACTION_LAUNCH_ACTION) &&
                 intent.hasExtra(EXTRA_ACTION)) {
@@ -112,6 +121,8 @@ public class ShortcutActivity extends ListActivity {
             NfcShortcut.launchAction(mContext, intent);
         } else if (action.equals(GpsShortcut.ACTION)) {
             GpsShortcut.launchAction(mContext, intent);
+        } else if (action.equals(GoogleNowShortcut.ACTION)) {
+            GoogleNowShortcut.launchAction(mContext, intent);
         }
     }
 
@@ -133,6 +144,7 @@ public class ShortcutActivity extends ListActivity {
         if (Build.VERSION.SDK_INT > 16)
             list.add(new ExpandQuicksettingsShortcut(mContext));
         list.add(new ExpandedDesktopShortcut(mContext));
+        list.add(new GoogleNowShortcut(mContext));
         list.add(new ScreenshotShortcut(mContext));
         if (Utils.hasFlash(mContext))
             list.add(new TorchShortcut(mContext));
@@ -147,7 +159,14 @@ public class ShortcutActivity extends ListActivity {
         list.add(new BluetoothShortcut(mContext));
         if (Utils.hasNfc(mContext))
             list.add(new NfcShortcut(mContext));
+        if (mInvokedFromGb) {
+            list.add(new MediaControlShortcut(mContext));
+        }
         list.add(new RecentAppsShortcut(mContext));
+        if (mInvokedFromGb) {
+            list.add(new KillAppShortcut(mContext));
+            list.add(new SwitchAppShortcut(mContext));
+        }
         list.add(new AppLauncherShortcut(mContext));
         list.add(new RotationLockShortcut(mContext));
         list.add(new SleepShortcut(mContext));

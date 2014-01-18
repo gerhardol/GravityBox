@@ -21,12 +21,15 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.XC_MethodHook.MethodHookParam;
 
-public class ModVolKeyCursor {
+public class ModInputMethod {
     public static final String TAG = "GB:ModVolKeyCursor";
     public static final String CLASS_IME_SERVICE = "android.inputmethodservice.InputMethodService";
-    private static int mVolKeyCursorControl = GravityBoxSettings.VOL_KEY_CURSOR_CONTROL_OFF;
     private static final boolean DEBUG = false;
+
+    private static int mVolKeyCursorControl = GravityBoxSettings.VOL_KEY_CURSOR_CONTROL_OFF;
+    private static boolean mFullscreenImeDisabled;
 
     private static void log (String message) {
         XposedBridge.log(TAG + ": " + message);
@@ -42,10 +45,14 @@ public class ModVolKeyCursor {
                 @Override
                 protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
                     prefs.reload();
-                    mVolKeyCursorControl = 
-                            Integer.valueOf(prefs.getString(GravityBoxSettings.PREF_KEY_VOL_KEY_CURSOR_CONTROL, "0")); 
+                    mVolKeyCursorControl = Integer.valueOf(prefs.getString(
+                            GravityBoxSettings.PREF_KEY_VOL_KEY_CURSOR_CONTROL, "0"));
+                    mFullscreenImeDisabled = prefs.getBoolean(
+                            GravityBoxSettings.PREF_KEY_IME_FULLSCREEN_DISABLE, false);
+
                     if (DEBUG) log("onShowInputRequested: refreshing configuartion; " +
-                    		"mVolKeyCursorControl = " + mVolKeyCursorControl);
+                            "mVolKeyCursorControl = " + mVolKeyCursorControl +
+                            "mFullscreenImeDisabled = " + mFullscreenImeDisabled);
                 } 
             });
 
@@ -109,6 +116,15 @@ public class ModVolKeyCursor {
                 }
             });
 
+            XposedHelpers.findAndHookMethod(imeClass, "onEvaluateFullscreenMode", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(final MethodHookParam param) throws Throwable {
+                    if (mFullscreenImeDisabled) {
+                        param.setResult(false);
+                        if (DEBUG) log("onEvaluateFullscreenMode: IME fullscreen mode disabled");
+                    }
+                }
+            });
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
